@@ -67,7 +67,10 @@
     }
 
     createCodeBlock(content, args, inline) {
-      const element = document.createElement(inline ? "doki-inline-code" : "doki-code-block");
+      const element = document.createElement("doki-code-block-container");
+      
+      const block = document.createElement(inline ? "doki-inline-code" : "doki-code-block");
+      
       const code = document.createElement("code");
       
       if (inline) {
@@ -85,9 +88,11 @@
       code.className += " prettyprint";
       code.setAttribute("translate", "no");
       
-      element.appendChild(code);
+      block.appendChild(code);
       
-      element.inline = inline || false;
+      block.inline = inline || false;
+      
+      element.appendChild(block);
       
       return element;
     }
@@ -410,6 +415,8 @@
             e.className += ' prettyprint';
             e.setAttribute('translate', 'no');
           }
+          
+          this.attachCopyButtons();
         };
     
         prettify.onerror = () => {
@@ -431,7 +438,7 @@
     }
     
     attachCopyButtons() {
-      const codeBlocks = document.querySelectorAll('doki-code-block');
+      const codeBlocks = document.querySelectorAll('doki-code-block-container');
       codeBlocks.forEach(block => {
         // Check if copy button already exists
         if (!block.querySelector('.doki-copy-button')) {
@@ -455,8 +462,7 @@
                 }, 500);
               } catch (err) {
                 console.error('Failed to copy code: ', err);
-                // Fallback implementation remains the same...
-              }
+               }
             });
             
             block.appendChild(copyButton);

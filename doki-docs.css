@@ -125,18 +125,38 @@ doki-inline-code {
   font-size: 0.9em;
 }
 
+doki-code-block-container {
+  display: block;
+  position: relative;
+}
+
 doki-code-block {
   display: block;
+  position: relative;
   margin: 1em 0;
   padding: 1em;
   background-color: #f8f8f8;
   border: 1px solid #ddd;
   border-radius: 4px;
   overflow-x: auto;
+  white-space: nowrap;
+}
+
+doki-code-block pre {
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  white-space: pre;
 }
 
 doki-code-block code {
-  white-space: pre-wrap;
+  display: block;
+  white-space: pre;
+  overflow: visible;
+  word-wrap: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
 }
 
 doki-link {
@@ -351,10 +371,6 @@ doki-list-item {
 }
 
 /* Code Copy Button */
-doki-code-block {
-  position: relative;
-}
-
 .doki-copy-button {
   position: absolute;
   top: 0.5em;
@@ -446,30 +462,6 @@ doki-table-header {
 }
 
 @media (prefers-color-scheme: dark) {
-  doki-table-header { 
-    background-color: #444; 
-    border-color: #666; 
-  }
-  doki-table-cell { 
-    border-color: #666; 
-  }
-}
-
-/* Prettify.js Theme */
-pre .str, code .str { color: #8000ff; } /* string */
-pre .kwd, code .kwd { color: #30b030; } /* keyword */
-pre .com, code .com { color: #999999; } /* comment */
-pre .typ, code .typ { color: #2194ce; } /* type */
-pre .lit, code .lit { color: #ff0080; } /* literal */
-pre .pun, code .pun { color: #888888; } /* punctuation */
-pre .pln, code .pln { color: #444444; } /* plaintext */
-pre .dec, code .dec { color: #22c0c4; } /* decimal */
-
-pre.prettyprint, code.prettyprint {
-  font-family: 'Roboto Mono', monospace;
-}
-
-@media (prefers-color-scheme: dark) {
   body {
     background-color: #262626;
     color: #eee;
@@ -523,4 +515,18 @@ pre.prettyprint, code.prettyprint {
     background: #388E3C;
     border-color: #388E3C;
   }
+}
+
+pre.prettyprint, code.prettyprint {
+/* Prettify.js Theme */
+pre .str, code .str { color: #8000ff; } /* string */
+pre .kwd, code .kwd { color: #30b030; } /* keyword */
+pre .com, code .com { color: #999999; } /* comment */
+pre .typ, code .typ { color: #2194ce; } /* type */
+pre .lit, code .lit { color: #ff0080; } /* literal */
+pre .pun, code .pun { color: #888888; } /* punctuation */
+pre .pln, code .pln { color: #444444; } /* plaintext */
+pre .dec, code .dec { color: #22c0c4; } /* decimal */
+
+  font-family: 'Roboto Mono', monospace;
 }
