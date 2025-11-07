@@ -90,7 +90,7 @@
       
       block.appendChild(code);
       
-      block.inline = inline || false;
+      element.inline = inline || false;
       
       element.appendChild(block);
       
@@ -411,7 +411,6 @@
           
           for (let i = 0; i < elements.length; i++) {
             const e = elements[i];
-            e.currentStyle = { 'whiteSpace': 'pre-wrap' }; // Workaround for Firefox
             e.className += ' prettyprint';
             e.setAttribute('translate', 'no');
           }
@@ -440,8 +439,7 @@
     attachCopyButtons() {
       const codeBlocks = document.querySelectorAll('doki-code-block-container');
       codeBlocks.forEach(block => {
-        // Check if copy button already exists
-        if (!block.querySelector('.doki-copy-button')) {
+        if (block.querySelector('doki-code-block') && block.querySelector('code')) {
           const code = block.querySelector('code');
           if (code) {
             const content = code.textContent;

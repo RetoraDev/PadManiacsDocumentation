@@ -104,7 +104,7 @@
           // Modify existing items
           menu.items.forEach((item, index) => {
             if (item.textContent === "Rhythm Game") {
-              item.setText("🎵 Rhythm Game"); // Add emoji
+              item.setText("Let's Rock!"); // Customize text
             }
           });
         }, 100);
@@ -388,7 +388,7 @@
         menu.config.fgcolor = "#ffffff"; // White
         
         // Add custom menu item
-        menu.addItem("🎵 Custom Music Player", function() {
+        menu.addItem("Custom Music Player", function() {
           notifications.show("Music player launched!");
         });
       }

@@ -5,6 +5,7 @@ body {
 	margin: 0 auto;
 	padding: 24px;
 	word-break: break-word;
+	font-family: "Segoe UI", "Comic Sans MS", Verdana, Sans-Serif;
 }
 
 a, doki-link {
