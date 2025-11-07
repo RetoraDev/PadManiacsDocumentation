@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>LoadAddons - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "LoadAddons Class"]
+    
+    <a href="../">← Back to index</a>
+    
+    <p>Loads and initializes community addons for the game.</p>
+    
+    [heading: "Description"]
+    <p>LoadAddons is responsible for discovering, loading, and initializing all community-created addons. It sets up the AddonManager and prepares addon resources for loading.</p>
+    
+    [heading: "Key Responsibilities"]
+    [list]
+    * Initialize the AddonManager
+    * Load addon manifests and assets
+    * Execute global addon behaviors
+    * Prepare addon resources for loading
+    * Transition to song loading state
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ create | () | Starts the addon loading process ]
+    [ initialize | () | Main initialization logic for addons ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ progressText | ProgressText | Progress text display ]
+    [ loadingDots | LoadingDots | Loading animation display ]
+    [/table]
+    
+    [heading: "Addon Loading Process"]
+    [list]
+    * Scan Addons directory for manifest files
+    * Parse addon metadata and dependencies
+    * Load addon assets and behaviors
+    * Execute global behaviors
+    * Prepare resources for Phaser loading
+    [/list]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

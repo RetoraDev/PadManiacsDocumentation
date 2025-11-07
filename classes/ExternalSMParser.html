@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ExternalSMParser - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "ExternalSMParser Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Parses StepMania chart files for user-added external songs.</p>
+    
+    [heading: "Description"]
+    <p>ExternalSMParser handles .SM and .SSC chart files for user-added songs from external storage. It processes file structures, creates blob URLs for assets, and converts chart data to the game's format.</p>
+    
+    [heading: "Key Responsibilities"]
+    [list]
+    * Parse external .SM and .SSC files
+    * Handle file system access for external songs
+    * Create blob URLs for song assets
+    * Process complex .SSC chart format
+    * Convert timing and note data
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ parseSM | (files, smContent) | Parses .SM files with file map ]
+    [ parseSSC | (files, sscContent) | Parses .SSC files with file map ]
+    [ convertSSCNotes | (noteData, bpmChanges, stops) | Converts SSC note format ]
+    [ getLastBpm | (bpmChanges, time, valueType) | Finds relevant BPM for time ]
+    [ beatToSec | (bpmChanges, stops, beat) | Converts beat time to seconds ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ files | Object | Map of available files for song ]
+    [/table]
+    
+    [heading: "File Processing"]
+    <p>ExternalSMParser works with a file map containing all files in a song directory:</p>
+    [table header]
+    [ File Type | Purpose ]
+    [ .sm / .ssc | Chart data files ]
+    [ .mp3 / .ogg / .wav | Audio files ]
+    [ .png / .jpg | Image assets ]
+    [ .mp4 / .avi | Video backgrounds ]
+    [ .lrc | Lyrics files ]
+    [/table]
+    
+    [heading: "SSC Format Support"]
+    <p>ExternalSMParser supports the extended .SSC format features:</p>
+    [list]
+    * Multiple chart sections per file
+    * Extended metadata tags
+    * Complex timing data
+    * Advanced note types
+    * Chart-specific properties
+    [/list]
+    
+    [heading: "URL Handling"]
+    <p>For external songs, the parser creates blob URLs or uses platform-specific URLs:</p>
+    [table header]
+    [ Platform | URL Type ]
+    [ Web | Blob URLs ]
+    [ Cordova | cdvfile:// URLs ]
+    [ NW.js | file:// URLs ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

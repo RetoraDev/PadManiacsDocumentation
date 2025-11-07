@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lyrics - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "Lyrics Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>LRC lyrics synchronization system for displaying timed song lyrics during gameplay.</p>
+    
+    [heading: "Description"]
+    <p>Lyrics parses and displays LRC format lyrics files synchronized with song playback. It handles timing, line transitions, and text display during gameplay.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * LRC file format parsing
+    * Precise timing synchronization
+    * Automatic line transitions
+    * Text wrapping for long lines
+    * Smooth display updates
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | (options) | Creates lyrics system with configuration ]
+    [ setLrc | (rawLrc) | Parses and loads LRC content ]
+    [ move | (time) | Updates display based on current time ]
+    [ displayCurrentLine | () | Shows current lyric line ]
+    [ getCurrentLine | () | Returns current line text ]
+    [ getNextLine | () | Returns next line text ]
+    [ hasLyrics | () | Checks if lyrics are loaded ]
+    [ clear | () | Clears lyrics display ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ textElement | Text | Text display element ]
+    [ maxLineLength | Number | Maximum characters per line ]
+    [ currentTime | Number | Current playback time ]
+    [ lrcData | Array | Parsed lyric data with timestamps ]
+    [ rangeLrc | Array | Time-range formatted lyric data ]
+    [ currentLineIndex | Number | Index of current lyric line ]
+    [ tags | Object | LRC metadata tags ]
+    [/table]
+    
+    [heading: "LRC File Format"]
+    <p>Supports standard LRC format with timing tags and metadata:</p>
+    [table header]
+    [ Tag | Format | Example | Description ]
+    [ Time | [mm:ss.xx] | [01:23.45] | Lyric line timestamp ]
+    [ ID | [key:value] | [ar:Artist] | Metadata information ]
+    [/table]
+    
+    [heading: "Supported Metadata Tags"]
+    [table header]
+    [ Tag | Description ]
+    [ ar | Artist ]
+    [ ti | Title ]
+    [ al | Album ]
+    [ by | Creator ]
+    [ offset | Time offset ]
+    [/table]
+    
+    [heading: "Configuration Options"]
+    [table header]
+    [ Option | Type | Default | Description ]
+    [ textElement | Text | null | Text display instance ]
+    [ maxLineLength | Number | 30 | Maximum characters per line ]
+    [ lrc | String | null | LRC file content ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

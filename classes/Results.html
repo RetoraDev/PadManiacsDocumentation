@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Results - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "Results Class"]
+    
+    <a href="../">← Back to index</a>
+    
+    <p>Displays gameplay results and high score information after song completion.</p>
+    
+    [heading: "Description"]
+    <p>Results shows the player's performance after completing a song, including score, accuracy, combo, and judgments. It handles high score saving and provides navigation options.</p>
+    
+    [heading: "Key Responsibilities"]
+    [list]
+    * Display performance statistics
+    * Save high scores if applicable
+    * Show judgment breakdown
+    * Provide navigation options
+    * Play song preview audio
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ init | (gameData) | Initializes with gameplay results ]
+    [ create | () | Sets up results display ]
+    [ saveHighScore | (song, difficulty, player) | Saves high score if new record ]
+    [ displayResults | () | Creates results visual elements ]
+    [ showMenu | () | Creates navigation menu ]
+    [ update | () | Handles input updates ]
+    [ shutdown | () | Cleanup when leaving state ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ gameData | Object | Results data from gameplay ]
+    [ isNewRecord | Boolean | Whether score is a new record ]
+    [ finalScore | Number | Final score achieved ]
+    [ finalAccuracy | Number | Final accuracy percentage ]
+    [ scoreRating | String | Letter grade (SSS, S, A, B, etc.) ]
+    [ previewAudio | HTMLAudioElement | Song preview audio ]
+    [/table]
+    
+    [heading: "Score Ratings"]
+    [table header]
+    [ Accuracy | Rating ]
+    [ ≥98% | SSS+ ]
+    [ ≥95% | SSS ]
+    [ ≥92.5% | SS ]
+    [ ≥90% | S ]
+    [ ≥80% | A ]
+    [ ≥70% | B ]
+    [ ≥60% | C ]
+    [ ≥50% | D ]
+    [ ≥40% | E ]
+    [ <40% | F ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

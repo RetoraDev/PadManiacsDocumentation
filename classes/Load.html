@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Load - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "Load Class"]
+    
+    <a href="../">← Back to index</a>
+    
+    <p>The Load state handles dynamic asset loading with progress tracking.</p>
+    
+    [heading: "Description"]
+    <p>Load is a flexible loading state that can load any type of asset (images, spritesheets, audio, video, JSON, text) and displays progress information.</p>
+    
+    [heading: "Key Responsibilities"]
+    [list]
+    * Load assets from a provided resource list
+    * Display loading progress
+    * Handle different asset types
+    * Transition to specified next state
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ init | (resources, nextState, nextStateParams) | Initializes with resources to load and destination state ]
+    [ preload | () | Loads all resources from the provided list ]
+    [ create | () | Called when all resources are loaded, starts next state ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ resources | Array | List of resources to load ]
+    [ nextState | String | Name of state to transition to after loading ]
+    [ nextStateParams | Object | Parameters to pass to next state ]
+    [ loadedCount | Number | Number of resources loaded ]
+    [ totalCount | Number | Total number of resources to load ]
+    [ progressText | ProgressText | Text display for loading progress ]
+    [/table]
+    
+    [heading: "Asset Types Supported"]
+    [table header]
+    [ Type | Description ]
+    [ image | Standard image files ]
+    [ spritesheet | Image with multiple frames ]
+    [ audio | Sound files ]
+    [ video | Video files ]
+    [ json | JSON data files ]
+    [ text | Plain text files ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

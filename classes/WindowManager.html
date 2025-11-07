@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>WindowManager - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "WindowManager Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Manages UI windows, focus, and navigation between multiple interface elements.</p>
+    
+    [heading: "Description"]
+    <p>WindowManager provides a centralized system for managing UI windows, handling focus, input delegation, and window lifecycle. It ensures proper navigation and prevents input conflicts between multiple windows.</p>
+    
+    [heading: "Key Responsibilities"]
+    [list]
+    * Manage window stacking and focus
+    * Handle input delegation to focused window
+    * Coordinate window transitions and animations
+    * Prevent input conflicts between windows
+    * Provide window creation utilities
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ add | (window) | Adds window to management system ]
+    [ show | (window) | Shows a window ]
+    [ remove | (window, destroy) | Removes window from management ]
+    [ focus | (window, hide) | Sets focus to specific window ]
+    [ unfocus | () | Removes focus from all windows ]
+    [ closeAll | () | Hides all windows ]
+    [ update | () | Processes input for focused window ]
+    [ createWindow | (x, y, width, height, skin, parent) | Helper to create and manage window ]
+    [ clearAll | (destroy) | Removes all windows ]
+    [ bringToFront | (window) | Brings window to visual front ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ windows | Array | Array of managed windows ]
+    [ focusedWindow | Window | Currently focused window ]
+    [ lastUp | Boolean | Previous up button state ]
+    [ lastDown | Boolean | Previous down button state ]
+    [ lastConfirm | Boolean | Previous confirm button state ]
+    [ lastCancel | Boolean | Previous cancel button state ]
+    [/table]
+    
+    [heading: "Input Handling"]
+    <p>WindowManager processes gamepad input and delegates it to the focused window:</p>
+    [list]
+    * Up/Down: Navigate menu items
+    * Left/Right: Change settings values
+    * A/Confirm: Activate selected item
+    * B/Cancel: Close window or go back
+    [/list]
+    
+    [heading: "Focus Management"]
+    [table header]
+    [ Action | Result ]
+    [ Adding first window | Automatically focused ]
+    [ Removing focused window | Next available window focused ]
+    [ Multiple windows | Only focused window receives input ]
+    [ Window destruction | Automatically removed from management ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Play - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "Play Class"]
+    
+    <a href="../">← Back to index</a>
+    
+    <p>The main gameplay state where rhythm gameplay occurs.</p>
+    
+    [heading: "Description"]
+    <p>Play is the core gameplay state where players interact with falling notes, score points, and complete songs. It handles all gameplay mechanics, scoring, and visual feedback.</p>
+    
+    [heading: "Key Responsibilities"]
+    [list]
+    * Manage song playback and timing
+    * Handle player input and note judgment
+    * Display HUD and gameplay elements
+    * Manage backgrounds and visual effects
+    * Handle pausing and game state
+    * Track scoring and accuracy
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ init | (song, difficultyIndex) | Initializes with song and difficulty ]
+    [ create | () | Sets up gameplay elements ]
+    [ createHud | () | Creates heads-up display ]
+    [ setupLyrics | () | Initializes lyrics system if available ]
+    [ songStart | () | Starts song playback ]
+    [ togglePause | () | Toggles pause state ]
+    [ update | () | Main update loop ]
+    [ render | () | Rendering operations ]
+    [ shutdown | () | Cleanup when leaving state ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ song | Object | Current song data ]
+    [ difficultyIndex | Number | Selected difficulty index ]
+    [ player | Player | Player instance handling gameplay logic ]
+    [ audio | HTMLAudioElement | Song audio element ]
+    [ backgroundLayer | Phaser.Group | Background display group ]
+    [ hud | Phaser.Sprite | Heads-up display container ]
+    [ isPaused | Boolean | Whether game is paused ]
+    [ autoplay | Boolean | Whether autoplay is enabled ]
+    [ lyrics | Lyrics | Lyrics system instance ]
+    [ visualizer | Visualizer | Current visualizer instance ]
+    [ metronome | Metronome | Metronome system instance ]
+    [/table]
+    
+    [heading: "Judgment Windows"]
+    [table header]
+    [ Judgment | Window (seconds) | Score Value ]
+    [ Marvelous | 0.15 | 1000 ]
+    [ Perfect | 0.20 | 800 ]
+    [ Great | 0.25 | 500 ]
+    [ Good | 0.30 | 200 ]
+    [ Boo | 0.40 | 50 ]
+    [ Miss | - | 0 ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Metronome - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "Metronome Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Audio metronome system that provides rhythmic timing assistance during gameplay.</p>
+    
+    [heading: "Description"]
+    <p>Metronome provides audible timing assistance by playing tick sounds at various rhythmic divisions. It can sync to the song's beat structure or trigger on specific note timings.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Multiple timing modes
+    * Configurable beat divisions
+    * Note-synced timing option
+    * Toggleable activation
+    * Visual status display
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | (scene) | Creates metronome system ]
+    [ update | () | Updates metronome timing ]
+    [ updateBeatMode | () | Handles beat-based timing ]
+    [ updateNoteMode | () | Handles note-synced timing ]
+    [ initializeNotes | () | Prepares note timing data ]
+    [ getCurrentDivisionValue | (beat) | Calculates beat division ]
+    [ playTick | () | Plays metronome tick sound ]
+    [ toggle | () | Toggles metronome on/off ]
+    [ resetNoteMode | () | Resets note timing state ]
+    [ setMode | (mode) | Changes metronome mode ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ scene | Play | Gameplay scene reference ]
+    [ player | Player | Player instance reference ]
+    [ mode | String | Current metronome mode ]
+    [ enabled | Boolean | Whether metronome is active ]
+    [ beatDivisions | Object | Beat division mappings ]
+    [ currentDivision | Number/String | Current division setting ]
+    [ lastDivisionValue | Number | Previous division state ]
+    [ noteIndex | Number | Current note index for note mode ]
+    [ lastNoteBeat | Number | Last note beat that triggered tick ]
+    [ notes | Array | Note timing data for note mode ]
+    [/table]
+    
+    [heading: "Metronome Modes"]
+    [table header]
+    [ Mode | Description | Timing ]
+    [ OFF | No metronome | - ]
+    [ Quarters | Whole beats | 1, 2, 3, 4... ]
+    [ Eighths | Half beats | 1, 1.5, 2, 2.5... ]
+    [ Sixteenths | Quarter beats | 1, 1.25, 1.5, 1.75... ]
+    [ Thirty-seconds | Eighth beats | 1, 1.125, 1.25, 1.375... ]
+    [ Note | Note-synced | Triggers on note beats ]
+    [/table]
+    
+    [heading: "Note Mode"]
+    <p>In Note mode, the metronome triggers on each unique note beat in the chart:</p>
+    [list]
+    * Processes all regular notes (tap, hold, roll)
+    * Ignores mine notes and hold ends
+    * Groups notes with identical beat timing
+    * Provides precise rhythmic feedback
+    [/list]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

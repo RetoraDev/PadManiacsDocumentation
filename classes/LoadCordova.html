@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>LoadCordova - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "LoadCordova Class"]
+    
+    <a href="../">← Back to index</a>
+    
+    <p>Initializes file system access for mobile devices using Cordova.</p>
+    
+    [heading: "Description"]
+    <p>LoadCordova handles the initialization of the file system on mobile devices, creating the necessary directory structure for addons and songs.</p>
+    
+    [heading: "Key Responsibilities"]
+    [list]
+    * Load Cordova script if needed
+    * Create directory structure for external storage
+    * Set up back button handling on mobile
+    * Transition to addon loading state
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ create | () | Starts the file system initialization process ]
+    [ loadScript | () | Dynamically loads Cordova script ]
+    [ createFolderStructure | () | Creates required directories in external storage ]
+    [ continue | () | Proceeds to addon loading state ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ loadingDots | LoadingDots | Loading animation display ]
+    [ progressText | ProgressText | Progress text display ]
+    [/table]
+    
+    [heading: "Directory Structure Created"]
+    [table header]
+    [ Directory | Purpose ]
+    [ Addons/ | Stores community addons ]
+    [ Songs/ | Stores user-added songs ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

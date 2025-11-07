@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>NotificationSystem - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "NotificationSystem Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Global notification system for displaying messages to the player.</p>
+    
+    [heading: "Description"]
+    <p>NotificationSystem provides a centralized way to display temporary messages to the player. It handles queuing, automatic text wrapping, state-aware display, and smooth animations.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Automatic message queuing
+    * Smart text wrapping
+    * State-aware display restrictions
+    * Smooth fade animations
+    * Preserved notifications across state changes
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | () | Initializes notification system ]
+    [ setupStateChangeHandling | () | Sets up state transition tracking ]
+    [ onStateChange | (newState) | Handles game state changes ]
+    [ show | (text, duration) | Queues notification for display ]
+    [ wrapText | (text) | Automatically wraps long text ]
+    [ breakLongWord | (word) | Breaks very long words ]
+    [ getTextWidth | (text) | Calculates text pixel width ]
+    [ processPendingNotifications | () | Processes queued notifications ]
+    [ processNext | () | Displays next notification in queue ]
+    [ preserveCurrentNotification | () | Saves current notification during state change ]
+    [ restorePreservedNotification | () | Restores saved notification ]
+    [ displayNotification | (text) | Creates notification display ]
+    [ hideCurrent | () | Hides current notification ]
+    [ cleanupUI | () | Removes notification elements ]
+    [ isStateRestricted | (stateName) | Checks if state allows notifications ]
+    [ isStateAllowed | (stateName) | Checks if state permits notifications ]
+    [ canShowInCurrentState | () | Checks current state permissions ]
+    [ setWrappingSettings | (maxLineWidth, charWidth) | Configures text wrapping ]
+    [ wrapTextToLines | (text, maxLines) | Wraps text with line limit ]
+    [ getQueueStatus | () | Returns current queue information ]
+    [ clear | () | Clears all notifications ]
+    [ hasActiveNotifications | () | Checks for any active notifications ]
+    [ getNotificationCount | () | Returns total notification count ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ queue | Array | Notification queue ]
+    [ isShowing | Boolean | Whether notification is currently displayed ]
+    [ currentNotification | Object | Currently displayed notification ]
+    [ duration | Number | Default display duration ]
+    [ lineHeight | Number | Line height in pixels ]
+    [ padding | Number | Text padding ]
+    [ maxLineWidth | Number | Maximum text width before wrapping ]
+    [ charWidth | Number | Average character width ]
+    [ restrictedStates | Set | States where notifications are blocked ]
+    [ allowedStates | Set | States where notifications are permitted ]
+    [ notificationWindow | Window | Notification display window ]
+    [ notificationTexts | Array | Text elements for notification ]
+    [ preservedNotification | Object | Notification saved during state change ]
+    [/table]
+    
+    [heading: "State Restrictions"]
+    [table header]
+    [ State | Allowed | Reason ]
+    [ MainMenu | Yes | User is navigating menus ]
+    [ SongSelect | Yes | User is selecting songs ]
+    [ Results | Yes | Showing performance results ]
+    [ Title | No | Initial loading screen ]
+    [ Play | No | Gameplay in progress ]
+    [ Load states | No | Loading screens ]
+    [ Boot | No | Initial boot sequence ]
+    [/table]
+    
+    [heading: "Text Wrapping"]
+    [table header]
+    [ Setting | Default | Description ]
+    [ maxLineWidth | 160 pixels | Maximum text width ]
+    [ charWidth | 4 pixels | Average character width ]
+    [ lineHeight | 8 pixels | Line spacing ]
+    [ padding | 8 pixels | Window padding ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

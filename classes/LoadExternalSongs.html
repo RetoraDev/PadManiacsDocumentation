@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>LoadExternalSongs - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "LoadExternalSongs Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Loads user-added songs from external storage with parallel processing and progress tracking.</p>
+    
+    [heading: "Description"]
+    <p>LoadExternalSongs scans external storage for user-added songs, processes .SM and .SSC chart files, and loads them into the game. It features parallel processing, progress tracking, and robust error handling.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Parallel song loading for performance
+    * Progress tracking and display
+    * Support for .SM and .SSC file formats
+    * File system and file input support
+    * Error recovery and logging
+    * Caching for faster reloads
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ create | () | Initializes external song loading ]
+    [ loadSongsFromStorage | () | Loads songs from file system ]
+    [ loadDirectoriesParallel | (directories) | Processes directories in parallel batches ]
+    [ loadDirectoriesSequential | (directories) | Processes directories one by one ]
+    [ processDirectoryBatch | (batch) | Processes a batch of directories ]
+    [ processSongDirectoryWithTracking | (dirEntry) | Tracks progress for directory processing ]
+    [ processSongDirectory | (dirEntry) | Processes individual song directory ]
+    [ updateProgress | () | Updates progress display ]
+    [ showFileInput | () | Shows file picker for web environment ]
+    [ processFileInput | (files) | Processes files from file input ]
+    [ processFileDirectoriesParallel | (directories, dirNames) | Processes file directories in parallel ]
+    [ processFileDirectoriesSequential | (directories, dirNames) | Processes file directories sequentially ]
+    [ processFileDirectoryBatch | (directories, batch) | Processes batch of file directories ]
+    [ processSongFilesWithTracking | (files, folderName) | Tracks progress for file processing ]
+    [ processSongFiles | (files, folderName) | Processes song files from file input ]
+    [ showError | (message) | Displays error message ]
+    [ finish | (resetIndex) | Completes loading and transitions to song selection ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ loadingDots | LoadingDots | Loading animation display ]
+    [ progressText | ProgressText | Progress text display ]
+    [ fileSystem | FileSystemTools | File system access instance ]
+    [ songs | Array | Loaded songs array ]
+    [ parser | ExternalSMParser | Chart file parser ]
+    [ loadedCount | Number | Number of successfully loaded songs ]
+    [ failedCount | Number | Number of failed song loads ]
+    [ totalCount | Number | Total directories to process ]
+    [ currentlyLoading | Set | Set of currently processing directories ]
+    [/table]
+    
+    [heading: "Loading Configuration"]
+    [table header]
+    [ Setting | Default | Description ]
+    [ ENABLE_PARALLEL_LOADING | false | Enable parallel processing ]
+    [ MAX_PARALLEL_DOWNLOADS | 16 | Maximum parallel operations ]
+    [ MAX_PARALLEL_ADDON_LOADS | 3 | Maximum parallel addon loads ]
+    [/table]
+    
+    [heading: "Processing Modes"]
+    [table header]
+    [ Mode | Use Case | Performance ]
+    [ Parallel | Fast devices, many songs | High throughput ]
+    [ Sequential | Slow devices, stability | More reliable ]
+    [ File Input | Web environment | User-selected files ]
+    [/table]
+    
+    [heading: "Directory Structure Support"]
+    [table header]
+    [ Structure | Description | Compatibility ]
+    [ Flat directory | All files in one folder | Basic support ]
+    [ Subdirectories | Assets in subfolders | Full support ]
+    [ Multiple charts | Multiple .SM files | First valid chart used ]
+    [ Mixed formats | .SM and .SSC together | Full support ]
+    [/table]
+    
+    [heading: "Error Handling"]
+    [table header]
+    [ Error Type | Handling | User Feedback ]
+    [ No chart files | Skip directory | Progress update ]
+    [ Corrupted chart | Skip file, try next | Progress update ]
+    [ Missing assets | Load with fallbacks | Warning in console ]
+    [ File system error | Retry or skip | Error message display ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

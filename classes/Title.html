@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "Title Class"]
+    
+    <a href="../">← Back to index</a>
+    
+    <p>The title screen state with animated logo and menu transition.</p>
+    
+    [heading: "Description"]
+    <p>Title is the first interactive state the player sees. It displays the game logo, copyright information, and waits for user input to proceed to the main menu.</p>
+    
+    [heading: "Key Responsibilities"]
+    [list]
+    * Display animated game logo
+    * Show copyright and version information
+    * Initialize background music
+    * Wait for user input to continue
+    * Handle smooth transitions to main menu
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ create | () | Sets up title screen elements ]
+    [ update | () | Handles user input and transitions ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ background | BackgroundGradient | Animated background gradient ]
+    [ lines | FuturisticLines | Animated background lines ]
+    [ logo | Logo | Animated game logo ]
+    [ inputInstructionText | Text | "PRESS ANY KEY" prompt ]
+    [ text | Phaser.Sprite | Container for text elements ]
+    [ creditText | Text | Copyright information display ]
+    [ introEnded | Boolean | Whether logo intro has completed ]
+    [ outroStarted | Boolean | Whether transition to menu has started ]
+    [/table]
+    
+    [heading: "Visual Elements"]
+    [list]
+    * Animated gradient background
+    * Moving futuristic lines
+    * Pulsing game logo
+    * Blinking "PRESS ANY KEY" text
+    * Copyright and version information
+    [/list]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

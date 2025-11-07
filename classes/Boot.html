@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Boot - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "Boot Class"]
+    
+    <a href="../">← Back to index</a>
+    
+    <p>The Boot state is the initial game state that loads critical assets and initializes core systems.</p>
+    
+    [heading: "Description"]
+    <p>Boot is the first game state that runs when PadManiaX starts. It loads essential assets like fonts and UI elements, initializes the input system, and prepares the game for loading.</p>
+    
+    [heading: "Key Responsibilities"]
+    [list]
+    * Load critical assets (fonts, window panels)
+    * Initialize the Gamepad input system
+    * Initialize the NotificationSystem
+    * Set up game timing and world settings
+    * Define primary assets and game resources
+    * Transition to the next loading state
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ preload | () | Loads essential assets including fonts and UI window panels ]
+    [ create | () | Initializes core systems and starts the next loading state ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ keys | Array | Array of loaded asset keys ]
+    [ load | Phaser.Loader | Phaser's asset loader instance ]
+    [/table]
+    
+    [heading: "Notes for Modders"]
+    <p>Addons are not available during the Boot state. This state runs before addon loading occurs.</p>
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

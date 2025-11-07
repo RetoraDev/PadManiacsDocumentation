@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>OffsetAssistant - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "OffsetAssistant Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Calibration tool for adjusting audio-video synchronization offset.</p>
+    
+    [heading: "Description"]
+    <p>OffsetAssistant helps players calibrate their audio-video synchronization by tapping to a metronome beat. It calculates the optimal offset value based on tap timing consistency and saves it to account settings.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Visual metronome with tick sounds
+    * Tap timing analysis
+    * Confidence-based offset calculation
+    * Real-time feedback display
+    * Automatic background music handling
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | (game) | Creates offset assistant ]
+    [ update | () | Handles input and metronome updates ]
+    [ pauseBackgroundMusic | () | Temporarily pauses background music ]
+    [ resumeBackgroundMusic | () | Restores background music ]
+    [ startTickSound | () | Starts metronome tick sounds ]
+    [ updateTickSound | () | Updates metronome timing ]
+    [ onTap | () | Processes user tap input ]
+    [ calculateOffset | () | Calculates optimal offset from taps ]
+    [ calculateConfidence | (offsets) | Calculates timing consistency ]
+    [ showTapFeedback | () | Provides visual feedback for taps ]
+    [ exit | () | Saves offset and returns to settings ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ taps | Array | Array of tap timestamps ]
+    [ confidenceThreshold | Number | Minimum confidence for reliable offset ]
+    [ maxTaps | Number | Maximum taps to store ]
+    [ requiredTaps | Number | Minimum taps for calculation ]
+    [ tickBPM | Number | Metronome beats per minute ]
+    [ tickInterval | Number | Milliseconds between ticks ]
+    [ calculatedOffsets | Array | Store calculated offset values ]
+    [ background | Phaser.Graphics | Background overlay ]
+    [ instructionText | Text | User instructions ]
+    [ offsetText | Text | Current offset display ]
+    [ tapCounter | Text | Tap count display ]
+    [ exitText | Text | Exit instructions ]
+    [/table]
+    
+    [heading: "Calibration Process"]
+    [list]
+    * Player taps A button to metronome ticks
+    * System analyzes tap timing consistency
+    * Calculates average offset from ideal timing
+    * Provides confidence indicator
+    * Saves offset when sufficient data collected
+    [/list]
+    
+    [heading: "Confidence Indicators"]
+    [table header]
+    [ Color | Confidence Level | Description ]
+    [ White | Low | Insufficient data ]
+    [ Yellow | Medium | Some consistency ]
+    [ Green | High | Reliable measurement ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

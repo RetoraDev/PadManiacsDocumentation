@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>FuturisticLines - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "FuturisticLines Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Dynamic animated line effects that move across the screen for futuristic visual atmosphere.</p>
+    
+    [heading: "Description"]
+    <p>FuturisticLines creates animated line effects that move across the screen with trailing tails, creating a futuristic, cyberpunk-inspired visual atmosphere. Lines can change direction and have configurable properties.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Procedurally generated lines
+    * Smooth trailing tail effects
+    * Dynamic direction changes
+    * Configurable speed and density
+    * Multiple color schemes
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | () | Creates lines system ]
+    [ update | () | Updates line positions and animations ]
+    [ spawnLine | () | Creates new line ]
+    [ updateLines | () | Updates all active lines ]
+    [ changeLineDirection | (line) | Changes line movement direction ]
+    [ drawLines | () | Renders all lines ]
+    [ drawTail | (line) | Draws line tail effect ]
+    [ drawCap | (line) | Draws line head cap ]
+    [ setDensity | (density) | Sets number of active lines ]
+    [ setSpeed | (speed) | Sets line movement speed ]
+    [ setTailLength | (length) | Sets tail length ]
+    [ setColors | (colors) | Sets line color palette ]
+    [ setAlpha | (alpha) | Sets line opacity ]
+    [ clearLines | () | Removes all lines ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ lines | Array | Array of active lines ]
+    [ maxLines | Number | Maximum concurrent lines ]
+    [ lineSpeed | Number | Base movement speed ]
+    [ tailLength | Number | Tail length in pixels ]
+    [ spawnRate | Number | Time between new line spawns ]
+    [ lastSpawnTime | Number | Last spawn timestamp ]
+    [ lineColors | Array | Available line colors ]
+    [ lineAlpha | Number | Line opacity ]
+    [ graphics | Phaser.Graphics | Drawing graphics object ]
+    [/table]
+    
+    [heading: "Line States"]
+    [table header]
+    [ State | Description ]
+    [ straight | Moving horizontally ]
+    [ angled | Moving at 45-degree angle ]
+    [ returning | Changing back to horizontal ]
+    [/table]
+    
+    [heading: "Default Color Palette"]
+    [table header]
+    [ Color | Hex Value | Description ]
+    [ Cyan | 0x76FCFF | Primary bright cyan ]
+    [ Light Cyan | 0x4AFCFE | Secondary cyan ]
+    [ Blue Cyan | 0x00E5FF | Tertiary blue-cyan ]
+    [ Dark Blue | 0x00B8D4 | Quaternary dark blue ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

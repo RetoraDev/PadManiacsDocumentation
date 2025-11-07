@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>BPMVisualizer - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "BPMVisualizer Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Displays BPM changes, stop events, and beat timing information during gameplay.</p>
+    
+    [heading: "Description"]
+    <p>BPMVisualizer shows the current BPM, upcoming BPM changes, stop events, and provides a visual beat indicator. It helps players anticipate timing changes in complex charts.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Current BPM display
+    * BPM change indicators
+    * Stop event markers
+    * Visual beat indicator
+    * Timing preview
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | (scene, x, y, width, height) | Creates BPM visualizer ]
+    [ update | () | Updates BPM and timing display ]
+    [ getLastBpm | () | Gets current BPM value ]
+    [ getLastStop | () | Gets current stop event ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ bpmChanges | Array | Song BPM change events ]
+    [ stops | Array | Song stop events ]
+    [ text | Text | BPM value text display ]
+    [ beatIndicatorAlpha | Number | Beat indicator opacity ]
+    [ currentBeat | Number | Current beat position ]
+    [ currentBeatInt | Number | Current integer beat ]
+    [ currentBpm | Number | Current BPM value ]
+    [/table]
+    
+    [heading: "Visual Elements"]
+    [table header]
+    [ Element | Description | Color/Appearance ]
+    [ BPM Text | Current BPM value | White/Red during stops ]
+    [ BPM Marker | Upcoming BPM change | Yellow line ]
+    [ Stop Marker | Upcoming stop event | Red line ]
+    [ Beat Indicator | Current beat pulse | Green circle ]
+    [/table]
+    
+    [heading: "Beat Indicator Behavior"]
+    [table header]
+    [ State | Appearance | Timing ]
+    [ Beat Start | Full opacity | Beginning of beat ]
+    [ Beat Progress | Fading out | During beat ]
+    [ Beat End | Low opacity | End of beat ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>NodeFileSystem - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "NodeFileSystem Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>File system implementation for NW.js desktop applications using Node.js APIs.</p>
+    
+    [heading: "Description"]
+    <p>NodeFileSystem provides full file system access for desktop applications using Node.js file system APIs. It offers complete read/write capabilities and directory management.</p>
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | () | Initializes Node.js file system ]
+    [ getBasePath | () | Gets application base path ]
+    [ getDirectory | (path) | Gets directory entry ]
+    [ listDirectories | (dirEntry) | Lists subdirectories ]
+    [ listAllDirectories | (startDir) | Recursively lists directories ]
+    [ listFiles | (dirEntry) | Lists files in directory ]
+    [ getFile | (fileEntry) | Gets file entry ]
+    [ readFileContent | (file) | Reads file content ]
+    [ saveFile | (dirEntry, fileData, fileName) | Saves file to directory ]
+    [ createEmptyFile | (dirEntry, fileName, isAppend) | Creates empty file ]
+    [ writeFile | (fileEntry, dataObj, isAppend) | Writes data to file ]
+    [ createDirectory | (rootDirEntry, dirName) | Creates new directory ]
+    [/table]
+    
+    [heading: "Node.js Integration"]
+    [table header]
+    [ Module | Purpose | Methods Used ]
+    [ fs | File operations | readFile, writeFile, stat, readdir, mkdir ]
+    [ path | Path handling | join, basename, resolve ]
+    [/table]
+    
+    [heading: "Base Path Detection"]
+    [table header]
+    [ Environment | Base Path | Description ]
+    [ NW.js | nw.process.cwd() | Executable directory ]
+    [ Node.js | process.cwd() | Current working directory ]
+    [ Fallback | "." | Current directory ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

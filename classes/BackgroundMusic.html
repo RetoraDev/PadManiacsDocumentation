@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>BackgroundMusic - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "BackgroundMusic Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Manages background music playback in menus with smart song selection and caching.</p>
+    
+    [heading: "Description"]
+    <p>BackgroundMusic handles the playback of music in menu screens, featuring intelligent song selection, caching for performance, and seamless transitions between songs.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Smart song randomization
+    * Performance-optimized caching
+    * Last song persistence
+    * Cross-fade transitions
+    * Error recovery
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | () | Initializes background music system ]
+    [ registerVisibilityChangeListener | () | Sets up visibility handling ]
+    [ playLastSong | () | Plays last played or random song ]
+    [ playRandomSong | () | Selects and plays random song ]
+    [ getCachedAvailableSongs | () | Gets cached song list ]
+    [ getAllAvailableSongsFast | () | Builds fast song list ]
+    [ isValidAudioUrl | (url) | Validates audio URLs ]
+    [ checkUrlAccessible | (url) | Tests URL accessibility ]
+    [ playSong | (songData) | Plays specified song ]
+    [ removeSongFromCache | (failedUrl) | Removes failed song from cache ]
+    [ stop | () | Stops music playback ]
+    [ setVolume | (volume) | Sets playback volume ]
+    [ refreshCache | () | Refreshes song cache ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ audio | HTMLAudioElement | Audio playback element ]
+    [ randomSong | Boolean | Whether to randomize songs ]
+    [ isPlaying | Boolean | Whether music is playing ]
+    [ currentSong | Object | Currently playing song data ]
+    [ availableSongsCache | Array | Cached available songs ]
+    [ cacheTimestamp | Number | Cache creation time ]
+    [ cacheDuration | Number | Cache validity duration ]
+    [ wasMusicPlaying | Boolean | Previous play state for pauses ]
+    [ originalMusicTime | Number | Previous time for resuming ]
+    [/table]
+    
+    [heading: "Song Selection Logic"]
+    [table header]
+    [ Condition | Behavior ]
+    [ Last song available | Play last played song ]
+    [ Random mode enabled | Select random song ]
+    [ Song inaccessible | Fallback to random song ]
+    [ No songs available | Silent operation ]
+    [/table]
+    
+    [heading: "Song Sources"]
+    [table header]
+    [ Source | Description | Priority ]
+    [ Last played song | User's previous selection | High ]
+    [ Local songs | Built-in game songs | Medium ]
+    [ External songs | User-added songs | Medium ]
+    [ Current state songs | Songs from active state | Low ]
+    [/table]
+    
+    [heading: "Cache Performance"]
+    [table header]
+    [ Setting | Value | Description ]
+    [ Cache Duration | 30 seconds | How long cache is valid ]
+    [ URL Check Timeout | 800ms | Maximum URL test time ]
+    [ Fallback Delay | 100ms | Delay before trying next song ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AccuracyVisualizer - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "AccuracyVisualizer Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Displays a graph of recent timing accuracy during gameplay.</p>
+    
+    [heading: "Description"]
+    <p>AccuracyVisualizer shows a real-time graph of the player's recent timing accuracy, helping players visualize their consistency and timing patterns during gameplay.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Real-time accuracy graphing
+    * Timing history visualization
+    * Reference line for perfect timing
+    * Color-coded accuracy feedback
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | (scene, x, y, width, height) | Creates accuracy visualizer ]
+    [ update | () | Updates accuracy graph display ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ accuracyHistory | Array | Recent timing accuracy values ]
+    [ maxHistoryLength | Number | Maximum history points to display ]
+    [/table]
+    
+    [heading: "Visual Elements"]
+    [table header]
+    [ Element | Description | Color ]
+    [ Reference Line | Perfect timing reference | Gray (0xF0F0F0) ]
+    [ Accuracy Line | Player timing accuracy | Green (0x00FF00) ]
+    [/table]
+    
+    [heading: "Graph Interpretation"]
+    [table header]
+    [ Position | Timing | Description ]
+    [ Center | Perfect | Exactly on beat ]
+    [ Above center | Early | Hitting before beat ]
+    [ Below center | Late | Hitting after beat ]
+    [ Flat line | Consistent | Steady timing ]
+    [ Jagged line | Inconsistent | Variable timing ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

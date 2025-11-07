@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>LocalSMParser - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "LocalSMParser Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Parses StepMania .SM chart files for built-in songs.</p>
+    
+    [heading: "Description"]
+    <p>LocalSMParser processes StepMania .SM chart files for the game's built-in songs. It extracts song metadata, note charts, timing data, and asset references, converting them into the game's internal format.</p>
+    
+    [heading: "Key Responsibilities"]
+    [list]
+    * Parse .SM file format
+    * Extract song metadata and timing
+    * Process note charts and difficulties
+    * Calculate timing conversions
+    * Handle BPM changes and stops
+    * Resolve asset file paths
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ parseSM | (smContent, baseUrl) | Main parsing method for .SM files ]
+    [ parseSSC | (sscContent, baseUrl) | Parses .SSC file format ]
+    [ resolveFileUrl | (filename) | Resolves relative file paths ]
+    [ getLastBpm | (bpmChanges, time, valueType) | Finds relevant BPM for time ]
+    [ beatToSec | (bpmChanges, stops, beat) | Converts beat time to seconds ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ baseUrl | String | Base URL for asset resolution ]
+    [/table]
+    
+    [heading: "Parsed Song Structure"]
+    [table header]
+    [ Property | Type | Description ]
+    [ title | String | Song title ]
+    [ artist | String | Song artist ]
+    [ titleTranslit | String | Transliterated title ]
+    [ artistTranslit | String | Transliterated artist ]
+    [ bpmChanges | Array | BPM change events ]
+    [ stops | Array | Stop events ]
+    [ notes | Object | Note charts by difficulty ]
+    [ difficulties | Array | Available difficulties ]
+    [ audioUrl | String | Audio file path ]
+    [ banner | String | Banner image path ]
+    [ background | String | Background image path ]
+    [ offset | Number | Global timing offset ]
+    [ sampleStart | Number | Preview start time ]
+    [ sampleLength | Number | Preview length ]
+    [/table]
+    
+    [heading: "Supported File Tags"]
+    [table header]
+    [ Tag | Description ]
+    [ #TITLE | Song title ]
+    [ #ARTIST | Song artist ]
+    [ #BPMs | BPM changes ]
+    [ #STOPS | Stop events ]
+    [ #NOTES | Note chart data ]
+    [ #BACKGROUND | Background image ]
+    [ #BANNER | Banner image ]
+    [ #MUSIC | Audio file ]
+    [ #OFFSET | Global offset ]
+    [ #SAMPLESTART | Preview start ]
+    [ #SAMPLELENGTH | Preview length ]
+    [/table]
+    
+    [heading: "Note Types"]
+    [table header]
+    [ Character | Type | Description ]
+    [ 0 | Empty | No note ]
+    [ 1 | Tap | Regular note ]
+    [ 2 | Hold | Hold note start ]
+    [ 3 | Hold End | Hold note end ]
+    [ 4 | Roll | Roll note start ]
+    [ M | Mine | Mine note (avoid) ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Logo - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "Logo Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Animated logo display with entrance and exit effects for the title screen.</p>
+    
+    [heading: "Description"]
+    <p>Logo handles the animated game logo on the title screen, providing smooth entrance animations, pulsating effects, and dramatic exit transitions when proceeding to the main menu.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Smooth fade-in entrance
+    * Pulsating glow effect
+    * Multi-layer visual effects
+    * Dramatic exit transition
+    * Camera flash effects
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | () | Creates logo at screen center ]
+    [ intro | (callback) | Plays entrance animation ]
+    [ outro | (callback) | Plays exit transition ]
+    [ effect | (amountLayers, time, invert) | Creates multi-layer visual effect ]
+    [ addShape | (tint, x, y) | Adds logo shape element ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ mainShape | Phaser.Sprite | Primary logo shape ]
+    [ logoTween | Phaser.Tween | Pulsating animation tween ]
+    [/table]
+    
+    [heading: "Animation Sequences"]
+    [table header]
+    [ Animation | Description | Duration ]
+    [ Intro | Fade in with smooth entrance | 1000ms ]
+    [ Idle | Gentle pulsating glow | Continuous ]
+    [ Outro | Multi-layer explosion with camera flash | 350ms ]
+    [ Effect | Custom multi-layer effects | Configurable ]
+    [/table]
+    
+    [heading: "Visual Elements"]
+    [table header]
+    [ Element | Description ]
+    [ mainShape | Primary logo sprite ]
+    [ effect layers | Additional shapes for complex effects ]
+    [ camera flash | Full-screen white flash transition ]
+    [ scale animation | Logo scaling for dramatic effects ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

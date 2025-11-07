@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Getting Started with Modding - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "Getting Started with Modding"]
+    <a href="../">← Back to index</a>
+    
+    <p>Learn how to create your first PadManiaX addon from scratch.</p>
+    
+    [heading: "Prerequisites"]
+    <p>Before you begin modding PadManiaX, you should have:</p>
+    [list]
+    * Basic understanding of JavaScript
+    * Text editor or code editor
+    * PadManiaX installed on your device
+    * File manager app (for mobile development)
+    [/list]
+    
+    [heading: "Development Tools"]
+    
+    [subheading: "Mobile Development with Acode"]
+    <p>If you're developing on mobile, we recommend using <strong>Acode</strong> - a powerful mobile code editor:</p>
+    [list]
+    * Free and open source
+    * File system access
+    * JavaScript syntax highlighting
+    * Git integration
+    * Available on Google Play Store
+    [/list]
+    
+    [subheading: "Desktop Development"]
+    <p>For desktop development, any code editor works:</p>
+    [list]
+    * Visual Studio Code (recommended)
+    * Sublime Text
+    * Atom
+    * Notepad++
+    [/list]
+    
+    [heading: "Your First Addon"]
+    
+    [subheading: "Step 1: Create Addon Directory"]
+    <p>Navigate to your PadManiaX data directory and create a new folder in the <code>"Addons"</code> folder:</p>
+    [codeblock]
+Path: /storage/emulated/0/PadManiacs/Addons/MyFirstAddon/
+    [/codeblock]
+    
+    [subheading: "Step 2: Create Manifest File"]
+    <p>Create a <code>manifest.json</code> file with basic information:</p>
+    [codeblock json]
+{
+  "id": "my-first-addon",
+  "name": "My First Addon",
+  "version": "1.0.0",
+  "author": "Your Name",
+  "description": "My very first PadManiaX addon!"
+}
+    [/codeblock]
+    
+    [subheading: "Step 3: Test Your Addon"]
+    <p>Launch PadManiaX and check if your addon appears in the Addon Manager:</p>
+    [list]
+    * Go to Main Menu → Extras → Addon Manager
+    * Your addon should appear in the list
+    * Enable it if it's disabled
+    [/list]
+    
+    [heading: "Understanding the Basics"]
+    
+    [subheading: "Addon Structure"]
+    <p>A basic addon has this structure:</p>
+    [codeblock]
+MyFirstAddon/
+├── manifest.json      # Required: Addon metadata
+├── icon.png          # Optional: Addon icon
+├── assets/           # Optional: Game assets to replace
+└── behaviors/        # Optional: JavaScript code files
+    [/codeblock]
+    
+    [subheading: "Required JavaScript Knowledge"]
+    <p>You'll need basic JavaScript knowledge for modding:</p>
+    [list]
+    * Variables and functions
+    * Objects and arrays
+    * Event handling
+    * Basic DOM manipulation (for web concepts)
+    [/list]
+    
+    <p>Recommended JavaScript learning resources:</p>
+    [list]
+    * <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide">MDN JavaScript Guide</a>
+    * <a href="https://javascript.info/">The Modern JavaScript Tutorial</a>
+    * <a href="https://www.w3schools.com/js/">W3Schools JavaScript Tutorial</a>
+    [/list]
+    
+    [heading: "Development Tips"]
+    
+    [subheading: "Enable Debug Console"]
+    <p>PadManiaX has a hidden developer console using Eruda. To enable it:</p>
+    [codeblock js]
+// Open browser console and run:
+eruda.init();
+    [/codeblock]
+    
+    <p><strong>Eruda</strong> is a mobile web debugger that provides console, elements inspection, and network monitoring. <a href="https://github.com/liriliri/eruda">Learn more about Eruda</a>.</p>
+    
+    [subheading: "Restart the Game"]
+    <p>You can restart the game programmatically:</p>
+    [codeblock js]
+bootGame(); // Restarts the entire game
+    [/codeblock]
+    
+    [heading: "Next Steps"]
+    <p>Now that you've created your first addon, check out these tutorials:</p>
+    [list]
+    * <a href="manifest_format.html">Understanding the Manifest Format</a>
+    * <a href="asset_replacement.html">Asset Replacement Tutorial</a>
+    * <a href="behavior_scripts.html">Creating Behavior Scripts</a>
+    [/list]
+    
+    [heading: "Example Addons"]
+    <p>Download example addons to learn from:</p>
+    [list]
+    * <a href="https://retora.itch.io/padmaniacs">Official itch.io page</a>
+    * <a href="https://github.com/RetoraDev/PadManiacs/releases">GitHub Releases</a>
+    [/list]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

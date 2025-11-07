@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>MainMenu - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "MainMenu Class"]
+    
+    <a href="../">← Back to index</a>
+    
+    <p>The main menu state with navigation to all game features.</p>
+    
+    [heading: "Description"]
+    <p>MainMenu provides access to all major game features including song selection, settings, addon management, and extras. It features a carousel-based navigation system.</p>
+    
+    [heading: "Key Responsibilities"]
+    [list]
+    * Provide navigation to all game modes
+    * Display and manage settings
+    * Handle addon management
+    * Play background music
+    * Manage UI windows and menus
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ create | () | Initializes main menu elements ]
+    [ menu | () | Creates the main navigation menu ]
+    [ freePlay | () | Starts free play song selection ]
+    [ startOffsetAssistant | () | Launches offset calibration tool ]
+    [ loadExternalSongs | () | Loads user-added songs ]
+    [ loadSingleSong | () | Loads single song from folder ]
+    [ addonManager | () | Opens addon management interface ]
+    [ update | () | Handles input and UI updates ]
+    [ shutdown | () | Cleans up resources when leaving state ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ manager | WindowManager | Manages UI windows ]
+    [ previewCanvas | HTMLCanvasElement | Canvas for addon previews ]
+    [ previewCtx | CanvasRenderingContext2D | Context for preview canvas ]
+    [ previewImg | HTMLImageElement | Image for addon icons ]
+    [/table]
+    
+    [heading: "Menu Structure"]
+    [table header]
+    [ Menu | Options ]
+    [ Home | Rhythm Game, Settings, Extras, Exit ]
+    [ Rhythm Game | Free Play, Extra Songs ]
+    [ Settings | Volume, Auto-play, Visualizer, Note Colors, etc. ]
+    [ Extras | Addon Manager, Offset Assistant ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

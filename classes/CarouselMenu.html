@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CarouselMenu - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "CarouselMenu Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>A vertical scrolling menu with animated selection and gradient backgrounds.</p>
+    
+    [heading: "Description"]
+    <p>CarouselMenu provides a visually appealing vertical menu system with smooth animations, gradient backgrounds, and customizable appearance. It's used throughout the game for navigation menus.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Smooth vertical scrolling
+    * Animated selection indicators
+    * Gradient background effects
+    * Customizable colors and alignment
+    * Page-based navigation support
+    * Visual feedback for interactions
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | (x, y, width, height, config) | Creates new carousel menu ]
+    [ addItem | (text, callback, data) | Adds menu item ]
+    [ update | () | Processes input and animations ]
+    [ navigate | (direction, page) | Changes selection ]
+    [ confirm | () | Activates selected item ]
+    [ cancel | () | Handles cancel action ]
+    [ clear | () | Removes all items ]
+    [ destroy | () | Cleans up resources ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ config | Object | Menu configuration ]
+    [ viewport | Object | Menu display dimensions ]
+    [ items | Array | Menu items array ]
+    [ selectedIndex | Number | Currently selected item ]
+    [ scrollOffset | Number | Scroll position ]
+    [ itemHeight | Number | Height of each item ]
+    [ itemSpacing | Number | Spacing between items ]
+    [ visibleItems | Number | Number of visible items ]
+    [ isAnimating | Boolean | Whether menu is animating ]
+    [ inputEnabled | Boolean | Whether input is accepted ]
+    [/table]
+    
+    [heading: "Configuration Options"]
+    [table header]
+    [ Option | Type | Default | Description ]
+    [ animate | Boolean | true | Enable animations ]
+    [ align | String | 'left' | Text alignment (left/right) ]
+    [ bgcolor | String | '#3498db' | Background color ]
+    [ fgcolor | String | '#ffffff' | Text color ]
+    [ margin | Object | {top:4,bottom:4,left:4,right:4} | Content margins ]
+    [ silent | Boolean | false | Suppress automatic adding to game ]
+    [/table]
+    
+    [heading: "Item Data Structure"]
+    [table header]
+    [ Property | Type | Description ]
+    [ textContent | String | Display text ]
+    [ callback | Function | Activation callback ]
+    [ data | Object | Custom data for styling ]
+    [ bgcolor | String | Item background color override ]
+    [ fgcolor | String | Item text color override ]
+    [/table]
+    
+    [heading: "Signals"]
+    [table header]
+    [ Signal | Parameters | Description ]
+    [ onSelect | (index, item) | Selection changed ]
+    [ onConfirm | (index, item) | Item confirmed ]
+    [ onCancel | () | Cancel pressed ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

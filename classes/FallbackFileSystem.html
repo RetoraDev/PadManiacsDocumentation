@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>FallbackFileSystem - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "FallbackFileSystem Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Fallback file system implementation for web environments without file system access.</p>
+    
+    [heading: "Description"]
+    <p>FallbackFileSystem provides a stub implementation for web environments where file system access is not available. All operations return rejected promises with appropriate error messages.</p>
+    
+    [heading: "Methods"]
+    <p>All methods return rejected promises with the error message "File system not available in this environment".</p>
+    [table header]
+    [ Method | Always Returns ]
+    [ getDirectory | Rejected promise ]
+    [ listDirectories | Rejected promise ]
+    [ listAllDirectories | Rejected promise ]
+    [ listFiles | Rejected promise ]
+    [ getFile | Rejected promise ]
+    [ readFileContent | Rejected promise ]
+    [ saveFile | Rejected promise ]
+    [ createEmptyFile | Rejected promise ]
+    [ writeFile | Rejected promise ]
+    [ createDirectory | Rejected promise ]
+    [/table]
+    
+    [heading: "Usage Context"]
+    <p>FallbackFileSystem is used in standard web browser environments where:</p>
+    [list]
+    * No Cordova plugin available
+    * No Node.js/NW.js environment
+    * Standard web security restrictions apply
+    * File system access would require user interaction
+    [/list]
+    
+    [heading: "Impact on Features"]
+    [table header]
+    [ Feature | Status in Fallback Mode ]
+    [ Addon loading | Not available ]
+    [ External songs | Not available ]
+    [ Save data | Limited to localStorage ]
+    [ File operations | Not available ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

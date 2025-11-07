@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AudioVisualizer - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "AudioVisualizer Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Displays real-time audio frequency spectrum analysis during gameplay.</p>
+    
+    [heading: "Description"]
+    <p>AudioVisualizer uses Web Audio API to analyze the game's audio and display a frequency spectrum visualization, showing the distribution of sound frequencies in real-time.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Real-time frequency analysis
+    * Audio spectrum visualization
+    * Configurable frequency bands
+    * Smooth animation transitions
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | (scene, x, y, width, height) | Creates audio visualizer ]
+    [ setupAudioAnalysis | () | Initializes Web Audio API components ]
+    [ update | () | Updates frequency display ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ audioContext | AudioContext | Web Audio context ]
+    [ analyser | AnalyserNode | Audio analysis node ]
+    [ dataArray | Uint8Array | Frequency data buffer ]
+    [ bufferLength | Number | Number of frequency bins ]
+    [ bars | Array | Visual frequency bars ]
+    [/table]
+    
+    [heading: "Audio Analysis Settings"]
+    [table header]
+    [ Setting | Value | Description ]
+    [ FFT Size | 64 | Frequency resolution ]
+    [ Max Decibels | -10 | Maximum volume level ]
+    [ Smoothing | 0.1 | Data smoothing factor ]
+    [ Frequency Bins | 32 | Number of display bars ]
+    [/table]
+    
+    [heading: "Visual Representation"]
+    [table header]
+    [ Element | Description | Color ]
+    [ Frequency Bars | Audio frequency amplitude | Blue (0x0000FF) ]
+    [ Bar Height | Sound intensity at frequency | Dynamic ]
+    [ Bar Width | Frequency range coverage | Calculated ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "PadManiaX Modding API Documentation"]
+    
+    <p>This website provides detailed information about all core classes in PadManiacs. Use this reference when creating addons to understand available APIs and modification points.</p>
+    
+    [heading: "Introduction"]
+    <p>PadManiacs is a lightweight rhythm game that brings the StepMania experience to web and mobile devices with a retro pixel art aesthetic. The game features core rhythm gameplay mechanics of StepMania, a popular open source rhythm game.</p>
+    
+    <p><a href="https://github.com/RetoraDev/PadManiacs">Explore Source code</a>
+    <p><a href="https://retora.itch.io/padmaniacs">Play on itch.io</a>
+    
+    <p>PadManiacs supports community-created modifications through an add-on system. Add-ons can:</p>
+    [list]
+    * Replace game assets (arrows, backgrounds, UI elements)
+    * Add new behaviors and gameplay mechanics
+    * Extend the game with new features
+    [/list]
+    
+    [heading: "How addons work"]
+    <p>An addon is a folder that contains data that the game loads at startup, overwriting the assets and default game behavior.</p>
+    
+    <p>In order for an addon to be considered valid, it must include the [code: "manifest.json"] file, a file that defines metadata, which parts of the game must be modified or extended, as well as the data and the code that must be loaded.</p>
+    
+    <p>Add-ons are stored at a subfolder [code: "Addons/"] under local storage folder. All Addons you develop must be inside this folder so you can test them in the game.</p>
+    
+    [heading: "Tutorials"]
+    <p>Learn how to create and modify PadManiaX with these step-by-step tutorials.</p>
+    
+    [list]
+    * <a href="tutorials/getting_started.html">Getting Started with Modding</a> - Learn the basics of creating your first addon
+    * <a href="tutorials/manifest_format.html">Understanding the Manifest Format</a> - Complete guide to manifest.json structure
+    * <a href="tutorials/asset_replacement.html">Asset Replacement Tutorial</a> - How to replace game graphics and sounds
+    * <a href="tutorials/behavior_scripts.html">Creating Behavior Scripts</a> - Adding custom gameplay logic
+    * <a href="tutorials/ui_modification.html">UI Modification Guide</a> - Customizing menus and interfaces
+    [/list]
+    
+    [heading: "Global Scope"]
+    <p>The following global variables and constants are available throughout the game and can be used in addons:</p>
+    
+    [subheading: "Constants"]
+    [table header]
+    [ Name | Type | Value | Description ]
+    [ COPYRIGHT | string | "(C) RETORA 2025" | Copyright notice ]
+    [ VERSION | string | "v0.0.5" | Current game version ]
+    [ DEBUG | boolean | false | Global debug flag, can be enabled for development ]
+    [ ENVIRONMENT.UNKNOWN | string | 'UNKNOWN' | Environment detection constant ]
+    [ ENVIRONMENT.NWJS | string | 'NWJS' | NW.js desktop application environment ]
+    [ ENVIRONMENT.CORDOVA | string | 'CORDOVA' | Apache Cordova mobile environment ]
+    [ ENVIRONMENT.WEB | string | 'WEB' | Standard web browser environment ]
+    [ CURRENT_ENVIRONMENT | string | (detected) | Current runtime environment ]
+    [ FONTS | object | font configurations | Predefined font configurations for text rendering ]
+    [ WINDOW_PANELS | array | ["1"] | Available UI window panels ]
+    [ CORDOVA_EXTERNAL_DIRECTORY | string | "PadManiacs/" | External directory path for Cordova ]
+    [ NWJS_EXTERNAL_DIRECTORY | string | "data/" | External directory path for NW.js ]
+    [ EXTERNAL_DIRECTORY | string | (environment-specific) | Current external directory path ]
+    [ ADDONS_DIRECTORY | string | "Addons" | Addons directory name ]
+    [ SONGS_DIRECTORY | string | "Songs" | Songs directory name ]
+    [ ENABLE_PARALLEL_LOADING | boolean | false | Enable parallel asset loading ]
+    [ MAX_PARALLEL_DOWNLOADS | number | 16 | Maximum parallel downloads ]
+    [ MAX_PARALLEL_ADDON_LOADS | number | 3 | Maximum parallel addon loads ]
+    [ ENABLE_ADDON_SAFE_MODE | boolean | true | Enable addon safe mode for error protection ]
+    [ ENABLE_UI_SFX | boolean | false | Enable UI sound effects ]
+    [ DEFAULT_SONG_FOLDERS | array | [...] | Default built-in song folders ]
+    [/table]
+    
+    [subheading: "Global Variables"]
+    [table header]
+    [ Name | Type | Description ]
+    [ game | Phaser.Game | Main Phaser game instance ]
+    [ gamepad | Gamepad | Unified input system instance ]
+    [ backgroundMusic | Object | Background music controller ]
+    [ notifications | NotificationSystem | Global notification system instance ]
+    [ addonManager | AddonManager | Addon management system ]
+    [ Account | Object | User account data with settings and progress ]
+    [/table]
+    
+    [subheading: "Global Functions"]
+    [table header]
+    [ Name | Parameters | Description ]
+    [ detectEnvironment | () | Detects and returns current runtime environment ]
+    [ saveAccount | () | Saves account data to localStorage ]
+    [ bootGame | () | Initializes and starts the Phaser game ]
+    [/table]
+    
+    [heading: "API"]
+    <p>PadManiaX was built using <a href="https://github.com/photonstorm/phaser-ce">Phaser CE</a>, with Cordova for mobile file access and NW.js for desktop builds. See the documentation: <a href="https://cordova.apache.org/docs/en/latest/">Cordova Docs</a> and <a href="https://nwjs.io/docs/">NW.js Docs</a>, plus <a href="https://github.com/photonstorm/phaser-ce">Phaser CE Docs</a>.</p>
+    
+    <p>The game code is divided into different classes. All classes are accessible in the scope of addon file. Each of them plays a role, some more important than others. For example game screens visual or abstract elements, data managers, etc.</p>
+    
+    [subheading: "Game States"]
+    [table header]
+    [ Name | Description ]
+    [ <a href="classes/Boot.html">Boot</a> | Load critical assets, initialize input system, then start loading the game. Addons are not ready to be used yet ]
+    [ <a href="classes/Load.html">Load</a> | Initialized with a set of objects representing assets that need to be loaded, when all assets are loaded it starts a specific game screen. Still addons can't be used ]
+    [ <a href="classes/LoadCordova.html">LoadCordova</a> | Initialize Cordova on mobile devices, initialize file system, then start loading add-ons ]
+    [ <a href="classes/LoadAddons.html">LoadAddons</a> | Initializes the addon manager and loads addon resources, then start loading default songs ]
+    [ <a href="classes/LoadLocalSongs.html">LoadLocalSongs</a> | Loads Free Play songs and starts title screen, at this points addons are initialized but the game will not invoke addon behaviors ]
+    [ <a href="classes/Title.html">Title</a> | Title Screen, waits for user input and starts MainMenu ]
+    [ <a href="classes/MainMenu.html">MainMenu</a> | Main Menu screen, song selection, user songs, settings and extras ]
+    [ <a href="classes/LoadExternalSongs.html">LoadExternalSongs</a> | Loads songs stored in local storage, the game will not invoke addon behaviors ]
+    [ <a href="classes/SongSelect.html">SongSelect</a> | Initialized with a set of songs, displays song selection menu, starts gameplay screen with the song selected ]
+    [ <a href="classes/Play.html">Play</a> | Gameplay screen, initialized with a single song ]
+    [ <a href="classes/Results.html">Results</a> | Judge your performance, display scores and save new records ]
+    [/table]
+    
+    [subheading: "Game Classes"]
+    [table header]
+    [ Name | Description ]
+    [ <a href="classes/Logo.html">Logo</a> | Logic for title screen logo ]
+    [ <a href="classes/Text.html">Text</a> | Tiny pixel text with various effects ]
+    [ <a href="classes/WindowManager.html">WindowManager</a> | Handles creation, focus and removal of UI Windows (like Settings window), you'll need to work with this class if you want to make multiple windows ]
+    [ <a href="classes/Window.html">Window</a> | A single UI Window ]
+    [ <a href="classes/CarouselMenu.html">CarouselMenu</a> | Great vertical carousel menu, supports colors, item data, auto scrolls if text is too long ]
+    [ <a href="classes/OffsetAssistant.html">OffsetAssistant</a> | Logic for the offset assistant screen ]
+    [ <a href="classes/BackgroundGradient.html">BackgroundGradient</a> | Pixelated gradient using as UI background ]
+    [ <a href="classes/FuturisticLines.html">FuturisticLines</a> | Logic for futuristic background lines ]
+    [ <a href="classes/LoadingDots.html">LoadingDots</a> | Logic for dots animation used in loading screens ]
+    [ <a href="classes/ProgressText.html">ProgressText</a> | A version of the <a href="classes/Text.html">Text</a> class that appears in loading screens ]
+    [ <a href="classes/NotificationSystem.html">NotificationSystem</a> | Notification manager, accessible globally as [code: "notificationSystem"]. Handles notifications in all game screens ]
+    [ <a href="classes/Lyrics.html">Lyrics</a> | Logic for LRC lyrics ]
+    [ <a href="classes/Visualizer.html">Visualizer</a> | Base class to create stats visualizers in-game ]
+    [ <a href="classes/AcurracyVisualizer.html">AcurracyVisualizer</a> | Logic for acurracy visualizer graph ]
+    [ <a href="classes/AudioVisualizer.html">AudioVisualizer</a> | Logic for audio frequency visualizer ]
+    [ <a href="classes/BPMVisualizer.html">BPMVisualizer</a> | Logic for BPM changes and stops visualizer ]
+    [ <a href="classes/Metronome.html">Metronome</a> | Logic for metronome sound ]
+    [ <a href="classes/Player.html">Player</a> | Almost all gameplay logic is handled by this class ]
+    [ <a href="classes/Gamepad.html">Gamepad</a> | Unified input system, handles keyboard, touchscreen and gamepad input ]
+    [ <a href="classes/LocalSMParser.html">LocalSMParser</a> | Process StepMania .SM files of default songs, resolve it's dependencies and return and object that represents a song chart ]
+    [ <a href="classes/ExternalSMParser.html">ExternalSMParser</a> | Works similar to <a href="classes/LocalSMParser.html">LocalSMParser</a> but handles external songs ]
+    [ <a href="classes/AddonManager.html">AddonManager</a> | Loads addons, applies behaviors, overrides default assets, enables, disables, hibernates or wakes addons. You should not modify this class ]
+    [/table]
+    
+    [subheading: "File System Classes"]
+    [table header]
+    [ Name | Description ]
+    [ <a href="classes/FileSystemTools.html">FileSystemTools</a> | Wrapper to class to interact with the file system, allows read/write access to the user files ]
+    [ <a href="classes/CordovaFileSystem.html">CordovaFileSystem</a> | Logic for file access with Cordova Plugin File. It's used by <a href="classes/FileSystemTools.html">FileSystemTools</a> on Mobile ]
+    [ <a href="classes/NodeFileSystem.html">NodeFileSystem</a> | Logic for file access with Node.JS APIs, It's used by <a href="classes/FileSystemTools.html">FileSystemTools</a> on Desktop ]
+    [ <a href="classes/FallbackFileSystem.html">FallbackFileSystem</a> | Rejects all file operations, It's used when file system access is not available. <a href="classes/FileSystemTools.html">FileSystemTools</a> will use this for Web ]
+    [ <a href="classes/NodeDirectoryEntry.html">NodeDirectoryEntry</a> | Equivalent to DirectoryEntry class of Cordova Plugin File ]
+    [ <a href="classes/NodeFileEntry.html">NodeFileEntry</a> | Equivalent to FileEntry class of Cordova Plugin File ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="doki-docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Text - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "Text Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>A versatile text rendering system with retro font support and advanced text effects.</p>
+    
+    [heading: "Description"]
+    <p>Text provides advanced text rendering capabilities using retro pixel fonts. It supports typewriter effects, scrolling text, word wrapping, and multi-line text with various formatting options.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Retro pixel font rendering
+    * Typewriter and scrolling text effects
+    * Automatic word wrapping
+    * Multi-line text support
+    * Custom font configurations
+    * Text alignment and anchoring
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | (x, y, text, config, parent) | Creates new text instance ]
+    [ write | (text) | Sets text content immediately ]
+    [ typewrite | (text, callback) | Types text character by character ]
+    [ scrollwrite | (text, visibleLength, scrollSpeed, separation) | Creates scrolling text effect ]
+    [ wrap | (maxWidth, lineSpacing) | Wraps text to fit width ]
+    [ wrapPreserveNewlines | (maxWidth, lineSpacing) | Wraps text while preserving existing newlines ]
+    [ getWrappedText | (maxWidth) | Returns wrapped text without modifying display ]
+    [ stopScrolling | () | Stops any active scrolling animation ]
+    [ isScrolling | () | Returns whether text is currently scrolling ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ config | Object | Text configuration settings ]
+    [ texture | Phaser.RetroFont | Retro font texture instance ]
+    [ timer | Phaser.Timer | Timer for text animations ]
+    [ typewriterInterval | Number | Delay between characters in typewriter effect ]
+    [/table]
+    
+    [heading: "Configuration Options"]
+    [table header]
+    [ Option | Type | Default | Description ]
+    [ font | String | "font_tiny" | Font key from FONTS constant ]
+    [ fontMap | String | " ABCDEFGHIJKLMNOPQRSTUVWXYZ.,:!¡?¿h+-×*()[]/\\0123456789_'\"`•<>=%" | Character mapping ]
+    [ fontWidth | Number | 4 | Character width in pixels ]
+    [ fontHeight | Number | 6 | Character height in pixels ]
+    [ typewriter | Boolean | false | Enable typewriter effect ]
+    [ typewriterInterval | Number | 100 | Milliseconds between characters ]
+    [/table]
+    
+    [heading: "Available Fonts"]
+    [table header]
+    [ Font Key | Description ]
+    [ default | Standard pixel font ]
+    [ shaded | Font with drop shadow effect ]
+    [ stroke | Outlined font for better visibility ]
+    [ number | Optimized for numerical display ]
+    [ combo | Large font for combo display ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

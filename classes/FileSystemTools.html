@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>FileSystemTools - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "FileSystemTools Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Platform-agnostic file system access wrapper for reading and writing game data.</p>
+    
+    [heading: "Description"]
+    <p>FileSystemTools provides a unified interface for file system operations across different platforms (NW.js, Cordova, Web). It abstracts platform-specific file APIs and provides consistent methods for file management.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Cross-platform file access
+    * Directory listing and traversal
+    * File reading and writing
+    * Directory creation
+    * Platform auto-detection
+    * Fallback for unsupported environments
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ detectPlatform | () | Detects current platform ]
+    [ getDirectory | (path) | Gets directory entry ]
+    [ listDirectories | (dirEntry) | Lists subdirectories ]
+    [ listAllDirectories | (startDir) | Recursively lists all subdirectories ]
+    [ listFiles | (dirEntry) | Lists files in directory ]
+    [ getFile | (fileEntry) | Gets file entry ]
+    [ readFileContent | (file) | Reads file content ]
+    [ saveFile | (dirEntry, fileData, fileName) | Saves file to directory ]
+    [ createEmptyFile | (dirEntry, fileName, isAppend) | Creates empty file ]
+    [ writeFile | (fileEntry, dataObj, isAppend) | Writes data to file ]
+    [ createDirectory | (rootDirEntry, dirName) | Creates new directory ]
+    [ getBasePath | () | Gets platform base path ]
+    [ canExitApp | () | Checks if app can be exited ]
+    [ exitApp | () | Exits the application ]
+    [/table]
+    
+    [heading: "Supported Platforms"]
+    [table header]
+    [ Platform | Implementation | Capabilities ]
+    [ NW.js | NodeFileSystem | Full read/write access ]
+    [ Cordova | CordovaFileSystem | Mobile file system access ]
+    [ Web | FallbackFileSystem | No file system access ]
+    [/table]
+    
+    [heading: "Directory Structure"]
+    [table header]
+    [ Directory | Platform Path | Purpose ]
+    [ Addons/ | EXTERNAL_DIRECTORY/Addons/ | Community addons ]
+    [ Songs/ | EXTERNAL_DIRECTORY/Songs/ | User songs ]
+    [ Root | EXTERNAL_DIRECTORY/ | Game data root ]
+    [/table]
+    
+    [heading: "File Operations"]
+    [table header]
+    [ Operation | Supported Platforms ]
+    [ Read files | NW.js, Cordova ]
+    [ Write files | NW.js, Cordova ]
+    [ Create directories | NW.js, Cordova ]
+    [ List directories | NW.js, Cordova ]
+    [ Recursive traversal | NW.js, Cordova ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

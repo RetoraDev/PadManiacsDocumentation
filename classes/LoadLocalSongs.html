@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>LoadLocalSongs - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "LoadLocalSongs Class"]
+    
+    <a href="../">← Back to index</a>
+        
+    <p>Loads the built-in default songs included with the game.</p>
+    
+    [heading: "Description"]
+    <p>LoadLocalSongs processes and loads all the default songs that come packaged with PadManiaX. It uses LocalSMParser to parse .sm files and prepare them for gameplay.</p>
+    
+    [heading: "Key Responsibilities"]
+    [list]
+    * Load default song folders
+    * Parse .sm chart files
+    * Load song assets (audio, banners, backgrounds)
+    * Prepare song data for game states
+    * Transition to title screen
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ create | () | Starts the song loading process ]
+    [ loadSongs | () | Main song loading logic ]
+    [ loadSong | (folderName) | Loads individual song from folder ]
+    [ loadTextFile | (url) | Helper to load text files ]
+    [ finish | () | Completes loading and transitions to title screen ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ progressText | ProgressText | Progress text display ]
+    [ songs | Array | Array of loaded songs ]
+    [ parser | LocalSMParser | Parser for .sm files ]
+    [ loadingDots | LoadingDots | Loading animation display ]
+    [/table]
+    
+    [heading: "Song Data Structure"]
+    [table header]
+    [ Property | Type | Description ]
+    [ title | String | Song title ]
+    [ artist | String | Song artist ]
+    [ difficulties | Array | Available difficulty levels ]
+    [ notes | Object | Chart note data ]
+    [ bpmChanges | Array | BPM change events ]
+    [ stops | Array | Stop events ]
+    [ audioUrl | String | Path to audio file ]
+    [ banner | String | Path to banner image ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

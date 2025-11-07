@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Player - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "Player Class"]
+    
+    <a href="../">← Back to index</a>
+    
+    <p>Handles all gameplay logic including note processing, scoring, and input handling.</p>
+    
+    [heading: "Description"]
+    <p>Player is the core gameplay controller that manages note rendering, judgment, scoring, combo tracking, and health management. It works closely with the Play state to provide the rhythm game experience.</p>
+    
+    [heading: "Key Responsibilities"]
+    [list]
+    * Process and render notes
+    * Handle player input and auto-play
+    * Calculate judgments and scoring
+    * Manage combo and health systems
+    * Render receptors and explosions
+    * Track accuracy and statistics
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | (scene) | Initializes player with game scene ]
+    [ initialize | () | Sets up receptors and UI elements ]
+    [ autoPlay | () | AI autoplay logic ]
+    [ handleInput | (column, isKeyDown) | Processes player input ]
+    [ processJudgement | (note, judgement, column) | Handles judgment scoring ]
+    [ update | () | Main update loop ]
+    [ render | () | Renders notes and gameplay elements ]
+    [ getScoreRating | () | Calculates letter grade for score ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ scene | Play | Reference to gameplay scene ]
+    [ chart | Object | Song chart data ]
+    [ difficulty | Object | Current difficulty settings ]
+    [ notes | Array | Chart notes to process ]
+    [ autoplay | Boolean | Whether autoplay is active ]
+    [ score | Number | Current score ]
+    [ combo | Number | Current combo count ]
+    [ accuracy | Number | Current accuracy percentage ]
+    [ health | Number | Current health value ]
+    [ maxCombo | Number | Maximum combo achieved ]
+    [ receptors | Array | Note receptor sprites ]
+    [ judgementCounts | Object | Count of each judgment type ]
+    [/table]
+    
+    [heading: "Note Types"]
+    [table header]
+    [ Type | Description ]
+    [ 1 | Regular note (tap) ]
+    [ 2 | Hold note (press and hold) ]
+    [ 4 | Roll note (rapid taps) ]
+    [ M | Mine note (avoid) ]
+    [/table]
+    
+    [heading: "Note Color Options"]
+    [table header]
+    [ Option | Description ]
+    [ NOTE | Default color pattern based on note speed ]
+    [ VIVID | Color cycle per beat (Yellow, Maroon, Blue, Cyan) ]
+    [ FLAT | All notes same color (Yellow) ]
+    [ RAINBOW | Orange, Blue, Purple/Pink color pattern ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

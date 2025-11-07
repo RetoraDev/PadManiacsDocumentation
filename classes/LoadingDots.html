@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>LoadingDots - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "LoadingDots Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Animated loading indicator with bouncing dots.</p>
+    
+    [heading: "Description"]
+    <p>LoadingDots provides a simple animated loading indicator that shows bouncing dots. It's used during loading screens to indicate that progress is being made.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Smooth bouncing dot animation
+    * Continuous loop
+    * Positioned at bottom-right corner
+    * Non-intrusive visual feedback
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | () | Creates loading dots animation ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ animations | Phaser.Animation | Bouncing dots animation ]
+    [/table]
+    
+    [heading: "Animation Details"]
+    [table header]
+    [ Property | Value | Description ]
+    [ Frames | 8 | Number of animation frames ]
+    [ Speed | 8 fps | Animation playback speed ]
+    [ Loop | true | Continuous animation ]
+    [ Position | Bottom-right | Screen placement ]
+    [/table]
+    
+    [heading: "Usage"]
+    <p>LoadingDots is used in various loading states:</p>
+    [table header]
+    [ State | Purpose ]
+    [ LoadCordova | File system initialization ]
+    [ LoadAddons | Addon loading progress ]
+    [ LoadLocalSongs | Song loading progress ]
+    [ LoadExternalSongs | External song scanning ]
+    [ SongSelect | Song preview loading ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

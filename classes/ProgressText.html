@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ProgressText - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "ProgressText Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Specialized text display for loading progress information.</p>
+    
+    [heading: "Description"]
+    <p>ProgressText extends the Text class to provide a standardized progress display positioned at the bottom-left of the screen. It's used consistently across all loading states.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Standardized position and styling
+    * Bottom-left screen placement
+    * Inherits all Text class capabilities
+    * Consistent visual appearance
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | (text) | Creates progress text with specified content ]
+    [/table]
+    
+    [heading: "Properties"]
+    <p>Inherits all properties from <a href="Text.html">Text</a> class.</p>
+    
+    [heading: "Position and Styling"]
+    [table header]
+    [ Property | Value | Description ]
+    [ Position | (4, game.height - 4) | Bottom-left corner ]
+    [ Anchor | (0, 1) | Bottom-left anchored ]
+    [ Font | FONTS.default | Standard pixel font ]
+    [/table]
+    
+    [heading: "Usage Examples"]
+    [table header]
+    [ Text | Context ]
+    [ "LOADING ASSETS" | General asset loading ]
+    [ "INITIALIZING FILESYSTEM" | File system setup ]
+    [ "LOADING ADD-ONS" | Addon discovery and loading ]
+    [ "LOADING SONGS" | Song chart processing ]
+    [ "LOADING EXTERNAL SONGS" | External song scanning ]
+    [ "SELECT SONG FOLDER" | File picker prompt ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

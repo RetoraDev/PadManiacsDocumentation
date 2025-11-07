@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AddonManager - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "AddonManager Class"]
+    
+    <a href="../">← Back to index</a>
+    
+    <p>Manages the loading, execution, and management of community addons.</p>
+    
+    [heading: "Description"]
+    <p>AddonManager is responsible for discovering, loading, and managing all community-created addons. It handles addon assets, behaviors, and provides an interface for enabling/disabling addons.</p>
+    
+    [heading: "Key Responsibilities"]
+    [list]
+    * Discover and load addons from storage
+    * Process addon manifests and metadata
+    * Load addon assets and behaviors
+    * Execute addon code in appropriate contexts
+    * Manage addon state (enabled/disabled/hibernating)
+    * Provide addon management interface
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ initialize | () | Initializes the addon manager ]
+    [ loadAddons | () | Main addon loading process ]
+    [ loadAddonFromDirectory | (addonDir, fileSystem) | Loads individual addon ]
+    [ processAddonBehaviors | (addon) | Processes addon behavior scripts ]
+    [ executeGlobalBehaviors | () | Executes global addon behaviors ]
+    [ executeStateBehaviors | (stateName, stateInstance) | Executes state-specific behaviors ]
+    [ enableAddon | (addonId) | Enables an addon ]
+    [ disableAddon | (addonId) | Disables an addon ]
+    [ getAddonList | () | Returns list of all addons ]
+    [ getResourceList | () | Returns addon resources for loading ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ addons | Map | Map of loaded addons by ID ]
+    [ enabledAddons | Set | Set of enabled addon IDs ]
+    [ hibernatingAddons | Set | Set of hibernating addon IDs ]
+    [ safeMode | Boolean | Whether safe mode is enabled ]
+    [ isInitialized | Boolean | Whether manager is initialized ]
+    [/table]
+    
+    [heading: "Addon Manifest Structure"]
+    [table header]
+    [ Field | Required | Description ]
+    [ id | Yes | Unique addon identifier ]
+    [ name | Yes | Display name for addon ]
+    [ version | Yes | Version number ]
+    [ author | No | Addon author name ]
+    [ description | No | Addon description ]
+    [ icon | No | Path to icon image ]
+    [ assets | No | Object mapping asset keys to file paths ]
+    [ behaviors | No | Object mapping state names to behavior scripts ]
+    [/table]
+    
+    [heading: "Addon States"]
+    [table header]
+    [ State | Description ]
+    [ Enabled | Addon is active and behaviors execute ]
+    [ Disabled | Addon is inactive but loaded ]
+    [ Hibernating | Addon is completely unloaded ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Window - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "Window Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>A customizable UI window with menu items, settings, and navigation support.</p>
+    
+    [heading: "Description"]
+    <p>Window provides a flexible UI container with built-in navigation, item selection, and various content types. It supports regular menu items, setting controls, toggle switches, and custom content.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Configurable window frame and skin
+    * Scrollable item lists
+    * Multiple item types (menu, setting, toggle)
+    * Built-in navigation and selection
+    * Customizable fonts and colors
+    * Signal-based event handling
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | (x, y, width, height, skin, parent) | Creates new window ]
+    [ createWindowFrame | () | Builds window frame graphics ]
+    [ addItem | (text, leftText, callback, backButton) | Adds menu item ]
+    [ addSettingItem | (text, options, currentIndex, callback) | Adds setting with options ]
+    [ update | () | Updates window layout and visibility ]
+    [ navigate | (direction) | Handles navigation input ]
+    [ handleLeft | () | Processes left input for settings ]
+    [ handleRight | () | Processes right input for settings ]
+    [ confirm | () | Activates selected item ]
+    [ cancel | () | Handles cancel/back action ]
+    [ clear | () | Removes all items and content ]
+    [ show | () | Makes window visible ]
+    [ hide | () | Hides window ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ size | Object | Window dimensions in tiles ]
+    [ offset | Object | Content offset within window ]
+    [ scrollOffset | Number | Scroll position for item list ]
+    [ selectedIndex | Number | Currently selected item index ]
+    [ focus | Boolean | Whether window has input focus ]
+    [ skin | String | Window frame skin identifier ]
+    [ font | String | Text font key ]
+    [ fontTint | Number | Text color tint ]
+    [ items | Array | Window content items ]
+    [ frameParts | Array | Window frame sprite elements ]
+    [ selector | Phaser.Sprite | Selection indicator sprite ]
+    [/table]
+    
+    [heading: "Item Types"]
+    [table header]
+    [ Type | Description ]
+    [ item | Regular menu item with callback ]
+    [ setting | Setting with multiple options ]
+    [ toggle | Boolean toggle with on/off states ]
+    [/table]
+    
+    [heading: "Window Skins"]
+    [table header]
+    [ Skin | Description ]
+    [ 1 | Default brown window frame ]
+    [ Other | Additional skins defined in WINDOW_PANELS ]
+    [/table]
+    
+    [heading: "Signals"]
+    [table header]
+    [ Signal | Parameters | Description ]
+    [ onSelect | (index, direction) | Fired when selection changes ]
+    [ onConfirm | (index, item) | Fired when item is confirmed ]
+    [ onCancel | (index) | Fired when cancel is pressed ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

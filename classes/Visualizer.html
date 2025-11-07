@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Visualizer - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "Visualizer Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Base class for gameplay visualizers that display various data during gameplay.</p>
+    
+    [heading: "Description"]
+    <p>Visualizer is an abstract base class that provides the foundation for different types of gameplay visualizers. It handles common functionality like positioning, graphics management, and basic lifecycle.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Common visualizer infrastructure
+    * Graphics context management
+    * Position and dimension handling
+    * Lifecycle management
+    * Extension point for specific visualizers
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | (scene, x, y, width, height) | Creates base visualizer ]
+    [ update | () | Abstract method for visualizer updates ]
+    [ destroy | () | Cleans up resources ]
+    [ clear | () | Clears visualizer graphics ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ scene | Play | Gameplay scene reference ]
+    [ x | Number | X position ]
+    [ y | Number | Y position ]
+    [ width | Number | Visualizer width ]
+    [ height | Number | Visualizer height ]
+    [ graphics | Phaser.Graphics | Drawing graphics object ]
+    [ active | Boolean | Whether visualizer is active ]
+    [/table]
+    
+    [heading: "Concrete Implementations"]
+    [table header]
+    [ Class | Description ]
+    [ AccuracyVisualizer | Displays timing accuracy history ]
+    [ AudioVisualizer | Shows audio frequency spectrum ]
+    [ BPMVisualizer | Displays BPM changes and beat timing ]
+    [/table]
+    
+    [heading: "Usage"]
+    <p>Visualizers are displayed in the HUD during gameplay and can be enabled/disabled in settings:</p>
+    [table header]
+    [ Visualizer | Setting Value | Description ]
+    [ None | NONE | No visualizer displayed ]
+    [ Accuracy | ACURRACY | Timing accuracy graph ]
+    [ Audio | AUDIO | Audio frequency display ]
+    [ BPM | BPM | Beat and timing information ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

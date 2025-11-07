@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>NodeDirectoryEntry - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "NodeDirectoryEntry Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Node.js implementation of Cordova's DirectoryEntry interface for file system operations.</p>
+    
+    [heading: "Description"]
+    <p>NodeDirectoryEntry provides a Cordova-compatible DirectoryEntry interface using Node.js file system APIs. It allows consistent file system operations across different platforms while using native Node.js capabilities.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Cordova DirectoryEntry API compatibility
+    * Node.js file system integration
+    * Directory listing and traversal
+    * File and directory creation
+    * Recursive directory operations
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | (name, fullPath, fileSystem, nativeURL) | Creates directory entry ]
+    [ createReader | () | Creates directory reader for listing contents ]
+    [ getDirectory | (path, options, successCallback, errorCallback) | Gets or creates subdirectory ]
+    [ getFile | (path, options, successCallback, errorCallback) | Gets or creates file ]
+    [ removeRecursively | (successCallback, errorCallback) | Recursively removes directory ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ isFile | Boolean | Always false for directories ]
+    [ isDirectory | Boolean | Always true for directories ]
+    [ name | String | Directory name ]
+    [ fullPath | String | Full directory path ]
+    [ filesystem | Object | File system reference ]
+    [ nativeURL | String | Native file system URL ]
+    [/table]
+    
+    [heading: "Directory Reader Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ readEntries | (successCallback, errorCallback) | Reads directory contents ]
+    [/table]
+    
+    [heading: "Options for getDirectory/getFile"]
+    [table header]
+    [ Option | Type | Default | Description ]
+    [ create | Boolean | false | Create if doesn't exist ]
+    [ exclusive | Boolean | false | Fail if already exists ]
+    [/table]
+    
+    [heading: "Compatibility with Cordova API"]
+    <p>NodeDirectoryEntry implements the same interface as Cordova's DirectoryEntry:</p>
+    [table header]
+    [ Cordova Method | NodeDirectoryEntry Equivalent | Status ]
+    [ createReader | createReader | Fully implemented ]
+    [ getDirectory | getDirectory | Fully implemented ]
+    [ getFile | getFile | Fully implemented ]
+    [ removeRecursively | removeRecursively | Fully implemented ]
+    [ toURL | nativeURL property | Property-based ]
+    [/table]
+    
+    [heading: "Error Handling"]
+    [table header]
+    [ Error Condition | Error Callback | Recovery ]
+    [ Directory not found | Error with message | Create with options.create ]
+    [ Path is file | Error with message | Use correct path ]
+    [ Permission denied | System error | Check file permissions ]
+    [ Disk full | System error | Free up space ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

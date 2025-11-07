@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SongSelect - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "SongSelect Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Song selection interface with previews, difficulty selection, and high score display.</p>
+    
+    [heading: "Description"]
+    <p>SongSelect provides the interface for players to browse available songs, preview them, view high scores, and select difficulties. It features carousel navigation, song previews, and comprehensive song information display.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Carousel-based song browsing
+    * Audio and visual song previews
+    * Difficulty selection with color coding
+    * High score display and tracking
+    * Auto-select for single songs
+    * Navigation history preservation
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ init | (songs, index, autoSelect) | Initializes with song list and selection ]
+    [ create | () | Sets up song selection interface ]
+    [ createSongSelectionMenu | () | Creates main song carousel ]
+    [ previewSong | (song) | Previews selected song ]
+    [ displayHighScores | (song) | Shows high scores for song ]
+    [ getSongKey | (song) | Generates unique key for song ]
+    [ getMetadataText | (data) | Formats song metadata for display ]
+    [ selectSong | (song, index) | Selects song and shows difficulties ]
+    [ showDifficultySelection | (song) | Creates difficulty selection menu ]
+    [ getDifficultyColor | (value) | Calculates color for difficulty rating ]
+    [ startGame | (song, difficultyIndex) | Starts gameplay with selected song ]
+    [ update | () | Handles input and UI updates ]
+    [ shutdown | () | Cleans up resources ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ songs | Array | Available songs array ]
+    [ startingIndex | Number | Initial selection index ]
+    [ autoSelect | Boolean | Whether to auto-select single song ]
+    [ selectedSong | Object | Currently selected song ]
+    [ selectedDifficulty | Number | Selected difficulty index ]
+    [ previewAudio | HTMLAudioElement | Song preview audio ]
+    [ bannerImg | HTMLImageElement | Song banner image ]
+    [ cdtitleImg | HTMLImageElement | CD title image ]
+    [ previewCanvas | HTMLCanvasElement | Banner preview canvas ]
+    [ previewCtx | CanvasRenderingContext2D | Canvas context ]
+    [ navigationHint | Phaser.Sprite | Navigation help display ]
+    [ autoplayText | Text | Autoplay status display ]
+    [ bannerSprite | Phaser.Sprite | Banner display sprite ]
+    [ metadataText | Text | Song information display ]
+    [ highScoreText | Text | High score information ]
+    [ loadingDots | LoadingDots | Loading indicator ]
+    [ songCarousel | CarouselMenu | Song selection menu ]
+    [ difficultyCarousel | CarouselMenu | Difficulty selection menu ]
+    [ visibilityChangeListener | Function | Visibility change handler ]
+    [/table]
+    
+    [heading: "Song Information Display"]
+    [table header]
+    [ Element | Content | Source ]
+    [ Banner | Song banner image | #BANNER tag or fallback ]
+    [ Title | Song title | #TITLE or #TITLETRANSLIT ]
+    [ Artist | Song artist | #ARTIST or #ARTISTTRANSLIT ]
+    [ Subtitle | Song subtitle | #SUBTITLE or #SUBTITLETRANSLIT ]
+    [ Credit | Chart creator | #CREDIT tag ]
+    [ High Scores | Best performances | Account.highScores ]
+    [/table]
+    
+    [heading: "Difficulty Rating Colors"]
+    [table header]
+    [ Rating Range | Color | Description ]
+    [ 1-3 | Green | Easy difficulties ]
+    [ 4-7 | Yellow | Medium difficulties ]
+    [ 8-11 | Red | Hard difficulties ]
+    [/table]
+    
+    [heading: "Navigation Controls"]
+    [table header]
+    [ Control | Action | Context ]
+    [ Up/Down | Navigate songs | Song selection ]
+    [ Left/Right | Navigate difficulties | Difficulty selection ]
+    [ A | Confirm selection | Both menus ]
+    [ B | Go back | Difficulty to song selection ]
+    [ Select | Toggle autoplay | Any time ]
+    [/table]
+    
+    [heading: "Auto-Select Behavior"]
+    <p>When autoSelect is true (single song loading):</p>
+    [list]
+    * Automatically selects the only available song
+    * Skips directly to difficulty selection
+    * Hides song carousel
+    * Streamlines navigation flow
+    [/list]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

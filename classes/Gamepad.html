@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Gamepad - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "Gamepad Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Unified input system handling keyboard, touchscreen, and gamepad input.</p>
+    
+    [heading: "Description"]
+    <p>Gamepad provides a unified input system that abstracts keyboard, touchscreen, and physical gamepad inputs into a consistent interface. It handles input detection, state tracking, and provides signals for input events.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Multi-platform input support
+    * Touch control overlay for mobile
+    * Input source auto-detection
+    * Consistent button mapping
+    * Signal-based event system
+    * Input state tracking
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | (game) | Initializes input system ]
+    [ setupKeyboard | () | Configures keyboard input ]
+    [ setupGamepad | () | Configures gamepad input ]
+    [ setupTouch | () | Sets up touch controls ]
+    [ update | () | Updates input states ]
+    [ releaseAll | () | Releases all buttons ]
+    [ press | (key) | Simulates button press ]
+    [ isTouchControlled | (key) | Checks if key is touch-controlled ]
+    [ getDirection | () | Gets normalized direction vector ]
+    [ reset | () | Resets all input states ]
+    [ destroy | () | Cleans up input system ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ game | Phaser.Game | Game instance reference ]
+    [ keys | Array | Available input keys ]
+    [ held | Object | Current held state for each key ]
+    [ pressed | Object | Pressed this frame for each key ]
+    [ released | Object | Released this frame for each key ]
+    [ prevState | Object | Previous frame state ]
+    [ lastInputSource | String | Last detected input source ]
+    [ activeTouches | Map | Active touch points ]
+    [/table]
+    
+    [heading: "Input Keys"]
+    [table header]
+    [ Key | Description | Keyboard | Gamepad | Touch ]
+    [ up | Up direction | UP, W, B | D-pad Up | Up button ]
+    [ down | Down direction | DOWN, S, V | D-pad Down | Down button ]
+    [ left | Left direction | LEFT, A, C | D-pad Left | Left button ]
+    [ right | Right direction | RIGHT, D, N | D-pad Right | Right button ]
+    [ a | Primary action | Z, K | Button 0 | A button ]
+    [ b | Secondary action | X, J | Button 1 | B button ]
+    [ select | Select function | SHIFT, TAB | Button 8 | Select button ]
+    [ start | Start function | ENTER, ESC | Button 9 | Start button ]
+    [/table]
+    
+    [heading: "Input States"]
+    [table header]
+    [ State | Description ]
+    [ held | Button is currently held down ]
+    [ pressed | Button was pressed this frame ]
+    [ released | Button was released this frame ]
+    [ any | Any button in specified state ]
+    [/table]
+    
+    [heading: "Signals"]
+    [table header]
+    [ Signal | Description ]
+    [ pressed.[key] | Fired when specific key is pressed ]
+    [ released.[key] | Fired when specific key is released ]
+    [ pressed.any | Fired when any key is pressed ]
+    [ released.any | Fired when any key is released ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

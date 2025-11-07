@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>NodeFileEntry - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "NodeFileEntry Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Node.js implementation of Cordova's FileEntry interface for file operations.</p>
+    
+    [heading: "Description"]
+    <p>NodeFileEntry provides a Cordova-compatible FileEntry interface using Node.js file system APIs. It enables consistent file operations across platforms while leveraging native Node.js file handling capabilities.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Cordova FileEntry API compatibility
+    * Node.js file system integration
+    * File reading and writing
+    * MIME type detection
+    * File metadata access
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | (name, fullPath, fileSystem, nativeURL) | Creates file entry ]
+    [ createWriter | (successCallback, errorCallback) | Creates file writer ]
+    [ file | (successCallback, errorCallback) | Gets file object with metadata ]
+    [ getMimeType | (filename) | Detects MIME type from extension ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ isFile | Boolean | Always true for files ]
+    [ isDirectory | Boolean | Always false for files ]
+    [ name | String | File name ]
+    [ fullPath | String | Full file path ]
+    [ filesystem | Object | File system reference ]
+    [ nativeURL | String | Native file system URL ]
+    [/table]
+    
+    [heading: "File Writer Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ write | (data) | Writes data to file ]
+    [/table]
+    
+    [heading: "File Object Structure"]
+    [table header]
+    [ Property | Type | Description ]
+    [ name | String | File name ]
+    [ size | Number | File size in bytes ]
+    [ type | String | MIME type ]
+    [ lastModified | Date | Modification timestamp ]
+    [ slice | Function | File slicing method ]
+    [ localURL | String | Local file path ]
+    [ _path | String | Internal file path ]
+    [/table]
+    
+    [heading: "Supported MIME Types"]
+    [table header]
+    [ Extension | MIME Type | File Type ]
+    [ png | image/png | PNG images ]
+    [ jpg, jpeg | image/jpeg | JPEG images ]
+    [ gif | image/gif | GIF images ]
+    [ bmp | image/bmp | Bitmap images ]
+    [ mp3 | audio/mpeg | MP3 audio ]
+    [ wav | audio/wav | WAV audio ]
+    [ ogg | audio/ogg | OGG audio ]
+    [ mp4 | video/mp4 | MP4 video ]
+    [ avi | video/x-msvideo | AVI video ]
+    [ mov | video/quicktime | QuickTime video ]
+    [ sm, ssc | text/plain | Chart files ]
+    [ json | application/json | JSON data ]
+    [ txt | text/plain | Text files ]
+    [ * | application/octet-stream | Other files ]
+    [/table]
+    
+    [heading: "Compatibility with Cordova API"]
+    <p>NodeFileEntry implements the same interface as Cordova's FileEntry:</p>
+    [table header]
+    [ Cordova Method | NodeFileEntry Equivalent | Status ]
+    [ createWriter | createWriter | Fully implemented ]
+    [ file | file | Fully implemented ]
+    [ toURL | nativeURL property | Property-based ]
+    [/table]
+    
+    [heading: "Data Writing Support"]
+    [table header]
+    [ Data Type | Support | Handling ]
+    [ String | Full | Written as UTF-8 text ]
+    [ Blob | Full | Converted to Buffer ]
+    [ ArrayBuffer | Full | Written as binary data ]
+    [ Buffer | Full | Direct write ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>

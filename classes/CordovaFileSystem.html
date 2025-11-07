@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CordovaFileSystem - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="../doki-docs.css">
+</head>
+<body class="doki-hidden">
+    [title: "CordovaFileSystem Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>File system implementation for Apache Cordova mobile applications.</p>
+    
+    [heading: "Description"]
+    <p>CordovaFileSystem provides file system access for mobile devices using the Cordova File Plugin. It handles mobile-specific file paths and permissions.</p>
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ getDirectory | (path) | Gets directory entry ]
+    [ listDirectories | (dirEntry) | Lists subdirectories ]
+    [ listAllDirectories | (startDir) | Recursively lists directories ]
+    [ listFiles | (dirEntry) | Lists files in directory ]
+    [ getFile | (fileEntry) | Gets file entry ]
+    [ readFileContent | (file) | Reads file content ]
+    [ saveFile | (dirEntry, fileData, fileName) | Saves file to directory ]
+    [ createEmptyFile | (dirEntry, fileName, isAppend) | Creates empty file ]
+    [ writeFile | (fileEntry, dataObj, isAppend) | Writes data to file ]
+    [ createDirectory | (rootDirEntry, dirName) | Creates new directory ]
+    [/table]
+    
+    [heading: "Platform-Specific Paths"]
+    [table header]
+    [ Platform | Root Directory | Description ]
+    [ Android | cordova.file.externalRootDirectory | External storage ]
+    [ iOS | cordova.file.documentsDirectory | Documents directory ]
+    [ Windows | cordova.file.dataDirectory | App data directory ]
+    [/table]
+    
+    [heading: "File System Types"]
+    [table header]
+    [ Type | Description | Persistence ]
+    [ PERSISTENT | Persistent storage | Survives app restarts ]
+    [ TEMPORARY | Temporary storage | May be cleared ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="../doki-docs.js"></script>
+</body>
+</html>
