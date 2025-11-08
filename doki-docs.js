@@ -74,11 +74,11 @@
       const code = document.createElement("code");
       
       if (inline) {
-        code.textContent = content;
+        code.innerHTML = content;
       } else {
         // Normalize indentation by removing common leading whitespace
         const normalizedContent = this.normalizeCodeBlock(content);
-        code.textContent = normalizedContent;
+        code.innerHTML = normalizedContent;
       }
 
       if (args.length > 0) {
