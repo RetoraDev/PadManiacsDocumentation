@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width">
+    <meta charset="UTF-8">
+    <title>NavigationHint - PadManiaX Modding API Documentation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/doki-docs@latest/doki-docs.min.css">
+</head>
+<body class="doki-hidden">
+    [title: "NavigationHint Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>UI Layer to display input prompt</p>
+    
+    [note: "This class is online available from v0.0.6 of the game"]
+    
+    [heading: "Description"]
+    <p>ProgressText extends the Text class to provide a standardized progress display positioned at the bottom-left of the screen. It's used consistently across all loading states.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Standardized position and styling
+    * Bottom-right screen placement
+    * Consistent visual appearance
+    * Displays input prompt for gamepad or keyboard automatically
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | (frame = 0) | Creates the sprite with a specific frame (0 to 3) ]
+    [ update | () | Update method called automatically by Phaser ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ defaultFrame | number | Default frame to load ]
+    [ lastInputSource | string | Last input source type ([code: "null"], [code: "'touch'"], [code: "'keyboard'"] or [code: "'gamepad'"]) ]
+    [/table]
+    
+    [footer: "&copy; Retora 2025"]
+    
+    <script src="https://cdn.jsdelivr.net/npm/doki-docs@latest/doki-docs.min.js"></script>
+</body>
+</html>
