@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
     <title>Text - PadManiaX Modding API Documentation</title>
 </head>
 <body class="doki-hidden">
@@ -24,20 +24,30 @@
     * Multi-line text support
     * Custom font configurations
     * Text alignment and anchoring
+    * Tinting support
     [/list]
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ x | Number | X position ]
+    [ y | Number | Y position ]
+    [ text | String | Initial text content ]
+    [ config | Object | Font configuration (optional) ]
+    [ parent | Phaser.Group | Parent group to attach to (optional) ]
+    [/table]
     
     [heading: "Methods"]
     [table header]
     [ Method | Parameters | Description ]
-    [ constructor | (x, y, text, config, parent) | Creates new text instance ]
-    [ write | (text) | Sets text content immediately ]
+    [ write | (text, max) | Sets text content immediately, optionally truncates ]
     [ typewrite | (text, callback) | Types text character by character ]
     [ scrollwrite | (text, visibleLength, scrollSpeed, separation) | Creates scrolling text effect ]
+    [ stopScrolling | () | Stops any active scrolling animation ]
+    [ isScrolling | () | Returns whether text is currently scrolling ]
     [ wrap | (maxWidth, lineSpacing) | Wraps text to fit width ]
     [ wrapPreserveNewlines | (maxWidth, lineSpacing) | Wraps text while preserving existing newlines ]
     [ getWrappedText | (maxWidth) | Returns wrapped text without modifying display ]
-    [ stopScrolling | () | Stops any active scrolling animation ]
-    [ isScrolling | () | Returns whether text is currently scrolling ]
     [/table]
     
     [heading: "Properties"]
@@ -47,6 +57,8 @@
     [ texture | Phaser.RetroFont | Retro font texture instance ]
     [ timer | Phaser.Timer | Timer for text animations ]
     [ typewriterInterval | Number | Delay between characters in typewriter effect ]
+    [ tint | Number | Text color (hex) ]
+    [ anchor | Object | Text anchor point (x, y) ]
     [/table]
     
     [heading: "Configuration Options"]
@@ -58,17 +70,39 @@
     [ fontHeight | Number | 6 | Character height in pixels ]
     [ typewriter | Boolean | false | Enable typewriter effect ]
     [ typewriterInterval | Number | 100 | Milliseconds between characters ]
+    [ tint | Number | 0xffffff | Text color ]
     [/table]
     
     [heading: "Available Fonts"]
     [table header]
     [ Font Key | Description ]
     [ default | Standard pixel font ]
+    [ tiny | Small pixel font (alias for default) ]
     [ shaded | Font with drop shadow effect ]
     [ stroke | Outlined font for better visibility ]
     [ number | Optimized for numerical display ]
     [ combo | Large font for combo display ]
     [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Basic text
+    const text = new Text(10, 10, "Hello World", FONTS.default);
+    
+    // Typewriter effect
+    text.typewrite("This appears letter by letter", () => {
+      console.log("Finished typing!");
+    });
+    
+    // Scrolling text
+    const scroller = text.scrollwrite("This is a very long text that scrolls", 10, 200);
+    
+    // Word wrapping
+    text.wrap(100);
+    
+    // Change color
+    text.tint = 0xff0000;
+    [/codeblock]
     
     [footer: "&copy; Retora 2026"]
 </body>

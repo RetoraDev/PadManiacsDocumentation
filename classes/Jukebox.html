@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Jukebox - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "Jukebox Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Music player mode with audio visualization, lyrics display, and playlist management.</p>
+    
+    [heading: "Description"]
+    <p>The Jukebox state provides a full-featured music player for enjoying songs from the game's library. It features audio visualization, synchronized lyrics display, playlist shuffling, and background video support.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Play songs from local and external libraries
+    * Multiple visualization types (bars, symmetrical, waveform, circular)
+    * LRC lyrics synchronization
+    * Shuffle mode
+    * Song list browsing
+    * Volume control
+    * Seek and skip controls
+    * Fullscreen mode
+    * Background video playback
+    * Persistent playback position
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ init | (songs, startIndex) | Initializes jukebox with song list ]
+    [ create | () | Creates jukebox UI and systems ]
+    [ setupAudioPlayer | () | Sets up audio element and event handlers ]
+    [ setupUI | () | Creates UI elements and controls ]
+    [ setupVisualizer | () | Initializes audio visualizer ]
+    [ setupLyrics | () | Sets up lyrics display system ]
+    [ loadSong | (index, reset) | Loads and plays song at given index ]
+    [ play | () | Starts or resumes playback ]
+    [ pause | () | Pauses playback ]
+    [ togglePlayback | () | Toggles between play and pause ]
+    [ nextSong | (reset) | Plays next song in playlist ]
+    [ previousSong | () | Plays previous song in playlist ]
+    [ toggleShuffle | () | Toggles shuffle mode ]
+    [ seekForward | () | Seeks forward by seekSpeed seconds ]
+    [ seekBackward | () | Seeks backward by seekSpeed seconds ]
+    [ changeVolume | (delta) | Changes volume by delta (-1 or 1) ]
+    [ changeVisualizerMode | () | Cycles through visualization modes ]
+    [ showSongList | () | Displays song selection menu ]
+    [ toggleFullscreen | () | Toggles fullscreen display mode ]
+    [ exitJukebox | () | Returns to main menu ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ songs | Array | Available songs playlist ]
+    [ currentIndex | Number | Index of currently playing song ]
+    [ currentSong | Object | Currently playing song data ]
+    [ isPlaying | Boolean | Whether audio is currently playing ]
+    [ isShuffled | Boolean | Whether shuffle mode is enabled ]
+    [ menuVisible | Boolean | Whether menu is visible ]
+    [ fullscreenMode | Boolean | Whether fullscreen mode is active ]
+    [ visualizerMode | String | Current visualization type ]
+    [ seekSpeed | Number | Seconds to seek per key press ]
+    [ visualizer | FullScreenAudioVisualizer | Audio visualizer instance ]
+    [ lyrics | Lyrics | Lyrics synchronization system ]
+    [ audioElement | HTMLAudioElement | Audio playback element ]
+    [/table]
+    
+    [heading: "Visualization Modes"]
+    [table header]
+    [ Mode | Description ]
+    [ bars | Standard vertical frequency bars ]
+    [ symmetrical | Mirrored bars from center ]
+    [ waveform | Waveform display of audio signal ]
+    [ circular | Radial frequency display ]
+    [/table]
+    
+    [heading: "Controls"]
+    [table header]
+    [ Control | Action ]
+    [ A button | Play/Pause toggle ]
+    [ B button | Toggle fullscreen mode ]
+    [ Up/Down | Volume control ]
+    [ Left/Right (press) | Seek backward/forward ]
+    [ Left/Right (double press) | Previous/Next song ]
+    [ Select button | Change visualizer mode ]
+    [ Select (double press) | Toggle shuffle ]
+    [ Start button | Show menu ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Start jukebox with all songs
+    const allSongs = [...window.localSongs, ...window.externalSongs];
+    game.state.start("Jukebox", true, false, allSongs, 0);
+    
+    // Jukebox will automatically save playback position for each song
+    // and resume from where you left off when you return
+    [/codeblock]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

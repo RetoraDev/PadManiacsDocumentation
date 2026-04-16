@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>TextInput - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "TextInput Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Text input dialog for entering character names and other text.</p>
+    
+    [heading: "Description"]
+    <p>TextInput provides a modal dialog for text entry with a virtual keyboard interface using gamepad controls. Used primarily for character naming.</p>
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ text | String | Initial text value ]
+    [ maxLength | Number | Maximum characters allowed ]
+    [ onConfirm | Function | Callback when text is confirmed ]
+    [ onCancel | Function | Callback when cancelled ]
+    [/table]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ getCharacterToInsert | () | Returns current selected character ]
+    [ getLastChar | (text) | Gets last character from string ]
+    [ takeChar | (char) | Sets current character selection ]
+    [ update | () | Handles input and updates display ]
+    [ confirm | () | Confirms input and calls callback ]
+    [ cancel | () | Cancels input and calls callback ]
+    [ destroy | () | Destroys dialog and cleans up ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ characterSet | String | Available characters (A-Z, ., space) ]
+    [ stackedText | String | Confirmed text input ]
+    [ currentIndex | Number | Current character selection index ]
+    [ maxLength | Number | Maximum input length ]
+    [ textLayer | Text | Display text sprite ]
+    [ cursor | Graphics | Blinking cursor graphic ]
+    [/table]
+    
+    [heading: "Controls"]
+    [table header]
+    [ Control | Action ]
+    [ Up/Down | Change current character ]
+    [ A | Add character to text ]
+    [ B | Delete last character ]
+    [ Start | Confirm text input ]
+    [ Select | Cancel text input ]
+    [/table]
+    
+    [heading: "Character Set"]
+    <p>The default character set includes:</p>
+    [codeblock]
+    ABCDEFGHIJKLMNOPQRSTUVWXYZ. (space)
+    [/codeblock]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Create text input for character name
+    new TextInput(
+      "",                           // Initial text
+      6,                            // Max length (6 for character names)
+      (name) => {
+        // Confirm callback
+        const newChar = characterManager.createCharacter(name, appearance);
+        if (newChar) {
+          notifications.show(`Created character: ${name}`);
+        }
+      },
+      () => {
+        // Cancel callback
+        notifications.show("Character creation cancelled");
+      }
+    );
+    [/codeblock]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

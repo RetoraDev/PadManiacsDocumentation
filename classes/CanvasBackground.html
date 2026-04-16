@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>CanvasBackground - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "CanvasBackground Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Background rendered from a canvas element for dynamic content.</p>
+    
+    [heading: "Description"]
+    <p>CanvasBackground creates a Phaser sprite from an HTML canvas element, allowing dynamic drawing and updates. Used for background video frames and dynamically generated backgrounds.</p>
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ canvas | HTMLCanvasElement | Canvas element to render as background ]
+    [/table]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ render | () | Updates the texture from the canvas (call after drawing) ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ baseTexture | PIXI.BaseTexture | Base texture from canvas ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Create canvas and draw content
+    const canvas = document.createElement('canvas');
+    canvas.width = 192;
+    canvas.height = 112;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, 192, 112);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(10, 10, 50, 50);
+    
+    // Create background
+    const background = new CanvasBackground(canvas);
+    
+    // Update after drawing changes
+    ctx.fillStyle = '#ff0000';
+    ctx.fillRect(20, 20, 30, 30);
+    background.render(); // Refresh the texture
+    [/codeblock]
+    
+    [heading: "Use Cases"]
+    [list]
+    * Background video frame rendering
+    * Dynamically generated patterns
+    * Real-time canvas effects
+    * Screenshot display
+    [/list]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

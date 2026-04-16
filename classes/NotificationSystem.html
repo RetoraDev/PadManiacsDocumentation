@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
     <title>NotificationSystem - PadManiaX Modding API Documentation</title>
 </head>
 <body class="doki-hidden">
@@ -11,10 +11,10 @@
     [title: "NotificationSystem Class"]
     <a href="../">← Back to index</a>
     
-    <p>Global notification system for displaying messages to the player.</p>
+    <p>Global notification system for displaying messages, achievements, and experience gains to the player.</p>
     
     [heading: "Description"]
-    <p>NotificationSystem provides a centralized way to display temporary messages to the player. It handles queuing, automatic text wrapping, state-aware display, and smooth animations.</p>
+    <p>NotificationSystem provides a centralized way to display temporary messages to the player. It handles queuing, automatic text wrapping, state-aware display, smooth animations, and specialized notifications for achievements and experience gains.</p>
     
     [heading: "Key Features"]
     [list]
@@ -23,6 +23,9 @@
     * State-aware display restrictions
     * Smooth fade animations
     * Preserved notifications across state changes
+    * Achievement notifications with custom styling
+    * Experience gain notifications with animated progress bar
+    * Level up effects
     [/list]
     
     [heading: "Methods"]
@@ -31,26 +34,25 @@
     [ constructor | () | Initializes notification system ]
     [ setupStateChangeHandling | () | Sets up state transition tracking ]
     [ onStateChange | (newState) | Handles game state changes ]
-    [ show | (text, duration) | Queues notification for display ]
-    [ wrapText | (text) | Automatically wraps long text ]
-    [ breakLongWord | (word) | Breaks very long words ]
-    [ getTextWidth | (text) | Calculates text pixel width ]
+    [ show | (text, duration) | Queues text notification ]
+    [ showAchievement | (achievement, expGain) | Queues achievement notification ]
+    [ showExpGain | (character, expGain, levelBefore, levelAfter, expBefore, expAfter) | Queues experience gain notification ]
     [ processPendingNotifications | () | Processes queued notifications ]
     [ processNext | () | Displays next notification in queue ]
+    [ displayTextNotification | (text) | Creates text notification display ]
+    [ displayExpNotification | (notification) | Creates experience notification with animated bar ]
+    [ animateExpBar | (notification, expBar, barWidth) | Animates experience bar filling ]
+    [ showLevelUpEffect | (level) | Shows level up text effect ]
+    [ wrapText | (text) | Wraps text to fit window ]
+    [ breakLongWord | (word) | Breaks very long words ]
+    [ getTextWidth | (text) | Calculates text pixel width ]
     [ preserveCurrentNotification | () | Saves current notification during state change ]
     [ restorePreservedNotification | () | Restores saved notification ]
-    [ displayNotification | (text) | Creates notification display ]
     [ hideCurrent | () | Hides current notification ]
     [ cleanupUI | () | Removes notification elements ]
-    [ isStateRestricted | (stateName) | Checks if state allows notifications ]
     [ isStateAllowed | (stateName) | Checks if state permits notifications ]
-    [ canShowInCurrentState | () | Checks current state permissions ]
-    [ setWrappingSettings | (maxLineWidth, charWidth) | Configures text wrapping ]
-    [ wrapTextToLines | (text, maxLines) | Wraps text with line limit ]
-    [ getQueueStatus | () | Returns current queue information ]
     [ clear | () | Clears all notifications ]
-    [ hasActiveNotifications | () | Checks for any active notifications ]
-    [ getNotificationCount | () | Returns total notification count ]
+    [ destroy | () | Cleans up notification system ]
     [/table]
     
     [heading: "Properties"]
@@ -60,10 +62,10 @@
     [ isShowing | Boolean | Whether notification is currently displayed ]
     [ currentNotification | Object | Currently displayed notification ]
     [ duration | Number | Default display duration ]
-    [ lineHeight | Number | Line height in pixels ]
-    [ padding | Number | Text padding ]
-    [ maxLineWidth | Number | Maximum text width before wrapping ]
-    [ charWidth | Number | Average character width ]
+    [ lineHeight | Number | Line height in pixels (8) ]
+    [ padding | Number | Text padding (8) ]
+    [ maxLineWidth | Number | Maximum text width before wrapping (160) ]
+    [ charWidth | Number | Average character width (4) ]
     [ restrictedStates | Set | States where notifications are blocked ]
     [ allowedStates | Set | States where notifications are permitted ]
     [ notificationWindow | Window | Notification display window ]
@@ -77,20 +79,42 @@
     [ MainMenu | Yes | User is navigating menus ]
     [ SongSelect | Yes | User is selecting songs ]
     [ Results | Yes | Showing performance results ]
+    [ CharacterSelect | Yes | Character management ]
+    [ Settings | Yes | Settings menu ]
+    [ Addons | Yes | Addon manager ]
     [ Title | No | Initial loading screen ]
     [ Play | No | Gameplay in progress ]
     [ Load states | No | Loading screens ]
     [ Boot | No | Initial boot sequence ]
     [/table]
     
-    [heading: "Text Wrapping"]
+    [heading: "Notification Types"]
     [table header]
-    [ Setting | Default | Description ]
-    [ maxLineWidth | 160 pixels | Maximum text width ]
-    [ charWidth | 4 pixels | Average character width ]
-    [ lineHeight | 8 pixels | Line spacing ]
-    [ padding | 8 pixels | Window padding ]
+    [ Type | Duration | Special Features ]
+    [ text | 2000ms | Standard text message ]
+    [ achievement | 2500ms | Achievement name and description ]
+    [ exp | 5000ms | Animated experience bar, level up effects ]
     [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Text notification
+    notifications.show("Hello, world!", 2000);
+    
+    // Achievement notification
+    notifications.showAchievement({
+      name: "First Game",
+      description: { achieved: "You completed your first game!" }
+    });
+    
+    // Experience gain notification
+    notifications.showExpGain(character, 25, 1, 2, 10, 5);
+    
+    // Check if notification can be shown
+    if (notifications.isStateAllowed("MainMenu")) {
+      notifications.show("Welcome!");
+    }
+    [/codeblock]
     
     [footer: "&copy; Retora 2026"]
 </body>

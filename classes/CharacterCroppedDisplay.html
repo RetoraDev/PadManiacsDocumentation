@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>CharacterCroppedDisplay - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "CharacterCroppedDisplay Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Character display with cropping support for portraits and close-ups.</p>
+    
+    [heading: "Description"]
+    <p>CharacterCroppedDisplay extends CharacterDisplay to add cropping functionality, allowing specific areas of the character sprite to be displayed. Used as base class for CharacterPortrait and CharacterCloseShot.</p>
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ x | Number | X position ]
+    [ y | Number | Y position ]
+    [ characterData | Character | Character object ]
+    [ cropArea | Object | Crop rectangle { x, y, w, h } ]
+    [/table]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ cropSprite | () | Applies crop to all character layers ]
+    [ updateAppearance | (newAppearance) | Updates appearance and reapplies crop ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ cropArea | Object | Crop rectangle definition ]
+    [/table]
+    
+    [heading: "Inherited Methods"]
+    <p>CharacterCroppedDisplay inherits all methods from <a href="CharacterDisplay.html">CharacterDisplay</a>.</p>
+    
+    [heading: "Subclasses"]
+    [table header]
+    [ Class | Crop Area | Use Case ]
+    [ CharacterPortrait | {x:43, y:11, w:15, h:15} | Results screen, character select ]
+    [ CharacterCloseShot | {x:32, y:15, w:36, h:7} | Skill activation effect ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Create custom cropped display
+    const cropArea = { x: 40, y: 10, w: 20, h: 20 };
+    const croppedDisplay = new CharacterCroppedDisplay(100, 50, character, cropArea);
+    [/codeblock]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

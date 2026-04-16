@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>DialogWindow - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "DialogWindow Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Modal dialog window for user confirmations, prompts, and notifications.</p>
+    
+    [heading: "Description"]
+    <p>DialogWindow creates modal dialog boxes with customizable text, buttons, and optional scrolling for long messages. It handles input automatically and provides confirmation/cancel signals.</p>
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ text | String | Dialog message (supports newlines) ]
+    [ options | Object | Configuration options ]
+    [/table]
+    
+    [heading: "Options"]
+    [table header]
+    [ Option | Type | Default | Description ]
+    [ x | Number | game.width/2 | X position ]
+    [ y | Number | game.height/2 | Y position ]
+    [ anchorX | Number | 0.5 | X anchor (0-1) ]
+    [ anchorY | Number | 0.5 | Y anchor (0-1) ]
+    [ maxWidth | Number | 180 | Maximum width in pixels ]
+    [ maxHeight | Number | 80 | Maximum height in pixels ]
+    [ buttons | Array | ['OK'] | Button labels ]
+    [ defaultButton | Number | 0 | Default selected button index ]
+    [ enableTextScroll | Boolean | false | Enable scrolling for long text ]
+    [ parent | Phaser.Group | null | Parent group to attach to ]
+    [/table]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ createDialog | () | Creates the dialog window and UI elements ]
+    [ calculateWindowSize | () | Calculates required window dimensions ]
+    [ wrapText | (text) | Wraps text to fit window width ]
+    [ breakLongWord | (word, charsPerLine) | Breaks long words across lines ]
+    [ getTextWidth | (text) | Calculates text width in pixels ]
+    [ createTextContent | (wrappedText) | Creates text display with optional scrolling ]
+    [ createButtonElements | () | Creates button elements ]
+    [ updateButtonSelection | () | Updates selected button highlight ]
+    [ updateScrollIndicator | () | Shows/hides scroll indicator ]
+    [ updateScrollBar | () | Updates scroll bar position ]
+    [ setupInputHandling | () | Sets up gamepad input handlers ]
+    [ refreshTextContent | () | Refreshes text after scrolling ]
+    [ confirm | () | Triggers confirmation with selected button ]
+    [ cancel | () | Triggers cancel action ]
+    [ cleanup | () | Removes input handlers ]
+    [ destroy | () | Destroys dialog and cleans up ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ window | Window | Internal window instance ]
+    [ textLines | Array | Text line sprites ]
+    [ buttonTexts | Array | Button text sprites ]
+    [ selectedButton | Number | Currently selected button index ]
+    [ isActive | Boolean | Whether dialog is accepting input ]
+    [ scrollIndicator | Text | Scroll indicator sprite ]
+    [ scrollBar | Graphics | Scroll bar graphics ]
+    [ currentScroll | Number | Current scroll position ]
+    [ maxScroll | Number | Maximum scroll position ]
+    [/table]
+    
+    [heading: "Signals"]
+    [table header]
+    [ Signal | Parameters | Description ]
+    [ onConfirm | (buttonIndex, buttonText) | Fired when a button is confirmed ]
+    [ onCancel | (buttonIndex) | Fired when dialog is cancelled ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Simple confirmation dialog
+    const dialog = new DialogWindow("Are you sure you want to continue?", {
+      buttons: ["Yes", "No"],
+      defaultButton: 0
+    });
+    
+    dialog.onConfirm.add((buttonIndex, buttonText) => {
+      if (buttonIndex === 0) {
+        notifications.show("Confirmed!");
+      } else {
+        notifications.show("Cancelled!");
+      }
+      dialog.destroy();
+    });
+    
+    // Dialog with scrolling text
+    const longDialog = new DialogWindow(
+      "This is a very long message that will need scrolling to read completely...",
+      {
+        buttons: ["OK", "Cancel"],
+        enableTextScroll: true,
+        maxWidth: 160
+      }
+    );
+    
+    // Dialog with custom position
+    const customDialog = new DialogWindow("Custom positioned dialog", {
+      x: 50,
+      y: 50,
+      anchorX: 0,
+      anchorY: 0,
+      buttons: ["Close"]
+    });
+    [/codeblock]
+    
+    [heading: "Navigation Controls"]
+    [table header]
+    [ Control | Action ]
+    [ Left/Right | Change selected button ]
+    [ Up/Down | Scroll text (if enabled) ]
+    [ A | Confirm selection ]
+    [ B | Cancel (selects No/Cancel button if available) ]
+    [/table]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

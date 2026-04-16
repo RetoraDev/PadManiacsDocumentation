@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>ErrorScreen - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "ErrorScreen Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Error display screen shown when the game crashes.</p>
+    
+    [heading: "Description"]
+    <p>ErrorScreen is automatically shown when an unhandled exception occurs in the game. It displays the error message and allows the player to recover by pressing any key.</p>
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ message | String | Error message to display ]
+    [ recoverStateKey | String | State to recover to (default: 'Title') ]
+    [/table]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ init | (message, recoverStateKey) | Initializes with error info ]
+    [ create | () | Creates error display screen ]
+    [ update | () | Handles input for recovery ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ message | String | Error message text ]
+    [ recoverStateKey | String | State to recover to ]
+    [ background | Graphics | Purple background overlay ]
+    [/table]
+    
+    [heading: "Automatic Crash Detection"]
+    <p>The game automatically detects crashes and stores a flag in Account.stats.lastCrashed. When the game restarts, it will prompt the user to submit a bug report.</p>
+    
+    [codeblock javascript]
+    // Crash is detected via window.onerror
+    window.onerror = (details, file, line) => {
+      localStorage.setItem('gameLastCrashed', 'true');
+      game.state.start('ErrorScreen', false, false, message, 'Boot');
+    };
+    [/codeblock]
+    
+    [heading: "Example"]
+    <p>The ErrorScreen is not meant to be called directly by modders. It's automatically invoked by the game's error handling system.</p>
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

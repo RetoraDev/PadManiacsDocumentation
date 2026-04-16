@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Credits - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "Credits Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Scrolling credits screen with background slideshow and music.</p>
+    
+    [heading: "Description"]
+    <p>Credits displays scrolling credit text with song credits, special thanks, and developer information. Features a rotating background slideshow using song banners/backgrounds and plays random music from the song library.</p>
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ returnState | String | State to return to after credits (default: 'MainMenu') ]
+    [ returnStateParams | Object | Parameters for return state ]
+    [/table]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ init | (returnState, returnStateParams) | Initializes with return state ]
+    [ create | () | Creates credits display ]
+    [ setupBackground | () | Sets up background slideshow ]
+    [ collectBackgrounds | () | Collects backgrounds from all songs ]
+    [ showNextBackground | () | Shows next random background ]
+    [ startBackgroundMusic | () | Starts random song playback ]
+    [ getSongCredits | () | Returns formatted song credits ]
+    [ update | () | Updates scrolling and handles input ]
+    [ onCreditsComplete | () | Handles credits completion ]
+    [ returnToMenu | () | Returns to previous state ]
+    [ shutdown | () | Cleans up resources ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ creditsContainer | Group | Container for scrolling credits ]
+    [ totalHeight | Number | Total height of credits content ]
+    [ scrollSpeed | Number | Scroll speed in pixels/second ]
+    [ creditsComplete | Boolean | Whether credits have finished ]
+    [ isWaitingForInput | Boolean | Waiting for user input ]
+    [ returnState | String | State to return to ]
+    [ returnStateParams | Object | Parameters for return state ]
+    [ backgroundSprite | Sprite | Background display ]
+    [ availableBackgrounds | Array | Available background images ]
+    [ backgroundTimer | Timer | Background slideshow timer ]
+    [ creditsMusic | HTMLAudioElement | Background music ]
+    [/table]
+    
+    [heading: "Credits Content"]
+    [list]
+    * Game title and creator
+    * Song credits from all local songs
+    * Sound effects credits
+    * Special thanks
+    * Copyright information
+    [/list]
+    
+    [heading: "Controls"]
+    [table header]
+    [ Control | Action ]
+    [ Any key (during scrolling) | Speed up scrolling (4x) ]
+    [ Any key (after completion) | Return to menu ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Start credits from main menu
+    game.state.start("Credits");
+    
+    // Return to specific state
+    game.state.start("Credits", true, false, "MainMenu", {});
+    [/codeblock]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

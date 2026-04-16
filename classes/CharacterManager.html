@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>CharacterManager - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "CharacterManager Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Manages multiple characters, persistence, and character-related operations.</p>
+    
+    [heading: "Description"]
+    <p>CharacterManager provides a centralized interface for creating, deleting, selecting, and updating characters. It handles loading characters from saved data, persisting changes, and managing the current active character.</p>
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ constructor | () | Initializes manager and loads characters from Account ]
+    [ loadFromAccount | () | Loads characters from saved account data ]
+    [ createCharacter | (name, appearance) | Creates a new character with given name and appearance ]
+    [ deleteCharacter | (name) | Deletes a character by name (cannot delete last character) ]
+    [ unsetCharacter | () | Removes current character selection ]
+    [ setCurrentCharacter | (name) | Sets the active character by name ]
+    [ updateCharacterStats | (gameResults) | Updates character stats after a game and awards experience ]
+    [ calculateExperienceGain | (gameResults) | Calculates experience earned from a game ]
+    [ unlockHair | (type, id) | Unlocks a hair style for all characters ]
+    [ unlockItem | (itemId) | Unlocks an item for all characters ]
+    [ getCharacterList | () | Returns array of all characters ]
+    [ getCurrentCharacter | () | Returns the currently selected character ]
+    [ saveToAccount | () | Saves all character data to Account ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ characters | Map | Map of character names to Character objects ]
+    [ currentCharacter | Character | Currently selected character or null ]
+    [/table]
+    
+    [heading: "Experience Calculation"]
+    <p>Experience is awarded based on gameplay performance:</p>
+    [table header]
+    [ Criteria | Bonus | Requirement ]
+    [ Completion Bonus | 2 XP | ≥70% accuracy ]
+    [ Accuracy Bonus | 1-8 XP | Based on accuracy percentage ]
+    [ Combo Bonus | 2-8 XP | Based on max combo achieved ]
+    [ Full Combo Bonus | 8 XP | Zero misses ]
+    [ Perfect Game Bonus | 4 XP | All marvelous/perfect judgments ]
+    [ Difficulty Bonus | 1-3 XP | Based on difficulty rating ]
+    [ Skill Usage | 1-5 XP | Skills used during gameplay ]
+    [/table]
+    
+    [note: "No experience is awarded if accuracy is below 40% or total notes played is less than 25"]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Create character manager
+    const characterManager = new CharacterManager();
+    
+    // Create a new character
+    const newChar = characterManager.createCharacter("MIKU", {
+      skinTone: 0,
+      hairColor: 0x00CCFF,
+      frontHair: "1",
+      backHair: "1",
+      clothing: "school_uniform",
+      accessory: "headphones"
+    });
+    
+    // Set as current character
+    characterManager.setCurrentCharacter("MIKU");
+    
+    // Update after game
+    const gameResults = {
+      score: 850000,
+      accuracy: 97.5,
+      maxCombo: 450,
+      judgements: { marvelous: 300, perfect: 150, great: 20, good: 5, boo: 2, miss: 0 },
+      skillsUsed: 2,
+      difficultyRating: 9
+    };
+    
+    const expGain = characterManager.updateCharacterStats(gameResults);
+    notifications.show(`Gained ${expGain} XP!`);
+    
+    // Get all characters
+    const allChars = characterManager.getCharacterList();
+    [/codeblock]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

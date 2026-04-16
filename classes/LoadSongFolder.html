@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width">
+    <meta charset="UTF-8">
+    <title>LoadSongFolder - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "LoadSongFolder Class"]
+    
+    <a href="../">← Back to index</a>
+        
+    <p>Load a single song via user file input.</p>
+    
+    [heading: "Description"]
+    <p>LoadSongFolder processes and loads songs selected by the user via file input. It uses ExternalSMParser to parse .sm file and prepare it for gameplay.</p>
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ create | () | Starts the song loading process, calls showFileInput ]
+    [ showFileInput | () | Prompts the user to select song folder or files ]
+    [ async processFiles | (files) | Prepares files for gameplay and parses SM chart ]
+    [ async processZipFile | (file) | Helper to process zipped songs ]
+    [ async processZipContent | (zipContent) | Load zip contents and prepares files for gameplay ]
+    [ showError | (message) | Displays an error message and aborts loading ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ progressText | ProgressText | Progress text display ]
+    [ parser | ExternalSMParser | Parser for .sm files ]
+    [/table]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

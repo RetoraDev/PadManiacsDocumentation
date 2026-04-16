@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>AchievementsManager - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "AchievementsManager Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Manages achievement tracking, unlocking, and player statistics.</p>
+    
+    [heading: "Description"]
+    <p>AchievementsManager handles the achievement system including tracking progress, unlocking achievements, awarding experience, and managing player statistics. It also tracks play time, streaks, and various gameplay metrics.</p>
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ initialize | () | Initializes achievements system and starts session tracking ]
+    [ startSession | () | Begins a new play session for time tracking ]
+    [ startTimeTracking | () | Starts interval-based time tracking ]
+    [ updateTimeStats | () | Updates total play time and session duration ]
+    [ updatePlayStreak | () | Updates daily play streak ]
+    [ checkTimeBasedConditions | () | Checks for time-based achievements (night owl, early bird, etc.) ]
+    [ getDate | () | Returns current date, hour, day, month information ]
+    [ getHolidays | () | Returns holiday calendar for achievement detection ]
+    [ isHoliday | (month, date) | Checks if given date is a holiday ]
+    [ setupWindowEvents | () | Sets up visibility change and freeze/resume handlers ]
+    [ onPageHide | () | Pauses time tracking when page is hidden ]
+    [ onPageShow | () | Resumes time tracking when page is shown ]
+    [ endSession | () | Ends current session and updates averages ]
+    [ updateStats | (gameResults) | Updates all stats based on game results ]
+    [ updateGameStats | (gameResults) | Updates gameplay-related statistics ]
+    [ checkAchievements | () | Checks and unlocks achievements based on current stats ]
+    [ awardAchievementExp | (achievement) | Awards experience to current character ]
+    [ getUnlockedAchievements | () | Returns array of unlocked achievements ]
+    [ getLockedAchievements | () | Returns array of locked (not hidden) achievements ]
+    [ getHiddenAchievements | () | Returns array of hidden locked achievements ]
+    [ getAchievementProgress | (achievementId) | Returns progress for an achievement ]
+    [ getTotalUnlockedCount | () | Returns number of unlocked achievements ]
+    [ getTotalAchievementsCount | () | Returns total number of achievements ]
+    [ getCompletionPercentage | () | Returns percentage of achievements completed ]
+    [ getTimePlayedFormatted | () | Returns formatted total play time string ]
+    [ formatTime | (seconds) | Formats seconds into readable time string ]
+    [ getCurrentSessionTime | () | Returns current session duration in seconds ]
+    [ destroy | () | Cleans up and ends session ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ newAchievements | Array | Recently unlocked achievements ]
+    [ timeUpdateInterval | Number | Interval ID for time tracking ]
+    [ sessionStartTime | Number | Timestamp when current session started ]
+    [ lastUpdateTime | Number | Last time stats were updated ]
+    [ isTracking | Boolean | Whether time tracking is active ]
+    [/table]
+    
+    [heading: "Achievement Categories"]
+    [table header]
+    [ Category | Description | Example ]
+    [ Gameplay | Core gameplay achievements | First game, Combo milestones ]
+    [ Character | Character-related achievements | First character, Max level ]
+    [ Progression | Progression-based achievements | Games played, High scores ]
+    [ Mastery | Difficulty mastery achievements | All difficulties cleared ]
+    [ Time | Time-based achievements | Play time milestones ]
+    [ Holidays | Holiday-specific achievements | Play on holidays ]
+    [ Editor | Chart editor achievements | First arrow placed ]
+    [ Misc | Miscellaneous achievements | Bug reports, Ratings ]
+    [/table]
+    
+    [heading: "Achievement Experience Rewards"]
+    [table header]
+    [ Rarity | Experience ]
+    [ Common | 5 XP ]
+    [ Uncommon | 10 XP ]
+    [ Rare | 20 XP ]
+    [ Epic | 35 XP ]
+    [ Legendary | 64 XP ]
+    [/table]
+    
+    [heading: "Tracked Statistics"]
+    [table header]
+    [ Statistic | Description ]
+    [ totalGamesPlayed | Total games completed ]
+    [ totalTimePlayed | Total play time in seconds ]
+    [ totalScore | Cumulative score across all games ]
+    [ maxCombo | Highest combo ever achieved ]
+    [ perfectGames | Games with 100% accuracy ]
+    [ currentStreak | Current daily play streak ]
+    [ longestStreak | Longest daily play streak ]
+    [ totalNotesHit | Total notes hit across all games ]
+    [ totalMarvelous | Total Marvelous judgments ]
+    [ totalPerfect | Total Perfect judgments ]
+    [ totalGreat | Total Great judgments ]
+    [ totalGood | Total Good judgments ]
+    [ totalBoo | Total Boo judgments ]
+    [ totalMiss | Total Miss judgments ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Initialize achievements (automatically done at game start)
+    achievementsManager.initialize();
+    
+    // Check achievements after a game
+    const newAchievements = achievementsManager.checkAchievements();
+    
+    if (newAchievements.length > 0) {
+      newAchievements.forEach(achievement => {
+        notifications.showAchievement(achievement);
+      });
+    }
+    
+    // Get completion percentage
+    const percent = achievementsManager.getCompletionPercentage();
+    
+    // Get unlocked achievements
+    const unlocked = achievementsManager.getUnlockedAchievements();
+    
+    // Format play time
+    const timeStr = achievementsManager.getTimePlayedFormatted();
+    [/codeblock]
+    
+    [heading: "Holiday Achievements"]
+    <p>The game includes holiday achievements for dates such as:</p>
+    [list]
+    * New Year's Day (January 1)
+    * Valentine's Day (February 14)
+    * St. Patrick's Day (March 17)
+    * Cinco de Mayo (May 5)
+    * Independence Day (July 4)
+    * PadManiacs Day (October 26)
+    * Halloween (October 31)
+    * Veterans Day (November 11)
+    * 39 Giving (November 25)
+    * Christmas Eve (December 24)
+    * Christmas (December 25)
+    * New Year's Eve (December 31)
+    [/list]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

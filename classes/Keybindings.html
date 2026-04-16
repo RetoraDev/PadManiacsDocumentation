@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Keybindings - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "Keybindings Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Keybinding configuration interface for keyboard and gamepad controls.</p>
+    
+    [heading: "Description"]
+    <p>Keybindings provides a UI for customizing keyboard and gamepad button mappings. Users can remap controls, reset to defaults, and unmap keys by holding ESC.</p>
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ create | () | Creates keybindings menu UI ]
+    [ showKeybindingsMenu | () | Shows main keybindings menu ]
+    [ showKeyboardCustomization | (index) | Shows keyboard key customization menu ]
+    [ showGamepadCustomization | (index) | Shows gamepad button customization menu ]
+    [ showKeyWaitOverlay | (message) | Shows overlay for key press waiting ]
+    [ handleKeyboardKeyPress | (keyCode) | Handles keyboard key mapping ]
+    [ handleGamepadButtonPress | (buttonCode) | Handles gamepad button mapping ]
+    [ unmapCurrentKey | () | Removes mapping for current key ]
+    [ cancelKeyWait | () | Cancels key waiting and returns to menu ]
+    [ getKeyboardKeyDisplay | (mappingKey, index) | Returns display text for keyboard key ]
+    [ getGamepadButtonDisplay | (mappingKey) | Returns display text for gamepad button ]
+    [ getKeyName | (keyCode) | Converts keyCode to readable name ]
+    [ formatKeyName | (name) | Formats key name for display ]
+    [ confirmDialog | (message, onConfirm, onCancel, confirmText, cancelText) | Shows confirmation dialog ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ waitingForKey | Object | Current key waiting state ]
+    [ waitOverlay | Object | Overlay elements for key waiting ]
+    [ lastCustomizationMenu | String | Last menu type ('keyboard' or 'gamepad') ]
+    [/table]
+    
+    [heading: "Keyboard Controls Available for Mapping"]
+    [table header]
+    [ Action | Default Keys | Description ]
+    [ UP | UP, J, B | Up direction / Dance Up ]
+    [ DOWN | DOWN, F, V | Down direction / Dance Down ]
+    [ LEFT | LEFT, D, C | Left direction / Dance Left ]
+    [ RIGHT | RIGHT, K, N | Right direction / Dance Right ]
+    [ CONFIRM | Z | Confirm / Right action ]
+    [ CANCEL | X | Cancel / Down action ]
+    [ START | ENTER | Start / Pause ]
+    [ SELECT | SPACEBAR | Select / Toggle ]
+    [/table]
+    
+    [heading: "Gamepad Controls Available for Mapping"]
+    [table header]
+    [ Action | Default Button | Description ]
+    [ UP | 12 (DPAD UP) | Up direction ]
+    [ DOWN | 13 (DPAD DOWN) | Down direction ]
+    [ LEFT | 14 (DPAD LEFT) | Left direction ]
+    [ RIGHT | 15 (DPAD RIGHT) | Right direction ]
+    [ CONFIRM | 1 (BUTTON B) | Confirm / Right action ]
+    [ CANCEL | 0 (BUTTON A) | Cancel / Down action ]
+    [ START | 9 (START) | Start / Pause ]
+    [ SELECT | 8 (SELECT/BACK) | Select / Toggle ]
+    [/table]
+    
+    [heading: "Key Waiting Overlay Controls"]
+    [table header]
+    [ Action | Behavior ]
+    [ Press any key/button | Maps to current action ]
+    [ Hold ESC for 1 second | Unmaps current action ]
+    [ Tap ESC | Cancels mapping ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Start keybindings from settings
+    game.state.start("Keybindings");
+    
+    // Keybindings are saved to Account.mapping.keyboard and Account.mapping.gamepad
+    [/codeblock]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

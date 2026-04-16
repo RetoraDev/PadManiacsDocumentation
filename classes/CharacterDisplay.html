@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>CharacterDisplay - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "CharacterDisplay Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Visual character sprite with layered rendering for hair, clothing, and accessories.</p>
+    
+    [heading: "Description"]
+    <p>CharacterDisplay creates and manages a layered character sprite with separate layers for back hair, base body, front hair, eyes, clothing, and accessories. It supports tinting for hair color, blinking animations, and dynamic appearance updates.</p>
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ x | Number | X position for the character ]
+    [ y | Number | Y position for the character ]
+    [ characterData | Character | Character object containing appearance data ]
+    [/table]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ createLayers | () | Creates all visual layers for the character ]
+    [ setClothingVisibility | () | Shows/hides layers based on clothing item ]
+    [ setupBlinking | () | Sets up eye blinking animation ]
+    [ startBlinking | () | Starts the random blinking cycle ]
+    [ blink | (time, callback) | Triggers a single blink after specified time ]
+    [ updateAppearance | (newAppearance) | Updates appearance and refreshes layers ]
+    [ destroy | () | Cleans up all layers and destroys the sprite ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ character | Character | Reference to the character data ]
+    [ layers | Object | Object containing all sprite layers ]
+    [/table]
+    
+    [heading: "Layer Order (Bottom to Top)"]
+    [list]
+    * backHair - Back hair layer (bottom)
+    * base - Base body/skin layer
+    * frontHair - Front hair layer
+    * eyes - Eyes layer with blinking animation
+    * clothing - Clothing layer
+    * accessory - Accessory layer (top)
+    [/list]
+    
+    [heading: "Blinking Animation"]
+    <p>The eyes layer uses a 4-frame animation:</p>
+    [table header]
+    [ Frame | State ]
+    [ 0 | Eyes open ]
+    [ 1 | Eyes half-closed ]
+    [ 2 | Eyes closed ]
+    [ 3 | Eyes half-closed ]
+    [ 2 | Eyes closed ]
+    [ 1 | Eyes half-closed ]
+    [ 0 | Eyes open ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Create character display
+    const character = characterManager.getCurrentCharacter();
+    const display = new CharacterDisplay(50, 30, character);
+    
+    // Update appearance dynamically
+    display.updateAppearance({
+      hairColor: 0xFF6699,
+      frontHair: "3",
+      clothing: "daring_clothing"
+    });
+    
+    // Trigger a blink
+    display.blink(500, () => {
+      console.log("Character blinked!");
+    });
+    [/codeblock]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

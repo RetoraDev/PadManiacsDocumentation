@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>CharacterPortrait - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "CharacterPortrait Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Cropped character portrait display for UI elements like results screen.</p>
+    
+    [heading: "Description"]
+    <p>CharacterPortrait extends CharacterCroppedDisplay with a predefined crop area for portrait-style character display. Used in results screens and character selection menus.</p>
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ x | Number | X position ]
+    [ y | Number | Y position ]
+    [ characterData | Character | Character object ]
+    [/table]
+    
+    [heading: "Crop Area"]
+    <p>The portrait crop area is defined in CHARACTER_SYSTEM.PORTRAIT_CROP:</p>
+    [codeblock javascript]
+    PORTRAIT_CROP = { x: 43, y: 11, w: 15, h: 15 }
+    [/codeblock]
+    
+    [heading: "Inherited Methods"]
+    <p>CharacterPortrait inherits all methods from <a href="CharacterDisplay.html">CharacterDisplay</a> and <a href="CharacterCroppedDisplay.html">CharacterCroppedDisplay</a>.</p>
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Create portrait for results screen
+    const character = characterManager.getCurrentCharacter();
+    const portrait = new CharacterPortrait(112, 41, character);
+    
+    // Update when character changes
+    portrait.updateAppearance(newAppearance);
+    [/codeblock]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
     <title>BackgroundMusic - PadManiaX Modding API Documentation</title>
 </head>
 <body class="doki-hidden">
     <script src="../doki-loader.js"></script>
-      
+    
     [title: "BackgroundMusic Class"]
     <a href="../">← Back to index</a>
     
-    <p>Manages background music playback in menus with smart song selection and caching.</p>
+    <p>Manages background music playback in menus with smart song selection, caching, and URL validation.</p>
     
     [heading: "Description"]
-    <p>BackgroundMusic handles the playback of music in menu screens, featuring intelligent song selection, caching for performance, and seamless transitions between songs.</p>
+    <p>BackgroundMusic handles the playback of music in menu screens, featuring intelligent song selection, caching for performance, URL accessibility validation, and seamless transitions between songs.</p>
     
     [heading: "Key Features"]
     [list]
     * Smart song randomization
-    * Performance-optimized caching
+    * Performance-optimized caching (30 second cache duration)
     * Last song persistence
-    * Cross-fade transitions
-    * Error recovery
+    * URL accessibility checking with timeout
+    * Error recovery and fallback
+    * Visibility change handling (pause/resume)
     [/list]
     
     [heading: "Methods"]
@@ -32,15 +33,16 @@
     [ registerVisibilityChangeListener | () | Sets up visibility handling ]
     [ playLastSong | () | Plays last played or random song ]
     [ playRandomSong | () | Selects and plays random song ]
-    [ getCachedAvailableSongs | () | Gets cached song list ]
-    [ getAllAvailableSongsFast | () | Builds fast song list ]
-    [ isValidAudioUrl | (url) | Validates audio URLs ]
-    [ checkUrlAccessible | (url) | Tests URL accessibility ]
+    [ getCachedAvailableSongs | () | Gets cached song list (30s cache) ]
+    [ getAllAvailableSongsFast | () | Builds fast song list without URL checking ]
+    [ isValidAudioUrl | (url) | Validates audio URLs (excludes invalid patterns) ]
+    [ checkUrlAccessible | (url) | Tests URL accessibility (800ms timeout) ]
     [ playSong | (songData) | Plays specified song ]
     [ removeSongFromCache | (failedUrl) | Removes failed song from cache ]
     [ stop | () | Stops music playback ]
     [ setVolume | (volume) | Sets playback volume ]
     [ refreshCache | () | Refreshes song cache ]
+    [ destroy | () | Destroys background music system ]
     [/table]
     
     [heading: "Properties"]
@@ -52,7 +54,7 @@
     [ currentSong | Object | Currently playing song data ]
     [ availableSongsCache | Array | Cached available songs ]
     [ cacheTimestamp | Number | Cache creation time ]
-    [ cacheDuration | Number | Cache validity duration ]
+    [ cacheDuration | Number | Cache validity duration (30 seconds) ]
     [ wasMusicPlaying | Boolean | Previous play state for pauses ]
     [ originalMusicTime | Number | Previous time for resuming ]
     [/table]
@@ -62,18 +64,18 @@
     [ Condition | Behavior ]
     [ Last song available | Play last played song ]
     [ Random mode enabled | Select random song ]
-    [ Song inaccessible | Fallback to random song ]
+    [ Song URL inaccessible | Remove from cache, fallback to random ]
     [ No songs available | Silent operation ]
     [/table]
     
-    [heading: "Song Sources"]
-    [table header]
-    [ Source | Description | Priority ]
-    [ Last played song | User's previous selection | High ]
-    [ Local songs | Built-in game songs | Medium ]
-    [ External songs | User-added songs | Medium ]
-    [ Current state songs | Songs from active state | Low ]
-    [/table]
+    [heading: "URL Validation"]
+    <p>URLs are considered invalid if they:</p>
+    [list]
+    * Are null or undefined
+    * Contain "assets/no-"
+    * Are "undefined" or "null" strings
+    * Are empty strings
+    [/list]
     
     [heading: "Cache Performance"]
     [table header]
@@ -82,6 +84,19 @@
     [ URL Check Timeout | 800ms | Maximum URL test time ]
     [ Fallback Delay | 100ms | Delay before trying next song ]
     [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Background music is automatically initialized
+    backgroundMusic.playLastSong();
+    
+    // Manual control
+    backgroundMusic.stop();
+    backgroundMusic.setVolume(3); // 75%
+    
+    // Refresh cache after adding new songs
+    backgroundMusic.refreshCache();
+    [/codeblock]
     
     [footer: "&copy; Retora 2026"]
 </body>

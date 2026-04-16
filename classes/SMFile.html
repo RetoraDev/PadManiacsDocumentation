@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>SMFile - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "SMFile Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Static class for generating StepMania (.sm) chart files from song data.</p>
+    
+    [heading: "Description"]
+    <p>SMFile provides methods to convert internal song data structures into the standard StepMania .sm file format, enabling chart export for use in other rhythm games.</p>
+    
+    [heading: "Static Methods"]
+    [table header]
+    [ Method | Parameters | Returns | Description ]
+    [ generateSM | (songData) | string | Generates complete .sm file content from song data ]
+    [ generateNotesSection | (difficulty, notes) | string | Generates #NOTES section for a difficulty ]
+    [ processFreezeNotes | (notes) | array | Processes freeze notes and adds tail notes ]
+    [ convertMeasureToSM | (notes, measureNum) | string | Converts notes in a measure to SM format ]
+    [ getBeatResolution | (beat) | number | Determines resolution needed for beat position ]
+    [ isBeatDivision | (beat, division) | boolean | Checks if beat aligns with a division ]
+    [ generateCustomResolutionMeasure | (notes, totalRows) | string | Generates measure for non-standard resolutions ]
+    [ resolveFileUrl | (filename, baseUrl) | string | Resolves relative file paths to absolute URLs ]
+    [/table]
+    
+    [heading: "SM File Format Structure"]
+    [codeblock]
+    #TITLE:Song Title;
+    #ARTIST:Artist Name;
+    #BPMS:0.000=120.000;
+    #STOPS:;
+    #OFFSET:0.000000;
+    #MUSIC:song.ogg;
+    #NOTES:
+         dance-single:
+         :
+         Medium:
+         5:
+         0.000000:
+    0000
+    0000
+    ;
+    [/codeblock]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Prepare song data
+    const songData = {
+      title: "My Song",
+      artist: "Me",
+      bpmChanges: [{ beat: 0, bpm: 140 }],
+      difficulties: [{ type: "Medium", rating: "5" }],
+      notes: {
+        "Medium5": [
+          { type: "1", beat: 0, column: 0 },
+          { type: "1", beat: 1, column: 1 }
+        ]
+      },
+      audio: "song.ogg"
+    };
+    
+    // Generate SM content
+    const smContent = SMFile.generateSM(songData);
+    
+    // Save to file
+    const blob = new Blob([smContent], { type: 'text/plain' });
+    // ... save blob to file system
+    [/codeblock]
+    
+    [heading: "Supported Note Types in Export"]
+    [table header]
+    [ Internal Type | SM Character | Description ]
+    [ "1" | 1 | Regular tap note ]
+    [ "2" | 2 | Hold note start ]
+    [ "3" | 3 | Hold note end (auto-generated) ]
+    [ "4" | 4 | Roll note start ]
+    [ "M" | M | Mine note ]
+    [/table]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

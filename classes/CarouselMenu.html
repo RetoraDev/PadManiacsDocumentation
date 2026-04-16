@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
     <title>CarouselMenu - PadManiaX Modding API Documentation</title>
 </head>
 <body class="doki-hidden">
@@ -11,10 +11,10 @@
     [title: "CarouselMenu Class"]
     <a href="../">← Back to index</a>
     
-    <p>A vertical scrolling menu with animated selection and gradient backgrounds.</p>
+    <p>A vertical scrolling menu with animated selection, gradient backgrounds, and scrollbar support.</p>
     
     [heading: "Description"]
-    <p>CarouselMenu provides a visually appealing vertical menu system with smooth animations, gradient backgrounds, and customizable appearance. It's used throughout the game for navigation menus.</p>
+    <p>CarouselMenu provides a visually appealing vertical menu system with smooth animations, gradient backgrounds, auto-hiding scrollbar, and customizable appearance. It's used throughout the game for navigation menus.</p>
     
     [heading: "Key Features"]
     [list]
@@ -23,18 +23,53 @@
     * Gradient background effects
     * Customizable colors and alignment
     * Page-based navigation support
+    * Auto-hiding scrollbar
     * Visual feedback for interactions
+    * Selection animation with glow effect
     [/list]
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ x | Number | X position ]
+    [ y | Number | Y position ]
+    [ width | Number | Menu width in pixels ]
+    [ height | Number | Menu height in pixels ]
+    [ config | Object | Configuration options ]
+    [/table]
+    
+    [heading: "Configuration Options"]
+    [table header]
+    [ Option | Type | Default | Description ]
+    [ animate | Boolean | true | Enable animations ]
+    [ align | String | 'left' | Text alignment (left/right) ]
+    [ bgcolor | String | '#3498db' | Background color ]
+    [ fgcolor | String | '#ffffff' | Text color ]
+    [ disableScrollBar | Boolean | false | Disable scrollbar ]
+    [ disableConfirm | Boolean | false | Disable confirm action ]
+    [ disableCancel | Boolean | false | Disable cancel action ]
+    [ inactiveAlpha | Number | 0.4 | Alpha for unselected items ]
+    [ activeAlpha | Number | 0.9 | Alpha for selected items (peak) ]
+    [ margin | Object | {top:4,bottom:4,left:4,right:4} | Content margins ]
+    [/table]
     
     [heading: "Methods"]
     [table header]
     [ Method | Parameters | Description ]
-    [ constructor | (x, y, width, height, config) | Creates new carousel menu ]
-    [ addItem | (text, callback, data) | Adds menu item ]
+    [ addItem | (text, callback, data) | Adds menu item with optional custom data ]
     [ update | () | Processes input and animations ]
-    [ navigate | (direction, page) | Changes selection ]
-    [ confirm | () | Activates selected item ]
-    [ cancel | () | Handles cancel action ]
+    [ navigate | (direction, page) | Changes selection (page=true for page scroll) ]
+    [ selectIndex | (index) | Selects item at specific index ]
+    [ updateSelection | () | Updates visual selection state ]
+    [ adjustScroll | () | Adjusts scroll to keep selection visible ]
+    [ updateScrollBar | () | Updates scrollbar position ]
+    [ showScrollBar | () | Shows scrollbar with fade out timer ]
+    [ hideScrollBar | () | Hides scrollbar immediately ]
+    [ updateItemPositions | () | Updates positions of visible items ]
+    [ confirm | () | Activates selected item with animation ]
+    [ animateSelection | (item, callback) | Animates selection (glow + fade) ]
+    [ cancel | () | Handles cancel action with animation ]
+    [ animateCancel | (callback) | Animates cancel (slide out) ]
     [ clear | () | Removes all items ]
     [ destroy | () | Cleans up resources ]
     [/table]
@@ -47,22 +82,15 @@
     [ items | Array | Menu items array ]
     [ selectedIndex | Number | Currently selected item ]
     [ scrollOffset | Number | Scroll position ]
-    [ itemHeight | Number | Height of each item ]
-    [ itemSpacing | Number | Spacing between items ]
+    [ itemHeight | Number | Height of each item (8px) ]
+    [ itemSpacing | Number | Spacing between items (1px) ]
     [ visibleItems | Number | Number of visible items ]
     [ isAnimating | Boolean | Whether menu is animating ]
     [ inputEnabled | Boolean | Whether input is accepted ]
-    [/table]
-    
-    [heading: "Configuration Options"]
-    [table header]
-    [ Option | Type | Default | Description ]
-    [ animate | Boolean | true | Enable animations ]
-    [ align | String | 'left' | Text alignment (left/right) ]
-    [ bgcolor | String | '#3498db' | Background color ]
-    [ fgcolor | String | '#ffffff' | Text color ]
-    [ margin | Object | {top:4,bottom:4,left:4,right:4} | Content margins ]
-    [ silent | Boolean | false | Suppress automatic adding to game ]
+    [ scrollBar | Graphics | Scrollbar graphics ]
+    [ onSelect | Phaser.Signal | Selection changed signal ]
+    [ onConfirm | Phaser.Signal | Item confirmed signal ]
+    [ onCancel | Phaser.Signal | Cancel pressed signal ]
     [/table]
     
     [heading: "Item Data Structure"]
@@ -70,9 +98,7 @@
     [ Property | Type | Description ]
     [ textContent | String | Display text ]
     [ callback | Function | Activation callback ]
-    [ data | Object | Custom data for styling ]
-    [ bgcolor | String | Item background color override ]
-    [ fgcolor | String | Item text color override ]
+    [ data | Object | Custom data for styling (bgcolor, fgcolor, etc.) ]
     [/table]
     
     [heading: "Signals"]
@@ -82,6 +108,27 @@
     [ onConfirm | (index, item) | Item confirmed ]
     [ onCancel | () | Cancel pressed ]
     [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    const menu = new CarouselMenu(0, 30, 100, 80, {
+      bgcolor: "#9b59b6",
+      fgcolor: "#ffffff",
+      align: 'left'
+    });
+    
+    menu.addItem("Play", () => startGame(), { bgcolor: "#00cc00" });
+    menu.addItem("Settings", () => openSettings());
+    menu.addItem("Exit", () => exitGame(), { bgcolor: "#cc0000" });
+    
+    menu.onSelect.add((index, item) => {
+      console.log(`Selected: ${item.textContent}`);
+    });
+    
+    menu.onConfirm.add((index, item) => {
+      console.log(`Confirmed: ${item.textContent}`);
+    });
+    [/codeblock]
     
     [footer: "&copy; Retora 2026"]
 </body>

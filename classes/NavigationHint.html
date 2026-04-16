@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
     <title>NavigationHint - PadManiaX Modding API Documentation</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/doki-docs@latest/doki-docs.min.css">
 </head>
 <body class="doki-hidden">
     <script src="../doki-loader.js"></script>
@@ -12,34 +11,63 @@
     [title: "NavigationHint Class"]
     <a href="../">← Back to index</a>
     
-    <p>UI Layer to display input prompt</p>
-    
-    [note: "This class is online available from v0.0.6 of the game"]
+    <p>UI sprite that displays context-sensitive input prompts for gamepad and keyboard.</p>
     
     [heading: "Description"]
-    <p>ProgressText extends the Text class to provide a standardized progress display positioned at the bottom-left of the screen. It's used consistently across all loading states.</p>
+    <p>NavigationHint displays input prompts that change based on the current screen context. It automatically detects the last input source (touch, keyboard, or gamepad) and shows appropriate button icons.</p>
     
-    [heading: "Key Features"]
-    [list]
-    * Standardized position and styling
-    * Bottom-right screen placement
-    * Consistent visual appearance
-    * Displays input prompt for gamepad or keyboard automatically
-    [/list]
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ frame | number | Initial frame to display (0-7) ]
+    [/table]
     
     [heading: "Methods"]
     [table header]
     [ Method | Parameters | Description ]
-    [ constructor | (frame = 0) | Creates the sprite with a specific frame (0 to 3) ]
-    [ update | () | Update method called automatically by Phaser ]
+    [ change | (value) | Changes to a different frame ]
+    [ hide | () | Hides the navigation hint ]
+    [ show | () | Shows the navigation hint ]
     [/table]
     
     [heading: "Properties"]
     [table header]
     [ Property | Type | Description ]
-    [ defaultFrame | number | Default frame to load ]
-    [ lastInputSource | string | Last input source type ([code: "null"], [code: "'touch'"], [code: "'keyboard'"] or [code: "'gamepad'"]) ]
+    [ frame | number | Current frame (0-7) ]
     [/table]
+    
+    [heading: "Frame Reference"]
+    [table header]
+    [ Frame | Screen/Context ]
+    [ 0 | Main Menu / Home ]
+    [ 1 | Results Screen ]
+    [ 2 | Song Select ]
+    [ 3 | Jukebox ]
+    [ 4 | Hair Color Customization ]
+    [ 5 | Character Name Input ]
+    [ 6 | Achievements Menu ]
+    [ 7 | Chart Editor ]
+    [/table]
+    
+    [heading: "Auto-detection"]
+    <p>The NavigationHint automatically updates based on the last input source:</p>
+    [list]
+    * Keyboard - Shows keyboard key icons
+    * Gamepad - Shows gamepad button icons
+    * Touch - Shows touch screen icons
+    [/list]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Create navigation hint (usually done in state create)
+    this.navigationHint = new NavigationHint(0);
+    
+    // Change frame for different screens
+    this.navigationHint.change(2); // Song select mode
+    
+    // Hide when not needed
+    this.navigationHint.hide();
+    [/codeblock]
     
     [footer: "&copy; Retora 2026"]
 </body>

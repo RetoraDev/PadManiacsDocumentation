@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>AchievementsMenu - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "AchievementsMenu Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Achievements viewing interface for browsing unlocked and locked achievements.</p>
+    
+    [heading: "Description"]
+    <p>AchievementsMenu displays all achievements in the game, allowing players to browse unlocked and locked achievements, view their details, and track completion progress.</p>
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ create | () | Creates achievements menu UI ]
+    [ createMenu | () | Creates achievement carousel menu ]
+    [ updateAchievementsList | () | Refreshes achievement list based on filter ]
+    [ showAchievementDetails | (achievement) | Displays achievement details ]
+    [ update | () | Handles input and updates display ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ carousel | CarouselMenu | Achievement list carousel ]
+    [ detailsText | Text | Achievement details display ]
+    [ toggleText | Text | Filter toggle display (Unlocked/Locked) ]
+    [ showingUnlocked | Boolean | Whether showing unlocked achievements ]
+    [/table]
+    
+    [heading: "Controls"]
+    [table header]
+    [ Control | Action ]
+    [ Up/Down | Navigate achievements ]
+    [ Select | Toggle between Unlocked/Locked ]
+    [ Any Key (with details) | Exit to Main Menu ]
+    [/table]
+    
+    [heading: "Display Features"]
+    [list]
+    * Achievement name with checkmark (✓) or circle (○)
+    * Color-coded entries (green for unlocked, red for locked)
+    * Detailed view with description and unlock date
+    * Experience reward display
+    * Hidden achievement support
+    [/list]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Start achievements menu from extras menu
+    game.state.start("AchievementsMenu");
+    [/codeblock]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

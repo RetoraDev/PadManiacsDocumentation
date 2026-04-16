@@ -24,12 +24,22 @@
     * High score display and tracking
     * Auto-select for single songs
     * Navigation history preservation
+    * Per-song last difficulty memory
     [/list]
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ songs | Array | Available songs array ]
+    [ index | Number | Starting selection index ]
+    [ autoSelect | Boolean | Whether to auto-select single song ]
+    [ type | String | Song type ('local', 'external', 'auto') ]
+    [/table]
     
     [heading: "Methods"]
     [table header]
     [ Method | Parameters | Description ]
-    [ init | (songs, index, autoSelect) | Initializes with song list and selection ]
+    [ init | (songs, index, autoSelect, type) | Initializes with song list and selection ]
     [ create | () | Sets up song selection interface ]
     [ createSongSelectionMenu | () | Creates main song carousel ]
     [ previewSong | (song) | Previews selected song ]
@@ -48,24 +58,21 @@
     [table header]
     [ Property | Type | Description ]
     [ songs | Array | Available songs array ]
+    [ type | String | Song type ('local', 'external', 'auto') ]
     [ startingIndex | Number | Initial selection index ]
     [ autoSelect | Boolean | Whether to auto-select single song ]
     [ selectedSong | Object | Currently selected song ]
     [ selectedDifficulty | Number | Selected difficulty index ]
     [ previewAudio | HTMLAudioElement | Song preview audio ]
     [ bannerImg | HTMLImageElement | Song banner image ]
-    [ cdtitleImg | HTMLImageElement | CD title image ]
-    [ previewCanvas | HTMLCanvasElement | Banner preview canvas ]
-    [ previewCtx | CanvasRenderingContext2D | Canvas context ]
-    [ navigationHint | Phaser.Sprite | Navigation help display ]
-    [ autoplayText | Text | Autoplay status display ]
     [ bannerSprite | Phaser.Sprite | Banner display sprite ]
     [ metadataText | Text | Song information display ]
     [ highScoreText | Text | High score information ]
     [ loadingDots | LoadingDots | Loading indicator ]
     [ songCarousel | CarouselMenu | Song selection menu ]
     [ difficultyCarousel | CarouselMenu | Difficulty selection menu ]
-    [ visibilityChangeListener | Function | Visibility change handler ]
+    [ navigationHint | NavigationHint | Navigation help display ]
+    [ autoplayText | Text | Autoplay status display ]
     [/table]
     
     [heading: "Song Information Display"]
@@ -97,14 +104,31 @@
     [ Select | Toggle autoplay | Any time ]
     [/table]
     
-    [heading: "Auto-Select Behavior"]
-    <p>When autoSelect is true (single song loading):</p>
+    [heading: "Character Integration"]
+    <p>SongSelect works with the character system:</p>
     [list]
-    * Automatically selects the only available song
-    * Skips directly to difficulty selection
-    * Hides song carousel
-    * Streamlines navigation flow
+    * Character stats affect nothing in song selection (pure UI)
+    * Character portrait may be displayed in future versions
+    * Character selection is managed in CharacterSelect state
     [/list]
+    
+    [heading: "Example Usage (Modding)"]
+    [codeblock javascript]
+    // Add custom filter to song list
+    game.onMenuIn.add(function(menuName, menu) {
+      if (menuName === 'songList') {
+        // Modify song display
+        menu.items.forEach(item => {
+          if (item.data.song.genre === "Rock") {
+            item.data.bgcolor = "#ff6600";
+          }
+        });
+      }
+    });
+    
+    // Start song selection directly
+    game.state.start("SongSelect", true, false, localSongs, 0, false, "local");
+    [/codeblock]
     
     [footer: "&copy; Retora 2026"]
 </body>

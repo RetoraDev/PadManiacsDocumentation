@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>CharacterSkillSystem - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "CharacterSkillSystem Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Manages skill activation, effects, and cooldowns during gameplay.</p>
+    
+    [heading: "Description"]
+    <p>CharacterSkillSystem handles the activation and management of character skills during gameplay. It tracks active skill effects, cooldowns, and provides hooks for skill-based gameplay modifications.</p>
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ scene | Play | Reference to the gameplay scene ]
+    [ character | Character | Character whose skills to use ]
+    [/table]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ checkSkillActivation | (condition, params) | Checks if any skill should activate based on condition ]
+    [ canActivateSkill | (skill, params) | Returns whether a skill can be activated ]
+    [ activateSkill | (skill, params) | Activates a skill and applies its effect ]
+    [ applySkillEffect | (skill) | Applies the skill's effect to gameplay ]
+    [ deactivateSkill | (skillId) | Deactivates a duration-based skill ]
+    [ startHealthRegen | (params) | Starts health regeneration over time ]
+    [ stopHealthRegen | () | Stops active health regeneration ]
+    [ resetGame | () | Resets all skill states for a new game ]
+    [ getSkillsUsed | () | Returns number of skills used this game ]
+    [/table]
+    
+    [heading: "Skill Effect Getters"]
+    [table header]
+    [ Method | Returns | Description ]
+    [ getJudgementConversion | Object/null | Converts one judgment type to another ]
+    [ getJudgementWindowMultiplier | Number | Multiplier for judgment windows ]
+    [ getMaxHealthBonus | Number | Bonus to maximum health ]
+    [ getNoteSpeedMultiplier | Number | Multiplier for note scroll speed ]
+    [ getHoldForgivenessMultiplier | Number | Multiplier for hold forgiveness window ]
+    [ getRollForgivenessMultiplier | Number | Multiplier for roll forgiveness window ]
+    [ getMineDamageMultiplier | Number | Multiplier for mine damage taken ]
+    [ getScoreMultiplier | (judgement) | Score multiplier for specific judgment ]
+    [ getHealthGainMultiplier | Number | Multiplier for health gained from hits ]
+    [ getInputLagReduction | Number | Reduction to input lag ]
+    [/table]
+    
+    [heading: "Activation Conditions"]
+    [table header]
+    [ Condition | Description | Params Used ]
+    [ on_miss | When player gets a Miss judgment | judgement ]
+    [ on_combo | When combo reaches a threshold | combo, threshold ]
+    [ on_low_health | When health drops below threshold | health, threshold ]
+    [ on_high_combo | When combo reaches high threshold | combo, threshold ]
+    [ on_perfect_streak | After consecutive perfect/marvelous hits | perfectStreak, threshold ]
+    [ on_mine_hit | Before hitting a mine | - ]
+    [ on_critical_health | When health is critically low | health, threshold ]
+    [/table]
+    
+    [heading: "Skill Effects"]
+    [table header]
+    [ Effect | Description | Parameters ]
+    [ convert_judgement | Converts one judgment to another | from, to ]
+    [ modify_judgement_window | Changes judgment timing windows | multiplier ]
+    [ health_regen | Regenerates health over time | amount, interval ]
+    [ modify_max_health | Temporarily increases max health | amount ]
+    [ modify_note_speed | Changes note scroll speed | multiplier ]
+    [ modify_hold_forgiveness | Changes hold release forgiveness | multiplier ]
+    [ modify_roll_forgiveness | Changes roll tap forgiveness | multiplier ]
+    [ reduce_mine_damage | Reduces damage from mines | multiplier ]
+    [ modify_score_gain | Multiplies score for judgments | multiplier, judgement ]
+    [ modify_health_gain | Multiplies health gained | multiplier ]
+    [ combo_shield | Prevents combo break on next miss | - ]
+    [ modify_input_lag | Reduces input lag | reduction ]
+    [ burst_health_regen | Instant health regeneration | amount ]
+    [ stabilize_judgement | Reduces timing variation | - ]
+    [ general_boost | Multiple boosts combined | windowMultiplier, healthMultiplier ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Skill system is automatically initialized in Play state
+    // To check skill activation in custom code:
+    
+    // Trigger skill check on combo milestone
+    if (combo === 50) {
+      skillSystem.checkSkillActivation('on_combo', { combo: 50 });
+    }
+    
+    // Check if a skill effect is active
+    const scoreMultiplier = skillSystem.getScoreMultiplier('marvelous');
+    
+    // Get skills used this game
+    const skillsUsed = skillSystem.getSkillsUsed();
+    [/codeblock]
+    
+    [heading: "Available Skills"]
+    <p>See CHARACTER_SKILLS constant for complete list including:</p>
+    [list]
+    * safety_net - Converts Miss to Boo
+    * focus_boost - Increases accuracy window by 20%
+    * health_regen - Regenerates health over time
+    * max_health_boost - Increases maximum health
+    * time_dilation - Slows note speed
+    * rhythm_echo - Extends hold forgiveness
+    * combo_shield - Prevents combo break
+    * precision_focus - Stabilizes judgment windows
+    * recovery_boost - Increases health gain
+    * mine_evasion - Reduces mine damage
+    * ... and many more
+    [/list]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

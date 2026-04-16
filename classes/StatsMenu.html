@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>StatsMenu - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "StatsMenu Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Player statistics display showing gameplay and progression metrics.</p>
+    
+    [heading: "Description"]
+    <p>StatsMenu displays comprehensive player statistics including games played, total score, play time, combo records, and progression metrics. Statistics update in real-time.</p>
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ create | () | Creates stats menu UI ]
+    [ formatTime | (seconds) | Formats seconds into readable time string ]
+    [ formatSessionTime | (seconds) | Formats session duration ]
+    [ updateStatsText | () | Updates all statistics displays ]
+    [ update | () | Handles input and real-time updates ]
+    [ shutdown | () | Cleans up update timer ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ titleText | Text | Section title ]
+    [ leftColumn | Text | Left column statistics ]
+    [ rightColumn | Text | Right column statistics ]
+    [ instructionText | Text | Exit instruction ]
+    [ updateTimer | Number | Timer for real-time updates ]
+    [/table]
+    
+    [heading: "Displayed Statistics"]
+    [table header]
+    [ Category | Statistics ]
+    [ General | Games Played, Total Score, Max Combo, Perfect Games ]
+    [ Character | Characters Created, Max Level, Skills Unlocked ]
+    [ Time | Total Time, Play Sessions, Avg Session, Longest Session ]
+    [ Streak | Current Streak, Longest Streak ]
+    [ High Scores | High Scores Set ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Start stats menu from extras menu
+    game.state.start("StatsMenu");
+    
+    // Press any key to exit back to main menu
+    [/codeblock]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

@@ -12,10 +12,10 @@
     
     <a href="../">← Back to index</a>
     
-    <p>The main gameplay state where rhythm gameplay occurs.</p>
+    <p>The main gameplay state where rhythm gameplay occurs, featuring character skills and visual effects.</p>
     
     [heading: "Description"]
-    <p>Play is the core gameplay state where players interact with falling notes, score points, and complete songs. It handles all gameplay mechanics, scoring, and visual feedback.</p>
+    <p>Play is the core gameplay state where players interact with falling notes, score points, and complete songs. It handles all gameplay mechanics, scoring, visual feedback, and integrates with the character skill system.</p>
     
     [heading: "Key Responsibilities"]
     [list]
@@ -25,17 +25,59 @@
     * Manage backgrounds and visual effects
     * Handle pausing and game state
     * Track scoring and accuracy
+    * Manage character skill system
+    * Show character close-ups on skill activation
+    * Display full combo and flawless animations
+    * Handle background videos and images
+    * Manage lyrics synchronization
     [/list]
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ song | Object | Song data with chart ]
+    [ difficultyIndex | Number | Selected difficulty index ]
+    [ playtestMode | Boolean | Whether in editor playtest mode ]
+    [ autoplay | Boolean | Whether autoplay is enabled ]
+    [/table]
     
     [heading: "Methods"]
     [table header]
     [ Method | Parameters | Description ]
-    [ init | (song, difficultyIndex) | Initializes with song and difficulty ]
-    [ create | () | Sets up gameplay elements ]
-    [ createHud | () | Creates heads-up display ]
+    [ init | (song, difficultyIndex, playtestMode, autoplay) | Initializes gameplay with song and settings ]
+    [ create | () | Sets up gameplay elements and systems ]
+    [ initialSetup | () | Preloads backgrounds and sets up audio ]
+    [ setupAudio | () | Creates audio element and waits for load ]
+    [ createHud | () | Creates heads-up display elements ]
+    [ createVisualizer | () | Creates selected visualizer (BPM, Accuracy, Audio, or None) ]
+    [ setupPlayer | () | Initializes player and chart renderer ]
     [ setupLyrics | () | Initializes lyrics system if available ]
-    [ songStart | () | Starts song playback ]
+    [ getDifficultyColor | (value) | Returns color for difficulty rating ]
+    [ setInitialBackground | () | Sets the starting background ]
+    [ songStart | () | Starts song playback with offset delay ]
+    [ showCharacterCloseShot | (duration) | Shows character close-up on skill activation ]
+    [ showGlitchAnimation | (duration) | Shows glitch effect for time dilation skills ]
+    [ showFullCombo | () | Shows full combo/flawless animation ]
+    [ drawBackground | (element) | Draws background from image/video element ]
+    [ drawFallbackBackground | () | Uses default song background as fallback ]
+    [ clearBackground | () | Clears background to black ]
+    [ updateBackgroundTexture | () | Updates background sprite texture ]
+    [ loadBackgroundImage | (filename, url) | Loads and displays background image ]
+    [ loadBackgroundVideo | (filename, url) | Loads and plays background video ]
+    [ playVideo | (video) | Starts video playback ]
+    [ applyBackground | (bg) | Applies background change at beat ]
+    [ applyBgEffects | (bg) | Applies fade in/out and opacity effects ]
+    [ songEnd | () | Ends gameplay and transitions to results ]
+    [ updateUserStats | (gameResults) | Updates account statistics ]
     [ togglePause | () | Toggles pause state ]
+    [ pause | () | Pauses gameplay ]
+    [ resume | () | Resumes gameplay ]
+    [ showPauseMenu | () | Displays pause menu ]
+    [ hidePauseMenu | () | Hides pause menu ]
+    [ getCurrentTime | () | Returns current time and beat (accounting for pause) ]
+    [ secToBeat | (sec) | Converts seconds to beat position ]
+    [ updateBackgrounds | () | Processes background change queue ]
+    [ updateVideo | () | Updates video frame at configured FPS ]
     [ update | () | Main update loop ]
     [ render | () | Rendering operations ]
     [ shutdown | () | Cleanup when leaving state ]
@@ -47,26 +89,70 @@
     [ song | Object | Current song data ]
     [ difficultyIndex | Number | Selected difficulty index ]
     [ player | Player | Player instance handling gameplay logic ]
+    [ characterManager | CharacterManager | Character management instance ]
+    [ currentCharacter | Character | Currently selected character ]
+    [ skillSystem | CharacterSkillSystem | Skill system instance ]
     [ audio | HTMLAudioElement | Song audio element ]
     [ backgroundLayer | Phaser.Group | Background display group ]
     [ hud | Phaser.Sprite | Heads-up display container ]
     [ isPaused | Boolean | Whether game is paused ]
     [ autoplay | Boolean | Whether autoplay is enabled ]
+    [ playtestMode | Boolean | Whether in editor playtest mode ]
     [ lyrics | Lyrics | Lyrics system instance ]
     [ visualizer | Visualizer | Current visualizer instance ]
     [ metronome | Metronome | Metronome system instance ]
+    [ visualizerType | String | Current visualizer type ('NONE', 'BPM', 'ACCURACY', 'AUDIO') ]
+    [ backgroundQueue | Array | Queue of pending background changes ]
+    [ currentBackground | Object | Currently active background ]
+    [ video | HTMLVideoElement | Current background video element ]
+    [ JUDGE_WINDOWS | Object | Timing windows for judgments (in milliseconds) ]
+    [ SCORE_VALUES | Object | Score values for each judgment ]
     [/table]
     
     [heading: "Judgment Windows"]
     [table header]
-    [ Judgment | Window (seconds) | Score Value ]
-    [ Marvelous | 0.15 | 1000 ]
-    [ Perfect | 0.20 | 800 ]
-    [ Great | 0.25 | 500 ]
-    [ Good | 0.30 | 200 ]
-    [ Boo | 0.40 | 50 ]
-    [ Miss | - | 0 ]
+    [ Judgment | Window (ms) | Score Value ]
+    [ Marvelous | 55 | 1000 ]
+    [ Perfect | 75 | 800 ]
+    [ Great | 99 | 500 ]
+    [ Good | 140 | 200 ]
+    [ Boo | 180 | 50 ]
+    [ Miss | >180 | 0 ]
     [/table]
+    
+    [heading: "Character Skill Integration"]
+    <p>Play state integrates with the character skill system:</p>
+    [list]
+    * SkillSystem instance manages skill activation and effects
+    * Character close-up shown when skills activate
+    * Glitch animation for time dilation skills
+    * Skill bar displays remaining skill charges
+    * Skills affect judgment windows, note speed, scoring, etc.
+    [/list]
+    
+    [heading: "Background System"]
+    <p>Supports both image and video backgrounds with:</p>
+    [list]
+    * Preloading of background assets
+    * Beat-synchronized background changes
+    * Fade in/out effects
+    * Configurable video frame rate (60/30/15 FPS)
+    * Fallback to default song background
+    [/list]
+    
+    [heading: "Example Usage (Modding)"]
+    [codeblock javascript]
+    // Access play state from within gameplay
+    const playState = game.state.states.Play;
+    const player = playState.player;
+    const skillSystem = playState.skillSystem;
+    
+    // Check active skills
+    const hasFocusBoost = skillSystem.getJudgementWindowMultiplier() > 1;
+    
+    // Get current background
+    console.log(playState.currentBackground);
+    [/codeblock]
     
     [footer: "&copy; Retora 2026"]
 </body>

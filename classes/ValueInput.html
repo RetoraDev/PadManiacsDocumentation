@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>ValueInput - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "ValueInput Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Numeric value input dialog for editing numerical settings like BPM, offset, and stop duration.</p>
+    
+    [heading: "Description"]
+    <p>ValueInput provides a modal dialog for numeric input using gamepad controls. Supports adjustable step sizes, min/max limits, and cooldown-based input handling.</p>
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ value | Number | Initial value ]
+    [ min | Number | Minimum allowed value ]
+    [ max | Number | Maximum allowed value ]
+    [ step | Number | Increment/decrement step size ]
+    [ onConfirm | Function | Callback when value is confirmed ]
+    [ onCancel | Function | Callback when cancelled ]
+    [/table]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ confirm | () | Confirms current value and calls callback ]
+    [ cancel | () | Cancels input and calls callback ]
+    [ update | () | Handles input and updates display ]
+    [ destroy | () | Destroys dialog and cleans up ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ window | Window | Internal window instance ]
+    [ textLayer | Text | Value display text ]
+    [ cursor | Graphics | Blinking cursor graphic ]
+    [ value | Number | Current value ]
+    [ min | Number | Minimum value ]
+    [ max | Number | Maximum value ]
+    [ step | Number | Step size ]
+    [ lastInputTime | Number | Last input timestamp for cooldown ]
+    [ inputCooldown | Number | Cooldown between inputs (120ms) ]
+    [/table]
+    
+    [heading: "Controls"]
+    [table header]
+    [ Control | Action | Speed ]
+    [ Up | Increase value | +step per press ]
+    [ Down | Decrease value | -step per press ]
+    [ Left | Fast decrease | -step × 5 per press ]
+    [ Right | Fast increase | +step × 5 per press ]
+    [ A / Start | Confirm value | - ]
+    [ B / Select | Cancel | - ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Edit BPM value
+    new ValueInput(
+      120,      // Current BPM
+      0,        // Min BPM
+      1000,     // Max BPM
+      1,        // Step size
+      (newBpm) => {
+        song.bpmChanges[0].bpm = newBpm;
+        console.log(`BPM set to ${newBpm}`);
+      },
+      () => {
+        console.log("Cancelled");
+      }
+    );
+    
+    // Edit offset with smaller step
+    new ValueInput(
+      0,        // Current offset
+      -32,      // Min offset
+      32,       // Max offset
+      0.001,    // Step (1ms)
+      (offset) => {
+        song.offset = offset;
+      },
+      () => {}
+    );
+    [/codeblock]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

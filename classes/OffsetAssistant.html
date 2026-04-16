@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
     <title>OffsetAssistant - PadManiaX Modding API Documentation</title>
 </head>
 <body class="doki-hidden">
@@ -14,7 +14,7 @@
     <p>Calibration tool for adjusting audio-video synchronization offset.</p>
     
     [heading: "Description"]
-    <p>OffsetAssistant helps players calibrate their audio-video synchronization by tapping to a metronome beat. It calculates the optimal offset value based on tap timing consistency and saves it to account settings.</p>
+    <p>OffsetAssistant helps players calibrate their audio-video synchronization by tapping to a metronome beat. It calculates the optimal offset value based on tap timing consistency, rounds to the nearest 25ms, and saves it to account settings.</p>
     
     [heading: "Key Features"]
     [list]
@@ -23,13 +23,19 @@
     * Confidence-based offset calculation
     * Real-time feedback display
     * Automatic background music handling
+    * Offset averaging over multiple calculations
+    * Rounds to nearest 25ms
     [/list]
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ game | Phaser.Game | Game instance ]
+    [/table]
     
     [heading: "Methods"]
     [table header]
     [ Method | Parameters | Description ]
-    [ constructor | (game) | Creates offset assistant ]
-    [ update | () | Handles input and metronome updates ]
     [ pauseBackgroundMusic | () | Temporarily pauses background music ]
     [ resumeBackgroundMusic | () | Restores background music ]
     [ startTickSound | () | Starts metronome tick sounds ]
@@ -37,20 +43,22 @@
     [ onTap | () | Processes user tap input ]
     [ calculateOffset | () | Calculates optimal offset from taps ]
     [ calculateConfidence | (offsets) | Calculates timing consistency ]
+    [ roundToNearestMultipleOf25 | (num) | Rounds number to nearest 25 ]
     [ showTapFeedback | () | Provides visual feedback for taps ]
     [ exit | () | Saves offset and returns to settings ]
+    [ destroy | () | Cleans up resources ]
     [/table]
     
     [heading: "Properties"]
     [table header]
     [ Property | Type | Description ]
     [ taps | Array | Array of tap timestamps ]
-    [ confidenceThreshold | Number | Minimum confidence for reliable offset ]
-    [ maxTaps | Number | Maximum taps to store ]
-    [ requiredTaps | Number | Minimum taps for calculation ]
-    [ tickBPM | Number | Metronome beats per minute ]
-    [ tickInterval | Number | Milliseconds between ticks ]
-    [ calculatedOffsets | Array | Store calculated offset values ]
+    [ confidenceThreshold | Number | Minimum confidence for reliable offset (0.8) ]
+    [ maxTaps | Number | Maximum taps to store (16) ]
+    [ requiredTaps | Number | Minimum taps for calculation (8) ]
+    [ tickBPM | Number | Metronome beats per minute (120) ]
+    [ tickInterval | Number | Milliseconds between ticks (500ms) ]
+    [ calculatedOffsets | Array | Store calculated offset values for averaging ]
     [ background | Phaser.Graphics | Background overlay ]
     [ instructionText | Text | User instructions ]
     [ offsetText | Text | Current offset display ]
@@ -58,22 +66,34 @@
     [ exitText | Text | Exit instructions ]
     [/table]
     
-    [heading: "Calibration Process"]
-    [list]
-    * Player taps A button to metronome ticks
-    * System analyzes tap timing consistency
-    * Calculates average offset from ideal timing
-    * Provides confidence indicator
-    * Saves offset when sufficient data collected
-    [/list]
-    
     [heading: "Confidence Indicators"]
     [table header]
     [ Color | Confidence Level | Description ]
-    [ White | Low | Insufficient data ]
-    [ Yellow | Medium | Some consistency ]
-    [ Green | High | Reliable measurement ]
+    [ White | Low (<4 taps) | Insufficient data ]
+    [ Yellow | Medium (4-7 taps) | Some consistency ]
+    [ Green | High (≥8 taps) | Reliable measurement ]
     [/table]
+    
+    [heading: "Offset Calculation"]
+    <p>The assistant calculates offset by:</p>
+    [list]
+    * Recording tap times relative to metronome ticks
+    * Calculating individual offset for each tap
+    * Averaging offsets from all taps
+    * Rounding to nearest 25ms
+    * Averaging across multiple calculations
+    * Final offset saved to Account.settings.userOffset
+    [/list]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Start offset assistant from settings
+    const offsetAssistant = new OffsetAssistant(game);
+    game.add.existing(offsetAssistant);
+    
+    // User taps A button to the beat
+    // Offset is automatically saved when exiting with B button
+    [/codeblock]
     
     [footer: "&copy; Retora 2026"]
 </body>

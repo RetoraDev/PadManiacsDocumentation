@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>FileTools - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "FileTools Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Static utility class for file operations including Base64 conversion and export preparation.</p>
+    
+    [heading: "Description"]
+    <p>FileTools provides helper methods for converting files to Base64, extracting Base64 data from data URLs, preparing songs for export, and handling file names.</p>
+    
+    [heading: "Static Methods"]
+    [table header]
+    [ Method | Parameters | Returns | Description ]
+    [ urlToDataURL | (url) | Promise&lt;string&gt; | Converts URL to data URL ]
+    [ extractBase64 | (dataUrl) | string/null | Extracts Base64 string from data URL ]
+    [ urlToBase64 | (url) | Promise&lt;string&gt; | Converts URL to Base64 string ]
+    [ prepareSongForExport | (song, files) | Promise&lt;object&gt; | Prepares song data for export (removes sprite references) ]
+    [ getFilename | (url) | string | Extracts filename from URL or path ]
+    [ getFileData | (filename, files) | Promise&lt;string/null&gt; | Gets file data from files map as Base64 ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Convert image URL to Base64
+    const base64 = await FileTools.urlToBase64("assets/banner.png");
+    
+    // Extract Base64 from data URL
+    const dataUrl = "data:image/png;base64,iVBORw0KG...";
+    const base64Data = FileTools.extractBase64(dataUrl);
+    
+    // Get filename from URL
+    const filename = FileTools.getFilename("assets/songs/MySong/song.sm");
+    // Returns: "song.sm"
+    
+    // Prepare song for export
+    const exportData = await FileTools.prepareSongForExport(song, fileMap);
+    
+    // Get file data from files map
+    const fileData = await FileTools.getFileData("song.sm", fileMap);
+    [/codeblock]
+    
+    [heading: "Data URL Format"]
+    <p>FileTools expects data URLs in the format:</p>
+    [codeblock]
+    data:[<mediatype>][;base64],<data>
+    [/codeblock]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

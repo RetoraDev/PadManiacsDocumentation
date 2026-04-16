@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>FullScreenAudioVisualizer - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "FullScreenAudioVisualizer Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Advanced audio visualization system for full-screen display in Jukebox mode.</p>
+    
+    [heading: "Description"]
+    <p>FullScreenAudioVisualizer provides real-time audio frequency visualization with multiple visualization styles, smoothing, and customizable colors. It uses the Web Audio API for frequency analysis.</p>
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ audioElement | HTMLAudioElement | Audio source for visualization ]
+    [ options | Object | Configuration options ]
+    [/table]
+    
+    [heading: "Options"]
+    [table header]
+    [ Option | Type | Default | Description ]
+    [ barColor | Number | 0x76fcde | Color of visualization elements ]
+    [ barWidth | Number | 4 | Width of bars in pixels ]
+    [ barSpacing | Number | 2 | Space between bars ]
+    [ barBaseHeight | Number | 10 | Minimum bar height ]
+    [ barMaxHeight | Number | 80 | Maximum bar height ]
+    [ smoothing | Number | 0.8 | Data smoothing factor (0-1) ]
+    [ alpha | Number | 1 | Visualizer opacity ]
+    [ fftSize | Number | 256 | FFT size for frequency analysis ]
+    [ visualizationType | String | 'circular' | Type of visualization ]
+    [/table]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ setupAudioAnalysis | () | Initializes Web Audio API components ]
+    [ connectAudioSource | () | Connects audio element to analyser ]
+    [ setAudioSource | (audioElement) | Changes audio source ]
+    [ update | () | Updates visualization display ]
+    [ drawBars | () | Draws standard bar visualization ]
+    [ drawSymmetricalBars | () | Draws mirrored bar visualization ]
+    [ drawWaveform | () | Draws waveform visualization ]
+    [ drawCircularVisualizer | () | Draws circular frequency display ]
+    [ drawBar | (x, y, width, height, intensity) | Draws a single bar with gradient ]
+    [ setVisualizationType | (type) | Changes visualization mode ]
+    [ setBarColor | (color) | Changes bar color ]
+    [ setAlpha | (alpha) | Changes opacity ]
+    [ setOptions | (newOptions) | Updates multiple options at once ]
+    [ pause | () | Pauses visualization updates ]
+    [ resume | () | Resumes visualization updates ]
+    [ destroy | () | Cleans up audio context and resources ]
+    [/table]
+    
+    [heading: "Visualization Types"]
+    [table header]
+    [ Type | Description | Best For ]
+    [ bars | Standard vertical bars | General use ]
+    [ symmetrical | Mirrored from center | Symmetrical displays ]
+    [ waveform | Audio waveform | Detailed audio view ]
+    [ circular | Radial display | Aesthetic displays ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Create visualizer
+    const audioElement = document.querySelector('audio');
+    const visualizer = new FullScreenAudioVisualizer(audioElement, {
+      visualizationType: 'symmetrical',
+      barColor: 0x00FF00,
+      barWidth: 3,
+      smoothing: 0.7
+    });
+    
+    // Update in game loop
+    function update() {
+      visualizer.update();
+    }
+    
+    // Change visualization mode
+    visualizer.setVisualizationType('circular');
+    
+    // Change color based on song intensity
+    visualizer.setBarColor(0xFF6699);
+    
+    // Pause during menu
+    visualizer.pause();
+    
+    // Clean up
+    visualizer.destroy();
+    
+    // Check if browser supports audio analysis
+    if (FullScreenAudioVisualizer.isSupported()) {
+      console.log("Audio visualization available!");
+    }
+    [/codeblock]
+    
+    [heading: "Browser Support"]
+    <p>FullScreenAudioVisualizer requires Web Audio API support. Check compatibility using the static method:</p>
+    [codeblock javascript]
+    if (FullScreenAudioVisualizer.isSupported()) {
+      // Safe to use
+    }
+    [/codeblock]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

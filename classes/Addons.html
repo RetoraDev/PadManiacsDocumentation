@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Addons - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "Addons Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Addon management user interface.</p>
+    
+    [heading: "Description"]
+    <p>Addons provides a UI for managing community-created addons, including enabling, disabling, hibernating, uninstalling, and viewing addon details.</p>
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ create | () | Creates addon manager UI ]
+    [ showAddonManager | () | Shows main addon management interface ]
+    [ showNoAddonsDialog | () | Shows dialog when no addons installed ]
+    [ previewAddon | (addon) | Previews addon icon and details ]
+    [ showAddonDetails | (addon) | Shows detailed view for an addon ]
+    [ confirmDialog | (message, onConfirm, onCancel, confirmText, cancelText) | Shows confirmation dialog ]
+    [ showMainMenu | () | Returns to main menu ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ previewCanvas | HTMLCanvasElement | Canvas for addon icon preview ]
+    [ previewCtx | CanvasRenderingContext2D | Canvas context for preview ]
+    [ previewImg | HTMLImageElement | Image for addon icon ]
+    [/table]
+    
+    [heading: "Addon States"]
+    [table header]
+    [ State | Color | Description ]
+    [ Enabled | Green (#00cc00) | Addon is active and loaded ]
+    [ Disabled | Brown | Addon is inactive but installed ]
+    [ Hibernating | Gray | Addon is completely unloaded ]
+    [/table]
+    
+    [heading: "Addon Actions"]
+    [table header]
+    [ Action | Description ]
+    [ Enable | Activates the addon (requires reload) ]
+    [ Disable | Deactivates the addon (requires reload) ]
+    [ Hibernate | Completely unloads the addon (requires reload) ]
+    [ Wake | Reactivates a hibernating addon (requires reload) ]
+    [ Uninstall | Removes the addon folder (requires reload) ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Start addon manager from extras menu
+    game.state.start("Addons");
+    
+    // Addon manager automatically reloads game when changes are applied
+    [/codeblock]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

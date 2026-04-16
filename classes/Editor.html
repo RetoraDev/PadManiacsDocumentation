@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Editor - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "Editor Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Full-featured chart editing mode for creating and modifying StepMania charts.</p>
+    
+    [heading: "Description"]
+    <p>The Editor state provides a complete interface for creating and editing stepcharts. It supports note placement, BPM changes, stops, background changes, and export to StepMania format.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Visual note editing with snap-to-grid
+    * Multiple difficulty support
+    * BPM change editing
+    * Stop (pause) editing
+    * Background change editing
+    * Audio preview
+    * Copy/paste notes
+    * Area selection
+    * Freeze/roll note support
+    * Mine placement
+    * Export to .sm/.zip format
+    * Import existing songs
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ init | (song) | Initializes editor with optional existing song ]
+    [ create | () | Creates editor UI and systems ]
+    [ createNewSong | () | Creates a new empty song ]
+    [ showHomeScreen | () | Shows the main editor menu ]
+    [ showFileMenu | () | Shows file operations menu ]
+    [ showEditMenu | () | Shows edit operations menu ]
+    [ showExportMenu | () | Shows export options menu ]
+    [ showChartsMenu | () | Shows difficulty management menu ]
+    [ editChart | (difficultyIndex) | Opens chart for editing ]
+    [ playtest | () | Starts playtest mode for current chart ]
+    [ placeNote | (column, beat, replace, mine, quick) | Places a note at position ]
+    [ placeFreeze | (column, startBeat, duration, type, quick) | Places a freeze/roll note ]
+    [ placeMine | (column, beat, replace, quick) | Places a mine note ]
+    [ deleteSelectedNotes | () | Deletes all selected notes ]
+    [ copyNotes | (notes) | Copies notes to clipboard ]
+    [ pasteNotes | () | Pastes notes from clipboard ]
+    [ mirrorNotes | () | Mirrors selected notes horizontally ]
+    [ alignToBeatDivision | () | Aligns selected notes to current snap division ]
+    [ addBPMChange | () | Adds BPM change at cursor position ]
+    [ addStop | () | Adds stop at cursor position ]
+    [ addBGChange | () | Adds background change at cursor position ]
+    [ exportSong | () | Exports song as ZIP file ]
+    [ importSong | () | Imports song from filesystem ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ song | Object | Current song being edited ]
+    [ currentScreen | String | Current editor screen ('metadata', 'chartEdit') ]
+    [ currentDifficultyIndex | Number | Index of difficulty being edited ]
+    [ snapDivision | Number | Current snap division (1,2,4,8,16,32,64,96,128,192) ]
+    [ cursorBeat | Number | Current cursor beat position ]
+    [ cursorColumn | Number | Current cursor column (0-3) ]
+    [ selectedNotes | Array | Currently selected notes ]
+    [ clipboard | Array | Copied notes for pasting ]
+    [ isPlaying | Boolean | Whether playback is active ]
+    [ menuVisible | Boolean | Whether context menu is visible ]
+    [ files | Object | Loaded file data (audio, background, banner, lyrics, extra) ]
+    [/table]
+    
+    [heading: "Snap Divisions"]
+    [table header]
+    [ Division | Notes Per Beat | Use Case ]
+    [ 1 | 1 | Quarter notes ]
+    [ 2 | 2 | Eighth notes ]
+    [ 4 | 4 | Sixteenth notes ]
+    [ 8 | 8 | Thirty-second notes ]
+    [ 12 | 12 | Eighth note triplets ]
+    [ 16 | 16 | Sixty-fourth notes ]
+    [ 24 | 24 | Sixteenth note triplets ]
+    [ 32 | 32 | 128th notes ]
+    [ 48 | 48 | 32nd note triplets ]
+    [ 64 | 64 | 256th notes ]
+    [ 96 | 96 | 64th note triplets ]
+    [ 192 | 192 | Maximum resolution ]
+    [/table]
+    
+    [heading: "Note Types"]
+    [table header]
+    [ Type | Character | Description ]
+    [ 1 | Tap | Regular tap note ]
+    [ 2 | Hold | Hold note (press and hold) ]
+    [ 3 | Hold End | End of hold note (auto-generated) ]
+    [ 4 | Roll | Roll note (rapid taps) ]
+    [ M | Mine | Mine note (avoid) ]
+    [/table]
+    
+    [heading: "Editor Controls"]
+    [table header]
+    [ Action | Control ]
+    [ Move Cursor | Left/Right arrows ]
+    [ Move Cursor (vertical) | Up/Down arrows ]
+    [ Place Note | B button (tap) ]
+    [ Place Freeze | B button (hold) ]
+    [ Place Mine | Context menu ]
+    [ Toggle Selection | A button (tap) ]
+    [ Area Select | Hold A + move cursor ]
+    [ Change Snap Division | Hold A + Left/Right ]
+    [ Play/Pause | Select button ]
+    [ Context Menu | Start button ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Start editor (from main menu)
+    game.state.start("Editor");
+    
+    // Editor song data structure
+    const songData = {
+      chart: {
+        title: "My Song",
+        artist: "Me",
+        audioUrl: "path/to/audio.mp3",
+        bpmChanges: [{ beat: 0, bpm: 120 }],
+        stops: [],
+        backgrounds: [],
+        difficulties: [
+          { type: "Medium", rating: "5" }
+        ],
+        notes: {
+          "Medium5": [
+            { type: "1", beat: 0, column: 0 },
+            { type: "1", beat: 1, column: 1 }
+          ]
+        }
+      }
+    };
+    
+    // Export song programmatically
+    const editor = game.state.states.Editor;
+    editor.song = songData;
+    editor.exportSong();
+    [/codeblock]
+    
+    [heading: "Export Format"]
+    <p>The editor exports songs as ZIP files containing:</p>
+    [list]
+    * .sm file with chart data
+    * Audio file (MP3/OGG)
+    * Background image (optional)
+    * Banner image (optional)
+    * Lyrics file (optional)
+    * Additional background images for BG changes
+    [/list]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

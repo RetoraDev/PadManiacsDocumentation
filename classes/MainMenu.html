@@ -12,10 +12,10 @@
     
     <a href="../">← Back to index</a>
     
-    <p>The main menu state with navigation to all game features.</p>
+    <p>The main menu state with navigation to all game features including character system, editor, and jukebox.</p>
     
     [heading: "Description"]
-    <p>MainMenu provides access to all major game features including song selection, settings, addon management, and extras. It features a carousel-based navigation system.</p>
+    <p>MainMenu provides access to all major game features including song selection, character management, chart editor, jukebox, settings, addon management, achievements, and extras.</p>
     
     [heading: "Key Responsibilities"]
     [list]
@@ -24,39 +24,64 @@
     * Handle addon management
     * Play background music
     * Manage UI windows and menus
+    * Show feedback dialogs (rating, feature requests, community)
+    * Handle crash recovery prompts
     [/list]
     
     [heading: "Methods"]
     [table header]
     [ Method | Parameters | Description ]
-    [ create | () | Initializes main menu elements ]
+    [ create | () | Initializes main menu elements and checks dialogs ]
+    [ checkInitialDialogs | () | Shows crash report, rating, feature request, or community dialogs ]
+    [ showBugReportDialog | () | Prompts user to report a crash ]
+    [ showRatingDialog | () | Asks user to rate the game ]
+    [ showFeatureRequestDialog | () | Asks for feature suggestions ]
+    [ showCommunityDialog | () | Prompts to join community ]
     [ menu | () | Creates the main navigation menu ]
+    [ showHomeMenu | () | Displays home menu with main options ]
+    [ startGame | () | Shows game mode selection (Free Play, Extra Songs) ]
+    [ showExtraSongs | () | Shows external song loading options ]
+    [ showExtras | () | Shows extras menu (Addons, Jukebox, Achievements, Stats, etc.) ]
+    [ showFeedback | () | Shows feedback options (Review, Feature Request, Bug Report) ]
+    [ showCommunity | () | Opens community homepage ]
+    [ showAddonManager | () | Launches addon management interface ]
+    [ showSettings | () | Launches settings menu ]
     [ freePlay | () | Starts free play song selection ]
     [ startOffsetAssistant | () | Launches offset calibration tool ]
     [ loadExternalSongs | () | Loads user-added songs ]
     [ loadSingleSong | () | Loads single song from folder ]
-    [ addonManager | () | Opens addon management interface ]
+    [ startJukebox | () | Launches jukebox music player ]
+    [ openEditor | () | Opens chart editor ]
+    [ showAchievements | () | Shows achievements menu ]
+    [ showStats | () | Shows player statistics ]
+    [ showCredits | () | Shows credits screen ]
+    [ confirmDialog | (message, onConfirm, onCancel, confirmText, cancelText) | Shows confirmation dialog ]
+    [ confirmExit | () | Confirms game exit ]
     [ update | () | Handles input and UI updates ]
     [ shutdown | () | Cleans up resources when leaving state ]
     [/table]
     
-    [heading: "Properties"]
+    [heading: "Feedback Dialogs"]
+    <p>MainMenu automatically shows feedback dialogs based on playtime:</p>
     [table header]
-    [ Property | Type | Description ]
-    [ manager | WindowManager | Manages UI windows ]
-    [ previewCanvas | HTMLCanvasElement | Canvas for addon previews ]
-    [ previewCtx | CanvasRenderingContext2D | Context for preview canvas ]
-    [ previewImg | HTMLImageElement | Image for addon icons ]
+    [ Dialog | Trigger | Purpose ]
+    [ Bug Report | After crash | Collect crash information ]
+    [ Rating | 15 minutes playtime | Ask for game rating ]
+    [ Feature Request | 30 minutes playtime | Collect feature suggestions ]
+    [ Community | 1 hour playtime | Promote community joining ]
     [/table]
     
-    [heading: "Menu Structure"]
-    [table header]
-    [ Menu | Options ]
-    [ Home | Rhythm Game, Settings, Extras, Exit ]
-    [ Rhythm Game | Free Play, Extra Songs ]
-    [ Settings | Volume, Auto-play, Visualizer, Note Colors, etc. ]
-    [ Extras | Addon Manager, Offset Assistant ]
-    [/table]
+    [heading: "Example Usage (Modding)"]
+    [codeblock javascript]
+    // Add custom menu item to home menu
+    game.onMenuIn.add(function(menuName, menu) {
+      if (menuName === 'home') {
+        menu.addItem("My Custom Feature", () => {
+          notifications.show("Custom feature activated!");
+        });
+      }
+    });
+    [/codeblock]
     
     [footer: "&copy; Retora 2026"]
 </body>

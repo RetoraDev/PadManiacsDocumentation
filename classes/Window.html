@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
     <title>Window - PadManiaX Modding API Documentation</title>
 </head>
 <body class="doki-hidden">
@@ -11,44 +11,69 @@
     [title: "Window Class"]
     <a href="../">← Back to index</a>
     
-    <p>A customizable UI window with menu items, settings, and navigation support.</p>
+    <p>A customizable UI window with menu items, settings, toggle switches, and scrollbar support.</p>
     
     [heading: "Description"]
-    <p>Window provides a flexible UI container with built-in navigation, item selection, and various content types. It supports regular menu items, setting controls, toggle switches, and custom content.</p>
+    <p>Window provides a flexible UI container with built-in navigation, item selection, scrollbar for long lists, and various content types. It supports regular menu items, setting controls, and toggle switches.</p>
     
     [heading: "Key Features"]
     [list]
     * Configurable window frame and skin
-    * Scrollable item lists
-    * Multiple item types (menu, setting, toggle)
+    * Scrollable item lists with auto-hiding scrollbar
+    * Multiple item types (menu, setting)
     * Built-in navigation and selection
     * Customizable fonts and colors
     * Signal-based event handling
+    * Multi-language support (ES/EN via || and ()|() syntax)
     [/list]
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ x | Number | X position in 8px tiles ]
+    [ y | Number | Y position in 8px tiles ]
+    [ width | Number | Width in 8px tiles ]
+    [ height | Number | Height in 8px tiles ]
+    [ skin | String | Window skin identifier (default: "1") ]
+    [ parent | Phaser.Group | Parent group (optional) ]
+    [/table]
     
     [heading: "Methods"]
     [table header]
     [ Method | Parameters | Description ]
-    [ constructor | (x, y, width, height, skin, parent) | Creates new window ]
     [ createWindowFrame | () | Builds window frame graphics ]
-    [ addItem | (text, leftText, callback, backButton) | Adds menu item ]
-    [ addSettingItem | (text, options, currentIndex, callback) | Adds setting with options ]
+    [ addItem | (text, valueText, callback, backButton) | Adds menu item ]
+    [ addSettingItem | (text, options, currentIndex, callback) | Adds setting with selectable options ]
     [ update | () | Updates window layout and visibility ]
+    [ updateSelector | () | Updates selection arrow position ]
+    [ updateScrollBar | () | Updates scrollbar position and visibility ]
+    [ showScrollBar | () | Shows scrollbar with fade out timer ]
+    [ hideScrollBar | () | Hides scrollbar immediately ]
+    [ adjustScroll | () | Adjusts scroll to keep selection visible ]
     [ navigate | (direction) | Handles navigation input ]
     [ handleLeft | () | Processes left input for settings ]
     [ handleRight | () | Processes right input for settings ]
     [ confirm | () | Activates selected item ]
     [ cancel | () | Handles cancel/back action ]
-    [ clear | () | Removes all items and content ]
+    [ selectIndex | (index) | Selects item at specific index ]
+    [ removeAll | () | Removes all items ]
+    [ clear | () | Removes all items and cleans up resources ]
     [ show | () | Makes window visible ]
     [ hide | () | Hides window ]
+    [ destroy | () | Destroys window and cleans up ]
+    [/table]
+    
+    [heading: "Static Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ processMultilingual | (text) | Processes ES/EN syntax: (ES|EN) or text||text ]
     [/table]
     
     [heading: "Properties"]
     [table header]
     [ Property | Type | Description ]
-    [ size | Object | Window dimensions in tiles ]
-    [ offset | Object | Content offset within window ]
+    [ size | Object | Window dimensions in tiles (width, height) ]
+    [ offset | Object | Content offset within window (x, y) ]
     [ scrollOffset | Number | Scroll position for item list ]
     [ selectedIndex | Number | Currently selected item index ]
     [ focus | Boolean | Whether window has input focus ]
@@ -58,22 +83,31 @@
     [ items | Array | Window content items ]
     [ frameParts | Array | Window frame sprite elements ]
     [ selector | Phaser.Sprite | Selection indicator sprite ]
+    [ scrollBar | Graphics | Scrollbar graphics ]
+    [ disableScrollBar | Boolean | Whether to disable scrollbar ]
     [/table]
     
     [heading: "Item Types"]
     [table header]
-    [ Type | Description ]
-    [ item | Regular menu item with callback ]
-    [ setting | Setting with multiple options ]
-    [ toggle | Boolean toggle with on/off states ]
+    [ Type | Structure | Description ]
+    [ item | {text, valueText, callback, backButton} | Regular menu item ]
+    [ setting | {text, valueText, options, currentIndex, callback} | Setting with multiple options ]
     [/table]
     
     [heading: "Window Skins"]
     [table header]
     [ Skin | Description ]
     [ 1 | Default brown window frame ]
-    [ Other | Additional skins defined in WINDOW_PANELS ]
     [/table]
+    
+    [heading: "Multi-language Syntax"]
+    [codeblock]
+    // Simple split
+    "Hello||Hola" → English: "Hello", Spanish: "Hola"
+    
+    // Parenthetical
+    "(Hello|Hola)" → English: "Hello", Spanish: "Hola"
+    [/codeblock]
     
     [heading: "Signals"]
     [table header]
@@ -82,6 +116,27 @@
     [ onConfirm | (index, item) | Fired when item is confirmed ]
     [ onCancel | (index) | Fired when cancel is pressed ]
     [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    const window = new Window(3, 1, 18, 12, "1");
+    
+    // Add regular item
+    window.addItem("Play Game", ">", () => startGame());
+    
+    // Add setting item
+    window.addSettingItem("Volume", ["0%","25%","50%","75%","100%"], 2, (index, value) => {
+      setVolume(index);
+    });
+    
+    // Add back button
+    window.addItem("Back", "", () => closeWindow(), true);
+    
+    // Handle signals
+    window.onConfirm.add((index, item) => {
+      console.log(`Selected: ${item.text.text}`);
+    });
+    [/codeblock]
     
     [footer: "&copy; Retora 2026"]
 </body>

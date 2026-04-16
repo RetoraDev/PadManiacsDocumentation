@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>CharacterSelect - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "CharacterSelect Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Character selection, creation, and customization state.</p>
+    
+    [heading: "Description"]
+    <p>CharacterSelect provides the complete interface for managing characters including creating new characters, customizing appearance, selecting skills, and deleting characters.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Character list browsing
+    * Character creation with name input
+    * Visual customization (skin, hair, clothing, accessories)
+    * Skill selection from unlocked skills
+    * Character deletion with confirmation
+    * Experience and level display
+    [/list]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ create | () | Creates character select UI ]
+    [ createUI | () | Creates persistent UI elements ]
+    [ createDetailsText | () | Creates character info text displays ]
+    [ showHomeUI | () | Shows main character selection interface ]
+    [ clearAllMenus | () | Destroys all active menus ]
+    [ writeCharacterInformation | () | Updates character info display ]
+    [ selectCharacter | (character) | Selects a character ]
+    [ updateDisplay | () | Updates character sprite and info ]
+    [ showCharacterList | () | Displays character carousel ]
+    [ showActionMenu | () | Shows character action menu ]
+    [ confirmSelection | () | Confirms character selection and exits ]
+    [ setSkill | () | Opens skill selection menu ]
+    [ updateSkillPreview | (skillId) | Updates skill description preview ]
+    [ customizeCharacter | () | Opens customization menu ]
+    [ showCustomizationMenu | () | Shows appearance customization options ]
+    [ customizeSkinTone | () | Opens skin tone selector ]
+    [ customizeHairColor | () | Opens hair color picker ]
+    [ customizeHairStyle | (type) | Opens hair style selector ]
+    [ customizeClothing | () | Opens clothing selector ]
+    [ customizeAccessory | () | Opens accessory selector ]
+    [ finishCustomization | () | Saves appearance changes ]
+    [ deleteCharacter | () | Deletes current character with confirmation ]
+    [ startCharacterCreation | () | Begins character creation wizard ]
+    [ showCreationStep | () | Shows current creation step ]
+    [ showCreationNavigationMenu | () | Shows navigation menu during creation ]
+    [ creationCustomizeSkinTone | (callback) | Skin tone selection during creation ]
+    [ creationCustomizeHairColor | (callback) | Hair color selection during creation ]
+    [ creationCustomizeHairStyle | (type, callback) | Hair style selection during creation ]
+    [ creationCustomizeClothing | (callback) | Clothing selection during creation ]
+    [ creationCustomizeAccessory | (callback) | Accessory selection during creation ]
+    [ creationNameCharacter | (callback) | Name input during creation ]
+    [ generateName | () | Generates random character name ]
+    [ cancelCharacterCreation | () | Cancels creation and returns ]
+    [ confirm | (message, onConfirm, onCancel, recommended) | Shows confirmation dialog ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ characterManager | CharacterManager | Character management instance ]
+    [ selectedCharacter | Character | Currently selected character ]
+    [ characterDisplay | CharacterDisplay | Visual character sprite ]
+    [ characterCarousel | CarouselMenu | Character list carousel ]
+    [ actionMenu | CarouselMenu | Character action menu ]
+    [ customizationMenu | CarouselMenu | Customization options menu ]
+    [ skillsCarousel | CarouselMenu | Skill selection carousel ]
+    [ creationMenu | CarouselMenu | Character creation menu ]
+    [ nameText | Text | Character name display ]
+    [ levelText | Text | Level display ]
+    [ selectedSkillText | Text | Selected skill name ]
+    [ skillDescriptionText | Text | Skill description ]
+    [ expBar | ExperienceBar | Experience progress bar ]
+    [ skillBar | SkillBar | Skill level display ]
+    [ skillPreviewText | Text | Skill preview text during selection ]
+    [/table]
+    
+    [heading: "Customization Options"]
+    [table header]
+    [ Category | Options | Controls ]
+    [ Skin Tone | Light, Dark | Left/Right to change ]
+    [ Hair Color | RGB values | Left/Right (R), Up/Down (G), A/B (B) ]
+    [ Front Hair | Unlocked styles | Left/Right to cycle ]
+    [ Back Hair | Unlocked styles | Left/Right to cycle ]
+    [ Clothing | Unlocked items | Left/Right to cycle ]
+    [ Accessory | Unlocked items + None | Left/Right to cycle ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Start character select from main menu
+    game.state.start("CharacterSelect");
+    
+    // Character select will automatically save changes to Account
+    [/codeblock]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>SkillBar - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "SkillBar Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Visual indicator for character skill level and skill usage.</p>
+    
+    [heading: "Description"]
+    <p>SkillBar displays the character's skill level (1-5) and shows which skill charges have been used during gameplay. It consists of 5 segments that light up based on skill availability.</p>
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ x | Number | X position ]
+    [ y | Number | Y position ]
+    [/table]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ update | () | Updates the skill bar display based on value and visibleParts ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ parts | Array | Array of part sprites ]
+    [ visibleParts | Number | Number of parts to show (skill level) ]
+    [ value | Number | Current skill charges remaining ]
+    [/table]
+    
+    [heading: "Visual States"]
+    [table header]
+    [ Frame | State | Description ]
+    [ 0 | Active | Skill charge available ]
+    [ 1 | Used | Skill charge consumed ]
+    [/table]
+    
+    [heading: "Behavior"]
+    [list]
+    * visibleParts = character.skillLevel (1-5)
+    * value = skillLevel - skillsUsedThisGame
+    * Parts beyond visibleParts are hidden
+    * Parts within visibleParts show frame 0 if charge available, frame 1 if used
+    [/list]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Create skill bar (usually in HUD)
+    const skillBar = new SkillBar(117, 18);
+    
+    // Update during gameplay
+    skillBar.value = character.skillLevel - skillsUsed;
+    skillBar.visibleParts = character.skillLevel;
+    skillBar.update();
+    [/codeblock]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

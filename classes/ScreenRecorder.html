@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>ScreenRecorder - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "ScreenRecorder Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Records gameplay video with audio using the MediaRecorder API.</p>
+    
+    [heading: "Description"]
+    <p>ScreenRecorder captures gameplay footage including audio from the song being played. It supports high-resolution recording, screenshots, and saving to file system on supported platforms.</p>
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ game | Phaser.Game | Phaser game instance ]
+    [/table]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ start | (audioElement, audioDelay) | Starts recording with optional audio ]
+    [ startRenderingLoop | () | Starts the rendering loop for scaled recording ]
+    [ stop | () | Stops recording and saves video ]
+    [ pause | () | Pauses recording ]
+    [ resume | () | Resumes recording ]
+    [ screenshot | () | Takes a high-resolution screenshot ]
+    [ save | (filename) | Saves recorded video with given filename ]
+    [ saveFile | (filename, blob) | Saves blob to filesystem or downloads ]
+    [ addAudioToStream | (audioElement, audioDelay) | Adds audio to recording stream ]
+    [ cleanup | () | Cleans up recording resources ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ isRecording | Boolean | Whether recording is active ]
+    [ mediaRecorder | MediaRecorder | MediaRecorder instance ]
+    [ recordedBlobs | Array | Array of recorded data chunks ]
+    [ scale | Number | Scale factor for video resolution ]
+    [ imageScale | Number | Scale factor for screenshots ]
+    [ videoBitsPerSecond | Number | Video bitrate (default: 1,100,000) ]
+    [ videoFrameRate | Number | Video frame rate (default: 25) ]
+    [/table]
+    
+    [heading: "Keyboard Shortcuts"]
+    [table header]
+    [ Key | Action ]
+    [ F8 | Take screenshot ]
+    [ F9 | Start/Stop recording ]
+    [ F10 | Record next game (auto-start on game start) ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Start recording with audio
+    const audioElement = document.querySelector('audio');
+    game.recorder.start(audioElement, 0);
+    
+    // Stop recording after gameplay
+    game.recorder.stop();
+    
+    // Take a screenshot
+    game.recorder.screenshot();
+    
+    // Check if recording is supported
+    if (ScreenRecorder.isSupported()) {
+      console.log("Recording is supported!");
+    }
+    
+    // Change recording scale (higher = better quality, larger files)
+    game.recorder.setScale(2);
+    [/codeblock]
+    
+    [heading: "Platform Support"]
+    [table header]
+    [ Platform | Recording | Screenshots | File Saving ]
+    [ Web (Desktop) | Yes | Yes | Download |
+    [ Web (Mobile) | Limited | Yes | Download ]
+    [ Cordova (Android) | Yes | Yes | File System ]
+    [ NW.js | Yes | Yes | File System ]
+    [/table]
+    
+    [note: "Recording requires canvas.captureStream support. Not all browsers support this feature."]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

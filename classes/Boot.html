@@ -24,6 +24,7 @@
     * Initialize the NotificationSystem
     * Set up game timing and world settings
     * Define primary assets and game resources
+    * Register all game states
     * Transition to the next loading state
     [/list]
     
@@ -31,14 +32,33 @@
     [table header]
     [ Method | Parameters | Description ]
     [ preload | () | Loads essential assets including fonts and UI window panels ]
-    [ create | () | Initializes core systems and starts the next loading state ]
+    [ checkForCrashRecovery | () | Checks if game crashed previously and sets flag ]
+    [ create | () | Initializes core systems, registers states, and starts loading ]
     [/table]
     
-    [heading: "Properties"]
+    [heading: "Registered Game States"]
     [table header]
-    [ Property | Type | Description ]
-    [ keys | Array | Array of loaded asset keys ]
-    [ load | Phaser.Loader | Phaser's asset loader instance ]
+    [ State | Description ]
+    [ Load | Dynamic asset loading ]
+    [ LoadCordova | Cordova file system initialization ]
+    [ LoadAddons | Addon loading and initialization ]
+    [ LoadLocalSongs | Built-in song loading ]
+    [ LoadExternalSongs | External song loading ]
+    [ LoadSongFolder | Single song folder loading ]
+    [ Title | Title screen with animated logo ]
+    [ MainMenu | Main navigation menu ]
+    [ Addons | Addon management interface ]
+    [ Settings | Game settings configuration ]
+    [ Keybindings | Keyboard and gamepad mapping ]
+    [ SongSelect | Song and difficulty selection ]
+    [ CharacterSelect | Character creation and customization ]
+    [ AchievementsMenu | Achievement viewing interface ]
+    [ StatsMenu | Player statistics display ]
+    [ Play | Main gameplay state ]
+    [ Results | Post-game results and high scores ]
+    [ Editor | Chart editing mode ]
+    [ Jukebox | Music player with visualizers ]
+    [ Credits | Scrolling credits screen ]
     [/table]
     
     [heading: "Notes for Modders"]

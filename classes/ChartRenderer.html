@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>ChartRenderer - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "ChartRenderer Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Rendering engine for gameplay charts including notes, receptors, and timing lines.</p>
+    
+    [heading: "Description"]
+    <p>ChartRenderer handles all visual rendering of notes, receptors, hold bodies, mines, and timing elements during gameplay. It supports both falling and rising scroll directions, multiple speed mods, and various note color options.</p>
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ scene | Play/Editor | Game scene reference ]
+    [ song | Object | Song data with chart ]
+    [ difficultyIndex | Number | Selected difficulty index ]
+    [ options | Object | Rendering options ]
+    [/table]
+    
+    [heading: "Options"]
+    [table header]
+    [ Option | Type | Default | Description ]
+    [ enableGameplayLogic | Boolean | true | Enable hit/miss processing ]
+    [ enableJudgement | Boolean | true | Enable judgment calculation ]
+    [ enableInput | Boolean | true | Enable input handling ]
+    [ enableHealth | Boolean | true | Enable health system ]
+    [ enableMissChecking | Boolean | true | Auto-mark off-screen notes as miss ]
+    [ enableReceptors | Boolean | true | Show receptor arrows ]
+    [ enableBeatLines | Boolean | false | Show beat timing lines ]
+    [ enableSpeedRendering | Boolean | false | Show BPM/stop markers ]
+    [ enableBGRendering | Boolean | false | Show BG change markers ]
+    [ judgeLineYFalling | Number | 90 | Judge line Y position (falling mode) ]
+    [ judgeLineYRising | Number | 25 | Judge line Y position (rising mode) ]
+    [/table]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ load | (song, difficultyIndex) | Loads new chart data ]
+    [ initialize | () | Creates receptors and initializes groups ]
+    [ calculateLeftOffset | () | Calculates left offset for centering ]
+    [ calculateFullWidth | () | Returns total width of note lanes ]
+    [ getNoteFrame | (note) | Returns sprite frame based on beat division and color option ]
+    [ isBeatDivision | (beat, division) | Checks if beat aligns with division ]
+    [ calculateVerticalPosition | (note, now, beat) | Calculates note Y position ]
+    [ getCurrentBPM | (beat) | Returns BPM at given beat ]
+    [ beatToSec | (beat) | Converts beats to seconds ]
+    [ secToBeat | (sec) | Converts seconds to beats ]
+    [ render | (now, beat) | Main render loop ]
+    [ renderFalling | (now, beat) | Renders falling direction notes ]
+    [ renderRising | (now, beat) | Renders rising direction notes ]
+    [ renderMine | (note, x, yPos) | Renders mine note ]
+    [ renderArrow | (note, x, yPos) | Renders regular arrow note ]
+    [ renderHoldNote | (note, x, yPos, bodyHeight, now, beat, direction) | Renders hold/roll note ]
+    [ renderTimeLines | (now, beat) | Renders beat timing lines ]
+    [ renderSpeedChanges | (now, beat) | Renders BPM change and stop markers ]
+    [ renderBGChanges | (now, beat) | Renders background change markers ]
+    [ getXPos | (note) | Returns X position for note ]
+    [ getYPos | (now, beat, targetBeat) | Returns Y position for given beat ]
+    [ killNote | (note, forever) | Removes note sprite from rendering ]
+    [ createExplosion | (note, type) | Creates hit effect explosion ]
+    [ toggleHoldExplosion | (column, visible) | Shows/hides hold effect ]
+    [ destroy | () | Cleans up all rendering resources ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ VERTICAL_SEPARATION | Number | Vertical spacing between notes (1.25) ]
+    [ NOTE_SPEED_MULTIPLIER | Number | Note speed multiplier from settings ]
+    [ JUDGE_LINE | Number | Y position of judge line ]
+    [ DIRECTION | Number | -1 (falling) or 1 (rising) ]
+    [ COLUMN_SIZE | Number | Note width in pixels (16) ]
+    [ COLUMN_SEPARATION | Number | Space between columns (4) ]
+    [ scrollDirection | String | 'falling' or 'rising' ]
+    [ speedMod | String | 'X-MOD' or 'C-MOD' ]
+    [ noteColorOption | String | 'NOTE', 'VIVID', 'FLAT', 'RAINBOW' ]
+    [ receptors | Array | Receptor sprite array ]
+    [ notesGroup | Group | Container for note sprites ]
+    [ minesGroup | Group | Container for mine sprites ]
+    [ linesGroup | Group | Container for beat lines ]
+    [ tags | Object | BPM/stop/BG change tags ]
+    [/table]
+    
+    [heading: "Color Mappings"]
+    [table header]
+    [ Division | NOTE | VIVID | FLAT | RAINBOW ]
+    [ 4th | Red | Yellow | Yellow | Orange ]
+    [ 8th | Blue | Maroon | Yellow | Blue ]
+    [ 12th | Purple | Blue | Yellow | Pink ]
+    [ 16th | Yellow | Cyan | Yellow | Pink ]
+    [ 24th | Pink | Yellow | Yellow | Blue ]
+    [ 32nd | Orange | Maroon | Yellow | Orange ]
+    [ 48th | Cyan | Blue | Yellow | Pink ]
+    [ 64th | Green | Cyan | Yellow | Blue ]
+    [ 96th | White | Yellow | Yellow | Pink ]
+    [ 128th | Sky Blue | Maroon | Yellow | Orange ]
+    [ 192nd | Olive | Blue | Yellow | Blue ]
+    [ Ultra-fast | Gray | Cyan | Yellow | Pink ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Create chart renderer for gameplay
+    const renderer = new ChartRenderer(scene, song, difficultyIndex, {
+      enableGameplayLogic: true,
+      enableJudgement: true,
+      enableReceptors: true
+    });
+    
+    // Render in update loop
+    renderer.render(now, beat);
+    
+    // Change note color option
+    renderer.noteColorOption = "VIVID";
+    
+    // Clean up
+    renderer.destroy();
+    [/codeblock]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

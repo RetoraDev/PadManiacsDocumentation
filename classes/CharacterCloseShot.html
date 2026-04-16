@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>CharacterCloseShot - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "CharacterCloseShot Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Close-up character display for skill activation effects.</p>
+    
+    [heading: "Description"]
+    <p>CharacterCloseShot extends CharacterCroppedDisplay with a predefined crop area for close-up character display. Used during skill activation to show the character's face with a static noise effect.</p>
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ x | Number | X position ]
+    [ y | Number | Y position ]
+    [ characterData | Character | Character object ]
+    [/table]
+    
+    [heading: "Crop Area"]
+    <p>The close-up crop area is defined in CHARACTER_SYSTEM.CLOSE_SHOT_CROP:</p>
+    [codeblock javascript]
+    CLOSE_SHOT_CROP = { x: 32, y: 15, w: 36, h: 7 }
+    [/codeblock]
+    
+    [heading: "Skill Activation Effect"]
+    <p>When a skill activates, the game shows:</p>
+    [list]
+    * Static noise effect for 200ms
+    * CharacterCloseShot appears
+    * Character blinks once
+    * Display lasts for skill duration minus 400ms
+    * Static noise effect on fade out
+    [/list]
+    
+    [heading: "Inherited Methods"]
+    <p>CharacterCloseShot inherits all methods from <a href="CharacterDisplay.html">CharacterDisplay</a> and <a href="CharacterCroppedDisplay.html">CharacterCroppedDisplay</a>.</p>
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Show character close-up on skill activation
+    const closeShot = new CharacterCloseShot(2, 103, character);
+    closeShot.visible = false;
+    
+    // Show with blink effect
+    game.time.events.add(200, () => {
+      closeShot.visible = true;
+      closeShot.blink(game.rnd.between(0, 200));
+    });
+    
+    // Hide after duration
+    game.time.events.add(displayTime, () => {
+      closeShot.visible = false;
+      closeShot.destroy();
+    });
+    [/codeblock]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Background - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "Background Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Generic background sprite with optional alpha pulsing animation.</p>
+    
+    [heading: "Description"]
+    <p>Background provides a simple background sprite that can be loaded from an image key and optionally animate its alpha value between min and max values.</p>
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ key | String | Asset key of the background image ]
+    [ tween | Boolean | Whether to animate alpha (default: false) ]
+    [ min | Number | Minimum alpha value (default: 0.1) ]
+    [ max | Number | Maximum alpha value (default: 0.5) ]
+    [ time | Number | Animation duration in ms (default: 5000) ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ alpha | Number | Current opacity value ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Static background
+    const bg = new Background('ui_background_gradient');
+    
+    // Animated background
+    const animatedBg = new Background('ui_lobby_background', true, 0.3, 0.5, 3000);
+    [/codeblock]
+    
+    [heading: "Related Classes"]
+    [list]
+    * <a href="BackgroundGradient.html">BackgroundGradient</a> - Animated gradient background
+    * <a href="CanvasBackground.html">CanvasBackground</a> - Canvas-based background rendering
+    [/list]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

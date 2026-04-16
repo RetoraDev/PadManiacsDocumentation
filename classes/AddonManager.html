@@ -7,26 +7,27 @@
 </head>
 <body class="doki-hidden">
     <script src="../doki-loader.js"></script>
-  
-    [title: "AddonManager Class"]
     
+    [title: "AddonManager Class"]
     <a href="../">← Back to index</a>
     
-    <p>Manages the loading, execution, and management of community addons.</p>
+    <p>Manages the loading, execution, and management of community addons with support for hibernation and safe mode.</p>
     
-    [warning: "Be careful modifying this class"]
-    
+    [warning: "Be careful modifying this class, you could break the entire game"]
+
     [heading: "Description"]
-    <p>AddonManager is responsible for discovering, loading, and managing all community-created addons. It handles addon assets, behaviors, and provides an interface for enabling/disabling addons.</p>
+    <p>AddonManager is responsible for discovering, loading, and managing all community-created addons. It handles addon assets, behaviors, and provides an interface for enabling/disabling/hibernating addons.</p>
     
-    [heading: "Key Responsibilities"]
+    [heading: "Key Features"]
     [list]
     * Discover and load addons from storage
     * Process addon manifests and metadata
     * Load addon assets and behaviors
     * Execute addon code in appropriate contexts
     * Manage addon state (enabled/disabled/hibernating)
+    * Safe mode for error protection
     * Provide addon management interface
+    * Persistent addon settings
     [/list]
     
     [heading: "Methods"]
@@ -34,14 +35,28 @@
     [ Method | Parameters | Description ]
     [ initialize | () | Initializes the addon manager ]
     [ loadAddons | () | Main addon loading process ]
+    [ loadAddonsFromStorage | () | Discovers addons from file system ]
     [ loadAddonFromDirectory | (addonDir, fileSystem) | Loads individual addon ]
+    [ processAddons | () | Processes assets and behaviors for enabled addons ]
+    [ processAddonAssets | (addon) | Processes addon asset mappings ]
     [ processAddonBehaviors | (addon) | Processes addon behavior scripts ]
+    [ loadTextFile | (url) | Loads text file from URL ]
+    [ executeBehavior | (addon, stateName, context, extraParams) | Executes behavior in safe context ]
     [ executeGlobalBehaviors | () | Executes global addon behaviors ]
-    [ executeStateBehaviors | (stateName, stateInstance) | Executes state-specific behaviors ]
+    [ executeStateBehaviors | (stateName, stateInstance, extraParams) | Executes state-specific behaviors ]
+    [ parseVersion | (version) | Parses version string to array ]
+    [ compareVersions | (v1, v2) | Compares version numbers ]
     [ enableAddon | (addonId) | Enables an addon ]
     [ disableAddon | (addonId) | Disables an addon ]
+    [ hibernateAddon | (addonId) | Hibernates an addon (completely unloads) ]
+    [ wakeAddon | (addonId) | Wakes a hibernating addon ]
+    [ uninstallAddon | (addonId) | Uninstalls an addon (removes folder) ]
+    [ setSafeMode | (enabled) | Enables/disables safe mode ]
     [ getAddonList | () | Returns list of all addons ]
     [ getResourceList | () | Returns addon resources for loading ]
+    [ saveAddonSettings | () | Saves addon settings to Account ]
+    [ needsReload | () | Checks if changes require reload ]
+    [ setsEqual | (set1, set2) | Compares two sets for equality ]
     [/table]
     
     [heading: "Properties"]
@@ -59,21 +74,70 @@
     [ Field | Required | Description ]
     [ id | Yes | Unique addon identifier ]
     [ name | Yes | Display name for addon ]
-    [ version | Yes | Version number ]
+    [ version | Yes | Version number (semantic) ]
     [ author | No | Addon author name ]
     [ description | No | Addon description ]
     [ icon | No | Path to icon image ]
     [ assets | No | Object mapping asset keys to file paths ]
     [ behaviors | No | Object mapping state names to behavior scripts ]
+    [ compatibility | No | Min/max game version compatibility ]
     [/table]
     
     [heading: "Addon States"]
     [table header]
-    [ State | Description ]
-    [ Enabled | Addon is active and behaviors execute ]
-    [ Disabled | Addon is inactive but loaded ]
-    [ Hibernating | Addon is completely unloaded ]
+    [ State | Description | Resources Loaded ]
+    [ Enabled | Addon is active and behaviors execute | Assets loaded, behaviors active ]
+    [ Disabled | Addon is inactive but installed | No resources loaded ]
+    [ Hibernating | Addon is completely unloaded | No resources (saved state preserved) ]
     [/table]
+    
+    [heading: "Safe Mode"]
+    <p>When safe mode is enabled:</p>
+    [list]
+    * All addons are prevented from loading
+    * Only the addon manager UI is available
+    * Use to recover from broken addons
+    [/list]
+    
+    [heading: "Behavior Context Variables"]
+    [table header]
+    [ Variable | Description ]
+    [ game | Main Phaser game instance ]
+    [ state | Current state instance (for state behaviors) ]
+    [ stateName | Name of current state ]
+    [ global | Global scope reference ]
+    [ addon | Current addon object ]
+    [ console | Console object for logging ]
+    [/table]
+    
+    [heading: "Example Usage (Addon Development)"]
+    [codeblock javascript]
+    // manifest.json
+    {
+      "id": "my-addon",
+      "name": "My Addon",
+      "version": "1.0.0",
+      "behaviors": {
+        "Global": "behaviors/global.js",
+        "MainMenu": "behaviors/menu.js"
+      },
+      "assets": {
+        "arrows": "assets/custom_arrows.png"
+      }
+    }
+    
+    // behaviors/global.js
+    console.log("My addon loaded!");
+    
+    // behaviors/menu.js
+    game.onMenuIn.add(function(menuName, menu) {
+      if (menuName === 'home') {
+        menu.addItem("My Custom Item", () => {
+          notifications.show("Hello from my addon!");
+        });
+      }
+    });
+    [/codeblock]
     
     [footer: "&copy; Retora 2026"]
 </body>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Character - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "Character Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Data model representing a playable character with leveling, experience, skills, and visual customization.</p>
+    
+    [heading: "Description"]
+    <p>The Character class manages all character-specific data including level progression, experience points, unlocked skills, visual appearance, and gameplay statistics. Characters gain experience from playing songs and can level up to unlock new skills, hair styles, and items.</p>
+    
+    [heading: "Key Features"]
+    [list]
+    * Experience-based leveling system
+    * Skill unlocking and selection
+    * Hair style unlocks (front and back)
+    * Clothing and accessory unlocks
+    * Visual appearance customization
+    * Gameplay statistics tracking
+    * Experience story recording
+    [/list]
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ data | Object | Character data object (typically from saved account) ]
+    [/table]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ addExperience | (amount) | Adds experience points, triggers level-ups if needed ]
+    [ levelUp | () | Performs level-up logic (skills, hair, items) ]
+    [ unlockRandomSkill | () | Unlocks a random skill not already owned ]
+    [ unlockRandomHairStyle | () | Unlocks a random front or back hair style ]
+    [ unlockRandomItem | () | Unlocks a random clothing or accessory item ]
+    [ getAvailableHairStyles | () | Returns object with unlocked front/back hair IDs ]
+    [ getAvailableItems | () | Returns array of unlocked item IDs ]
+    [ changeHairStyle | (type, hairId) | Changes front or back hair style if unlocked ]
+    [ changeClothing | (itemId) | Changes clothing item if unlocked ]
+    [ getRequiredExperience | () | Returns experience needed for next level ]
+    [ getExperienceProgress | () | Returns progress (0-1) toward next level ]
+    [ canUseSkill | () | Returns whether character can use skills ]
+    [ toJSON | () | Returns serializable character data ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ name | String | Character name (max 6 characters) ]
+    [ level | Number | Current level (starts at 1) ]
+    [ experience | Number | Current experience points ]
+    [ skillLevel | Number | Skill level (1-5, affects skills per game) ]
+    [ unlockedSkills | Array | Array of unlocked skill IDs ]
+    [ selectedSkill | String | Currently selected skill ID ]
+    [ appearance | Object | Visual appearance configuration ]
+    [ stats | Object | Gameplay statistics for this character ]
+    [ experienceStory | Array | History of experience gains and level-ups ]
+    [/table]
+    
+    [heading: "Appearance Object Structure"]
+    [table header]
+    [ Property | Type | Description ]
+    [ skinTone | Number | Skin tone index (0=Light, 1=Dark) ]
+    [ hairColor | Number | Hex color value for hair ]
+    [ frontHair | String | Front hair style ID ]
+    [ backHair | String | Back hair style ID ]
+    [ clothing | String | Clothing item ID ]
+    [ accessory | String | Accessory item ID or null ]
+    [/table]
+    
+    [heading: "Stats Object Structure"]
+    [table header]
+    [ Property | Type | Description ]
+    [ gamesPlayed | Number | Total games played with this character ]
+    [ totalScore | Number | Cumulative score across all games ]
+    [ maxCombo | Number | Highest combo achieved ]
+    [ perfectGames | Number | Games with 100% accuracy ]
+    [ skillsUsed | Number | Total skills used ]
+    [/table]
+    
+    [heading: "Leveling System"]
+    <p>Experience required for each level follows the formula:</p>
+    [codeblock javascript]
+    EXPERIENCE_CURVE = level => Math.floor(10 * Math.pow(level, 1.03))
+    [/codeblock]
+    
+    [table header]
+    [ Level | Experience Required | Cumulative ]
+    [ 1 | 10 | 10 ]
+    [ 2 | 20 | 30 ]
+    [ 3 | 31 | 61 ]
+    [ 4 | 42 | 103 ]
+    [ 5 | 54 | 157 ]
+    [ 10 | 125 | ~600 ]
+    [ 20 | 287 | ~2500 ]
+    [ 50 | 901 | ~15000 ]
+    [/table]
+    
+    [heading: "Level-Up Rewards"]
+    [table header]
+    [ Reward Type | Chance | Min Level | Cooldown ]
+    [ New Skill | 60% | 4 | 1 level ]
+    [ New Hair Style | 50% | 2 | 2 levels ]
+    [ New Item | 40% | 3 | 2 levels ]
+    [ Skill Level Up | 40% | N/A | 1 level ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Get current character
+    const characterManager = new CharacterManager();
+    const character = characterManager.getCurrentCharacter();
+    
+    // Add experience after a game
+    character.addExperience(25);
+    
+    // Check level progress
+    const progress = character.getExperienceProgress();
+    const requiredExp = character.getRequiredExperience();
+    
+    // Change appearance
+    character.changeHairStyle('front', 3);
+    character.changeClothing('daring_clothing');
+    
+    // Select a skill
+    character.selectedSkill = 'focus_boost';
+    
+    // Save changes
+    characterManager.saveToAccount();
+    [/codeblock]
+    
+    [heading: "Notes for Modders"]
+    <p>Characters are stored in Account.characters.list and can be accessed through the CharacterManager. When creating addons that modify character behavior, always use the CharacterManager methods rather than modifying Account directly.</p>
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

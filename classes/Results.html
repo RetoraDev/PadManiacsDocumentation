@@ -12,19 +12,27 @@
     
     <a href="../">← Back to index</a>
     
-    <p>Displays gameplay results and high score information after song completion.</p>
+    <p>Displays gameplay results, high score information, and character experience gains after song completion.</p>
     
     [heading: "Description"]
-    <p>Results shows the player's performance after completing a song, including score, accuracy, combo, and judgments. It handles high score saving and provides navigation options.</p>
+    <p>Results shows the player's performance after completing a song, including score, accuracy, combo, and judgments. It handles high score saving, character experience display with animated progress bar, and provides navigation options.</p>
     
     [heading: "Key Responsibilities"]
     [list]
     * Display performance statistics
     * Save high scores if applicable
     * Show judgment breakdown
-    * Provide navigation options
+    * Display character experience gain with animation
+    * Show character portrait
+    * Provide navigation options (Next, Continue, Retry, Quit)
     * Play song preview audio
     [/list]
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ gameData | Object | Gameplay results data from Play state ]
+    [/table]
     
     [heading: "Methods"]
     [table header]
@@ -32,8 +40,13 @@
     [ init | (gameData) | Initializes with gameplay results ]
     [ create | () | Sets up results display ]
     [ saveHighScore | (song, difficulty, player) | Saves high score if new record ]
+    [ getSongKey | (song) | Generates unique key for song ]
+    [ hashString | (str) | Hashes string for external song keys ]
     [ displayResults | () | Creates results visual elements ]
+    [ showCharacterExp | () | Displays character portrait and animated experience bar ]
     [ showMenu | () | Creates navigation menu ]
+    [ getJudgementsText | (judgements) | Formats judgment counts for display ]
+    [ getRatingColor | (rating) | Returns color hex for score rating ]
     [ update | () | Handles input updates ]
     [ shutdown | () | Cleanup when leaving state ]
     [/table]
@@ -45,24 +58,74 @@
     [ isNewRecord | Boolean | Whether score is a new record ]
     [ finalScore | Number | Final score achieved ]
     [ finalAccuracy | Number | Final accuracy percentage ]
-    [ scoreRating | String | Letter grade (SSS, S, A, B, etc.) ]
+    [ scoreRating | String | Letter grade (SSS+, SSS, SS, S, A, B, C, D, E, F) ]
     [ previewAudio | HTMLAudioElement | Song preview audio ]
+    [ bannerImg | HTMLImageElement | Song banner image ]
+    [ bannerSprite | Phaser.Sprite | Banner display sprite ]
+    [ songText | Text | Song title display ]
+    [ diffText | Text | Difficulty display ]
+    [ scoreText | Text | Score display ]
+    [ accuracyText | Text | Accuracy display ]
+    [ ratingText | Text | Rating display ]
+    [ comboText | Text | Max combo display ]
+    [ judgementsText | Text | Judgment counts display ]
+    [ recordText | Text | New record indicator ]
+    [ navigationHint | NavigationHint | Input prompt display ]
     [/table]
+    
+    [heading: "Character Experience Display"]
+    <p>When a character is selected, Results shows:</p>
+    [list]
+    * Character portrait (cropped)
+    * Character name
+    * Current level
+    * Animated experience bar
+    * Experience gain animation with sound effects
+    * Level up effects when applicable
+    [/list]
     
     [heading: "Score Ratings"]
     [table header]
-    [ Accuracy | Rating ]
-    [ ≥98% | SSS+ ]
-    [ ≥95% | SSS ]
-    [ ≥92.5% | SS ]
-    [ ≥90% | S ]
-    [ ≥80% | A ]
-    [ ≥70% | B ]
-    [ ≥60% | C ]
-    [ ≥50% | D ]
-    [ ≥40% | E ]
-    [ <40% | F ]
+    [ Accuracy | Rating | Color ]
+    [ ≥98% | SSS+ | Gold (0xFFD700) ]
+    [ ≥95% | SSS | Gold (0xFFD700) ]
+    [ ≥92.5% | SS | Silver (0xF0F0F0) ]
+    [ ≥90% | S | Silver (0xF0F0F0) ]
+    [ ≥80% | A | Green (0x00FF00) ]
+    [ ≥70% | B | Blue (0x0000FF) ]
+    [ ≥60% | C | Yellow (0xFFFF00) ]
+    [ ≥50% | D | Orange (0xFFA500) ]
+    [ ≥40% | E | Red (0xFF0000) ]
+    [ <40% | F | Purple (0x800080) ]
     [/table]
+    
+    [heading: "Menu Options"]
+    [table header]
+    [ Option | Action ]
+    [ NEXT | Go to next song in playlist ]
+    [ CONTINUE | Return to song selection ]
+    [ DISABLE AUTOPLAY | Turn off autoplay (if enabled) ]
+    [ RETRY | Restart the same song ]
+    [ QUIT | Return to main menu ]
+    [/table]
+    
+    [heading: "Example Usage (Modding)"]
+    [codeblock javascript]
+    // Access results data
+    const results = game.state.states.Results;
+    console.log(`Score: ${results.finalScore}`);
+    console.log(`Rating: ${results.scoreRating}`);
+    console.log(`New Record: ${results.isNewRecord}`);
+    
+    // Modify results display
+    game.onMenuIn.add(function(menuName, menu) {
+      if (menuName === 'results') {
+        menu.addItem("Custom Option", () => {
+          notifications.show("Custom action!");
+        });
+      }
+    });
+    [/codeblock]
     
     [footer: "&copy; Retora 2026"]
 </body>

@@ -1,79 +1,164 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
     <title>Player - PadManiaX Modding API Documentation</title>
 </head>
 <body class="doki-hidden">
     <script src="../doki-loader.js"></script>
     
     [title: "Player Class"]
-    
     <a href="../">← Back to index</a>
     
-    <p>Handles all gameplay logic including note processing, scoring, and input handling.</p>
+    <p>Handles all gameplay logic including note processing, scoring, input handling, and skill integration.</p>
     
     [heading: "Description"]
-    <p>Player is the core gameplay controller that manages note rendering, judgment, scoring, combo tracking, and health management. It works closely with the Play state to provide the rhythm game experience.</p>
+    <p>Player is the core gameplay controller that manages note rendering, judgment, scoring, combo tracking, health management, and skill system integration. It uses ChartRenderer for visual rendering.</p>
     
-    [heading: "Key Responsibilities"]
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ scene | Play | Reference to the gameplay scene ]
+    [/table]
+    
+    [heading: "Key Features"]
     [list]
-    * Process and render notes
-    * Handle player input and auto-play
-    * Calculate judgments and scoring
-    * Manage combo and health systems
-    * Render receptors and explosions
-    * Track accuracy and statistics
+    * Note judgment with adjustable timing windows
+    * Scoring with combo multipliers
+    * Health system with damage and recovery
+    * Autoplay mode for demonstration
+    * Hold and roll note support
+    * Mine note handling with damage
+    * Skill system integration
+    * Visual feedback (explosions, text)
+    * Haptic feedback support
     [/list]
     
     [heading: "Methods"]
     [table header]
     [ Method | Parameters | Description ]
-    [ constructor | (scene) | Initializes player with game scene ]
-    [ initialize | () | Sets up receptors and UI elements ]
+    [ calculateTotalNotes | () | Counts total notes for accuracy calculation ]
     [ autoPlay | () | AI autoplay logic ]
     [ handleInput | (column, isKeyDown) | Processes player input ]
-    [ processJudgement | (note, judgement, column) | Handles judgment scoring ]
-    [ update | () | Main update loop ]
+    [ checkRegularNotes | (column, now, beat) | Checks for regular note hits ]
+    [ checkMines | (column, now, beat) | Checks for mine hits ]
+    [ triggerMine | (mineNote) | Processes mine hit (damage, combo reset) ]
+    [ checkHoldStart | (column, now, beat) | Checks for hold/roll note start ]
+    [ checkHoldRelease | (column, now) | Processes hold/roll note release ]
+    [ createExplosion | (note, type) | Creates hit effect explosion ]
+    [ toggleHoldExplosion | (column, visible) | Shows/hides hold effect ]
+    [ getJudgement | (timeDelta) | Determines judgment based on timing ]
+    [ processJudgement | (note, judgement, column, type) | Processes judgment and updates score/combo/health ]
+    [ getMaxHealth | () | Returns max health with skill bonuses ]
+    [ getNoteSpeedMultiplier | () | Returns note speed with skill bonuses ]
+    [ updateAccuracy | () | Updates accuracy percentage ]
+    [ updateUI | () | Updates HUD displays ]
+    [ getScoreRating | () | Returns letter grade for score ]
+    [ showJudgementText | (judgement, column, type) | Displays judgment text ]
+    [ getComboColor | (combo) | Returns color for combo display ]
+    [ onSkillHpRegen | (amount) | Handles skill health regeneration ]
+    [ onComboShield | () | Activates combo shield ]
+    [ getCurrentBPM | (beat) | Returns BPM at given beat ]
+    [ beatToSec | (beat) | Converts beats to seconds ]
+    [ secToBeat | (sec) | Converts seconds to beats ]
     [ render | () | Renders notes and gameplay elements ]
-    [ getScoreRating | () | Calculates letter grade for score ]
+    [ update | () | Main update loop ]
+    [ destroy | () | Cleans up player resources ]
     [/table]
     
     [heading: "Properties"]
     [table header]
     [ Property | Type | Description ]
-    [ scene | Play | Reference to gameplay scene ]
-    [ chart | Object | Song chart data ]
-    [ difficulty | Object | Current difficulty settings ]
+    [ scene | Play | Gameplay scene reference ]
+    [ renderer | ChartRenderer | Chart rendering engine ]
     [ notes | Array | Chart notes to process ]
     [ autoplay | Boolean | Whether autoplay is active ]
     [ score | Number | Current score ]
     [ combo | Number | Current combo count ]
-    [ accuracy | Number | Current accuracy percentage ]
-    [ health | Number | Current health value ]
     [ maxCombo | Number | Maximum combo achieved ]
-    [ receptors | Array | Note receptor sprites ]
+    [ health | Number | Current health value ]
+    [ maxHealth | Number | Maximum health value ]
+    [ accuracy | Number | Current accuracy percentage ]
     [ judgementCounts | Object | Count of each judgment type ]
+    [ totalNotes | Number | Total notes in chart ]
+    [ gameOver | Boolean | Whether game is over (health = 0) ]
+    [ inputStates | Array | Current input states for each column ]
+    [ activeHolds | Object | Currently active hold/roll notes ]
+    [ perfectStreak | Number | Consecutive perfect/marvelous count ]
+    [ comboShieldActive | Boolean | Whether combo shield is active ]
+    [ skillSystem | CharacterSkillSystem | Reference to skill system ]
+    [ timingStory | Array | History of timing deltas for accuracy graph ]
+    [/table]
+    
+    [heading: "Judgment Windows (milliseconds)"]
+    [table header]
+    [ Judgment | Window | Score Value ]
+    [ Marvelous | ≤55ms | 1000 ]
+    [ Perfect | ≤75ms | 800 ]
+    [ Great | ≤99ms | 500 ]
+    [ Good | ≤140ms | 200 ]
+    [ Boo | ≤180ms | 50 ]
+    [ Miss | >180ms | 0 ]
     [/table]
     
     [heading: "Note Types"]
     [table header]
-    [ Type | Description ]
-    [ 1 | Regular note (tap) ]
-    [ 2 | Hold note (press and hold) ]
-    [ 4 | Roll note (rapid taps) ]
-    [ M | Mine note (avoid) ]
+    [ Type | Character | Description ]
+    [ 1 | Tap | Regular tap note ]
+    [ 2 | Hold | Hold note (press and hold) ]
+    [ 3 | Hold End | End of hold note (auto-generated) ]
+    [ 4 | Roll | Roll note (rapid taps) ]
+    [ M | Mine | Mine note (avoid) ]
+    [/table]
+    
+    [heading: "Score Ratings"]
+    [table header]
+    [ Accuracy | Rating ]
+    [ ≥98% | SSS+ ]
+    [ ≥95% | SSS ]
+    [ ≥92.5% | SS ]
+    [ ≥90% | S ]
+    [ ≥80% | A ]
+    [ ≥70% | B ]
+    [ ≥60% | C ]
+    [ ≥50% | D ]
+    [ ≥40% | E ]
+    [ <40% | F ]
     [/table]
     
     [heading: "Note Color Options"]
     [table header]
     [ Option | Description ]
-    [ NOTE | Default color pattern based on note speed ]
+    [ NOTE | Default StepMania color pattern by note speed ]
     [ VIVID | Color cycle per beat (Yellow, Maroon, Blue, Cyan) ]
     [ FLAT | All notes same color (Yellow) ]
-    [ RAINBOW | Orange, Blue, Purple/Pink color pattern ]
+    [ RAINBOW | Orange, Blue, Purple/Pink pattern ]
     [/table]
+    
+    [heading: "Example Usage (Modding)"]
+    [codeblock javascript]
+    // Access player from Play state
+    const player = game.state.states.Play.player;
+    
+    // Get current stats
+    console.log(`Score: ${player.score}`);
+    console.log(`Combo: ${player.combo}`);
+    console.log(`Accuracy: ${player.accuracy}%`);
+    
+    // Check judgment counts
+    console.log(`Marvelous: ${player.judgementCounts.marvelous}`);
+    
+    // Modify scoring (addon example)
+    const originalProcessJudgement = player.processJudgement;
+    player.processJudgement = function(note, judgement, column, type) {
+      // Double all scores
+      if (judgement !== "miss") {
+        this.score += 1000;
+      }
+      originalProcessJudgement.call(this, note, judgement, column, type);
+    };
+    [/codeblock]
     
     [footer: "&copy; Retora 2026"]
 </body>

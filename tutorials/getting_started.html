@@ -25,23 +25,10 @@
     [heading: "Development Tools"]
     
     [subheading: "Mobile Development with Acode"]
-    <p>If you're developing on mobile, we recommend using <strong>Acode</strong> - a powerful mobile code editor:</p>
-    [list]
-    * Free and open source
-    * File system access
-    * JavaScript syntax highlighting
-    * Git integration
-    * Available on Google Play Store
-    [/list]
+    <p>If you're developing on mobile, we recommend using <strong>Acode</strong> - a powerful mobile code editor.</p>
     
     [subheading: "Desktop Development"]
-    <p>For desktop development, any code editor works:</p>
-    [list]
-    * Visual Studio Code (recommended)
-    * Sublime Text
-    * Atom
-    * Notepad++
-    [/list]
+    <p>For desktop development, any code editor works: Visual Studio Code (recommended), Sublime Text, or Atom.</p>
     
     [heading: "Your First Addon"]
     
@@ -75,13 +62,14 @@
     [heading: "Understanding the Basics"]
     
     [subheading: "Addon Structure"]
-    <p>A basic addon has this structure:</p>
     [codeblock]
 MyFirstAddon/
 ├── manifest.json     # Required: Addon metadata
 ├── icon.png          # Optional: Addon icon
 ├── assets/           # Optional: Game assets to replace
-└── scripts/          # Optional: JavaScript code files
+└── behaviors/        # Optional: JavaScript code files
+    ├── global.js     # Runs when addon loads
+    └── menu.js       # Runs in MainMenu state
     [/codeblock]
     
     [subheading: "Required JavaScript Knowledge"]
@@ -117,19 +105,57 @@ eruda.init();
 bootGame(); // Restarts the entire game
     [/codeblock]
     
+    [heading: "Examples"]
+    
+    [subheading: "Hello World"]
+    [codeblock js]
+eruda.init(); // To initialize the console
+
+this.helloWorldText = new Text(2, 2, "Hello World");
+
+console.log("Hello World");
+    [/codeblock]
+    
+    [subheading: "Simple Character Mod"]
+    [codeblock js]
+// behaviors/global.js
+console.log("My character mod loaded!");
+
+// Add a custom skill
+CHARACTER_SKILLS.push({
+  id: "mod_skill",
+  name: "Modder's Touch",
+  description: "A custom skill from an addon",
+  activationCondition: "on_combo",
+  effect: "modify_score_gain",
+  effectParams: { multiplier: 1.2, judgement: "marvelous", threshold: 50 },
+  duration: 10000,
+  cooldown: 45000
+});
+
+// Add a custom achievement
+ACHIEVEMENT_DEFINITIONS.push({
+  id: "mod_achievement",
+  name: "Mod User",
+  category: ACHIEVEMENT_CATEGORIES.MISC,
+  description: {
+    unachieved: "Use a modded skill",
+    achieved: "You used a modded skill!"
+  },
+  expReward: ACHIEVEMENTS.EXPERIENCE_VALUES.COMMON,
+  condition: (stats, lastSong) => lastSong.skillsUsed > 0,
+  hidden: false
+});
+    [/codeblock]
+    
+    <p>You can download working sample add-ons to load in the game from <a href="https://retora.itch.io/padmaniacs/download/eyJleHBpcmVzIjoxNzc2MzA4MjQ4LCJpZCI6Mzk4OTgwNX0=.QIot74UL0TfHP+txH4R4uBGggY4=">itch.io</a>.</p>
+
     [heading: "Next Steps"]
     <p>Now that you've created your first addon, check out these tutorials:</p>
     [list]
     * <a href="manifest_format.html">Understanding the Manifest Format</a>
     * <a href="asset_replacement.html">Asset Replacement Tutorial</a>
     * <a href="behavior_scripts.html">Creating Behavior Scripts</a>
-    [/list]
-    
-    [heading: "Example Addons"]
-    <p>Download example addons to learn from:</p>
-    [list]
-    * <a href="https://retora.itch.io/padmaniacs">Official itch.io page</a>
-    * <a href="https://github.com/RetoraDev/PadManiacs/releases">GitHub Releases</a>
     [/list]
     
     [footer: "&copy; Retora 2026"]

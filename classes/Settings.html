@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Settings - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "Settings Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Game settings configuration interface.</p>
+    
+    [heading: "Description"]
+    <p>Settings provides a comprehensive UI for configuring game options including audio, gameplay, visuals, and controls.</p>
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ create | () | Creates settings menu UI ]
+    [ showSettings | () | Shows main settings window ]
+    [ showKeybindingsMenu | () | Navigates to keybindings menu ]
+    [ confirmDialog | (message, onConfirm, onCancel, confirmText, cancelText) | Shows confirmation dialog ]
+    [ confirmEraseHighscores | () | Confirms high score erasure ]
+    [ confirmRestoreDefaults | () | Confirms settings restoration ]
+    [ confirmRestart | () | Confirms game restart ]
+    [ showMainMenu | () | Returns to main menu ]
+    [/table]
+    
+    [heading: "Settings Options"]
+    [table header]
+    [ Setting | Options | Default | Description ]
+    [ Volume | 0%, 25%, 50%, 75%, 100% | 50% | Master volume ]
+    [ Auto-play | OFF, ON | OFF | AI autoplay mode ]
+    [ Metronome | OFF, Note, Quarters, Eighths, Sixteenths, Thirty-seconds | OFF | Timing assistance ]
+    [ Visualizer | NONE, BPM, ACCURACY, AUDIO | BPM | In-game visualizer ]
+    [ Scroll Direction | FALLING, RISING | FALLING | Note scroll direction ]
+    [ Note Colors | NOTE, VIVID, FLAT, RAINBOW | NOTE | Note color scheme ]
+    [ Note Speed | Normal to Faster than light | Normal | Note scroll speed multiplier ]
+    [ Speed Mod | X-MOD, C-MOD | X-MOD | Speed modifier type ]
+    [ Haptic Feedback | OFF, ON | OFF | Controller vibration ]
+    [ Beat Lines | YES, NO | YES | Beat timing lines ]
+    [ Video FPS | 60 FPS, 30 FPS, 15 FPS | 60 FPS | Background video frame rate ]
+    [ Global Offset | -1000ms to +1000ms | 0ms | Audio/video sync offset ]
+    [ Menu Music | LAST SONG, RANDOM SONG, OFF | LAST SONG | Background music mode ]
+    [ Renderer | AUTO, CANVAS, WEBGL | AUTO | Graphics renderer (requires restart) ]
+    [ Pixelated | YES, NO | YES | Pixel-perfect scaling (requires restart) ]
+    [ Safe Mode | ENABLED, DISABLED | ENABLED | Addon safe mode (requires restart) ]
+    [/table]
+    
+    [heading: "Danger Zone Options"]
+    [table header]
+    [ Option | Description | Confirmation Required ]
+    [ Erase Highscores | Permanently deletes all high scores | Yes ]
+    [ Restore Default Settings | Resets all settings to defaults | Yes ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Start settings from main menu
+    game.state.start("Settings");
+    
+    // Access settings from code
+    const volume = Account.settings.volume; // 0-4
+    const autoplay = Account.settings.autoplay;
+    [/codeblock]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

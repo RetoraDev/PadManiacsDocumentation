@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
     <title>Lyrics - PadManiaX Modding API Documentation</title>
 </head>
 <body class="doki-hidden">
@@ -11,31 +11,47 @@
     [title: "Lyrics Class"]
     <a href="../">← Back to index</a>
     
-    <p>LRC lyrics synchronization system for displaying timed song lyrics during gameplay.</p>
+    <p>LRC lyrics synchronization system with color support for displaying timed song lyrics during gameplay.</p>
     
     [heading: "Description"]
-    <p>Lyrics parses and displays LRC format lyrics files synchronized with song playback. It handles timing, line transitions, and text display during gameplay.</p>
+    <p>Lyrics parses and displays LRC format lyrics files synchronized with song playback. Supports color tags ([COLOUR]0xRRGGBB) for line-specific colors, automatic line transitions, and text wrapping.</p>
     
     [heading: "Key Features"]
     [list]
     * LRC file format parsing
     * Precise timing synchronization
+    * Color tag support ([COLOUR]0xRRGGBB)
     * Automatic line transitions
     * Text wrapping for long lines
     * Smooth display updates
     [/list]
     
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ options | Object | Configuration options ]
+    [/table]
+    
+    [heading: "Options"]
+    [table header]
+    [ Option | Type | Default | Description ]
+    [ textElement | Text | null | Text instance to display lyrics ]
+    [ maxLineLength | Number | 30 | Maximum characters per line ]
+    [ lrc | String | null | LRC file content ]
+    [/table]
+    
     [heading: "Methods"]
     [table header]
     [ Method | Parameters | Description ]
-    [ constructor | (options) | Creates lyrics system with configuration ]
-    [ setLrc | (rawLrc) | Parses and loads LRC content ]
+    [ setLrc | (rawLrc) | Parses and loads LRC content with color support ]
     [ move | (time) | Updates display based on current time ]
-    [ displayCurrentLine | () | Shows current lyric line ]
+    [ displayCurrentLine | () | Shows current lyric line with its color ]
     [ getCurrentLine | () | Returns current line text ]
+    [ getCurrentColor | () | Returns current line color (hex) ]
     [ getNextLine | () | Returns next line text ]
     [ hasLyrics | () | Checks if lyrics are loaded ]
     [ clear | () | Clears lyrics display ]
+    [ destroy | () | Destroys lyrics system ]
     [/table]
     
     [heading: "Properties"]
@@ -44,37 +60,61 @@
     [ textElement | Text | Text display element ]
     [ maxLineLength | Number | Maximum characters per line ]
     [ currentTime | Number | Current playback time ]
-    [ lrcData | Array | Parsed lyric data with timestamps ]
+    [ lrcData | Array | Parsed lyric data with timestamps and colors ]
     [ rangeLrc | Array | Time-range formatted lyric data ]
     [ currentLineIndex | Number | Index of current lyric line ]
     [ tags | Object | LRC metadata tags ]
+    [ currentColor | Number | Current line color (default: 0xffffff) ]
     [/table]
     
-    [heading: "LRC File Format"]
-    <p>Supports standard LRC format with timing tags and metadata:</p>
-    [table header]
-    [ Tag | Format | Example | Description ]
-    [ Time | [mm:ss.xx] | [01:23.45] | Lyric line timestamp ]
-    [ ID | [key:value] | [ar:Artist] | Metadata information ]
-    [/table]
+    [heading: "LRC File Format with Colors"]
+    [codeblock]
+    [ti:Song Title]
+    [ar:Artist Name]
+    [offset:0]
+    
+    [COLOUR]0xff0000
+    [00:12.34]First line in red
+    [COLOUR]0x00ff00
+    [00:24.56]Second line in green
+    [COLOUR]0xffffff
+    [00:36.78]Back to white
+    [/codeblock]
     
     [heading: "Supported Metadata Tags"]
     [table header]
     [ Tag | Description ]
-    [ ar | Artist ]
     [ ti | Title ]
+    [ ar | Artist ]
     [ al | Album ]
     [ by | Creator ]
-    [ offset | Time offset ]
+    [ offset | Time offset in milliseconds ]
+    [ COLOUR | Color tag (0xRRGGBB format) ]
     [/table]
     
-    [heading: "Configuration Options"]
-    [table header]
-    [ Option | Type | Default | Description ]
-    [ textElement | Text | null | Text display instance ]
-    [ maxLineLength | Number | 30 | Maximum characters per line ]
-    [ lrc | String | null | LRC file content ]
-    [/table]
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Create lyrics display
+    const lyricsText = new Text(game.width / 2, 72, "", FONTS.stroke);
+    lyricsText.anchor.set(0.5);
+    
+    const lyrics = new Lyrics({
+      textElement: lyricsText,
+      maxLineLength: 25,
+      lrc: lrcContent
+    });
+    
+    // Update during gameplay
+    function update() {
+      const currentTime = audio.currentTime;
+      lyrics.move(currentTime);
+    }
+    
+    // Check if lyrics available
+    if (lyrics.hasLyrics()) {
+      console.log("Lyrics loaded!");
+    }
+    [/codeblock]
     
     [footer: "&copy; Retora 2026"]
 </body>

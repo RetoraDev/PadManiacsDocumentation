@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>ExperienceBar - PadManiaX Modding API Documentation</title>
+</head>
+<body class="doki-hidden">
+    <script src="../doki-loader.js"></script>
+    
+    [title: "ExperienceBar Class"]
+    <a href="../">← Back to index</a>
+    
+    <p>Visual progress bar for character experience points.</p>
+    
+    [heading: "Description"]
+    <p>ExperienceBar displays a character's progress toward the next level with a colored fill bar, background, and border.</p>
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ x | Number | X position ]
+    [ y | Number | Y position ]
+    [ width | Number | Bar width in pixels ]
+    [ height | Number | Bar height in pixels ]
+    [/table]
+    
+    [heading: "Methods"]
+    [table header]
+    [ Method | Parameters | Description ]
+    [ setProgress | (progress) | Sets fill progress (0-1) ]
+    [ updateBar | () | Redraws the bar with current progress ]
+    [ destroy | () | Destroys all bar components ]
+    [/table]
+    
+    [heading: "Properties"]
+    [table header]
+    [ Property | Type | Description ]
+    [ barWidth | Number | Width of the bar ]
+    [ barHeight | Number | Height of the bar ]
+    [ progress | Number | Current fill progress (0-1) ]
+    [ background | Graphics | Dark background rectangle ]
+    [ bar | Graphics | Colored fill rectangle ]
+    [ border | Graphics | White border rectangle ]
+    [/table]
+    
+    [heading: "Visual Style"]
+    [table header]
+    [ Element | Color | Description ]
+    [ Background | #333333 | Dark gray base ]
+    [ Bar | #76fcde | Cyan fill color ]
+    [ Border | #FFFFFF | White outline ]
+    [/table]
+    
+    [heading: "Example Usage"]
+    [codeblock javascript]
+    // Create experience bar
+    const expBar = new ExperienceBar(140, 16, 36, 3);
+    
+    // Update progress (0 = empty, 1 = full)
+    const character = characterManager.getCurrentCharacter();
+    const progress = character.getExperienceProgress();
+    expBar.setProgress(progress);
+    
+    // Animate experience gain
+    function animateExp(currentExp, targetExp) {
+      if (currentExp < targetExp) {
+        currentExp++;
+        const newProgress = currentExp / character.getRequiredExperience();
+        expBar.setProgress(newProgress);
+        setTimeout(() => animateExp(currentExp, targetExp), 10);
+      }
+    }
+    [/codeblock]
+    
+    [footer: "&copy; Retora 2026"]
+</body>
+</html>

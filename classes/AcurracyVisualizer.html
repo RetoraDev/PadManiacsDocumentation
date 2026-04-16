@@ -14,46 +14,70 @@
     <p>Displays a graph of recent timing accuracy during gameplay.</p>
     
     [heading: "Description"]
-    <p>AccuracyVisualizer shows a real-time graph of the player's recent timing accuracy, helping players visualize their consistency and timing patterns during gameplay.</p>
+    <p>AccuracyVisualizer shows a real-time graph of the player's recent timing accuracy, helping players visualize their consistency and timing patterns during gameplay. It extends the base Visualizer class.</p>
     
     [heading: "Key Features"]
     [list]
     * Real-time accuracy graphing
-    * Timing history visualization
+    * Timing history visualization from player.timingStory
     * Reference line for perfect timing
-    * Color-coded accuracy feedback
+    * Auto-scaling graph window
     [/list]
+    
+    [heading: "Constructor"]
+    [table header]
+    [ Parameter | Type | Description ]
+    [ scene | Play | Gameplay scene reference ]
+    [ x | Number | X position of visualizer ]
+    [ y | Number | Y position of visualizer ]
+    [ width | Number | Width of visualizer area ]
+    [ height | Number | Height of visualizer area ]
+    [/table]
     
     [heading: "Methods"]
     [table header]
     [ Method | Parameters | Description ]
-    [ constructor | (scene, x, y, width, height) | Creates accuracy visualizer ]
-    [ update | () | Updates accuracy graph display ]
+    [ update | () | Updates accuracy graph display using player.timingStory ]
     [/table]
     
     [heading: "Properties"]
     [table header]
     [ Property | Type | Description ]
-    [ accuracyHistory | Array | Recent timing accuracy values ]
-    [ maxHistoryLength | Number | Maximum history points to display ]
+    [ accuracyHistory | Array | Recent timing accuracy values (from player.timingStory) ]
+    [ maxHistoryLength | Number | Maximum history points to display (width / 4) ]
     [/table]
     
     [heading: "Visual Elements"]
     [table header]
     [ Element | Description | Color ]
-    [ Reference Line | Perfect timing reference | Gray (0xF0F0F0) ]
+    [ Reference Line | Perfect timing reference (0ms) | Gray (0xF0F0F0, 0.3 alpha) ]
     [ Accuracy Line | Player timing accuracy | Green (0x00FF00) ]
     [/table]
     
     [heading: "Graph Interpretation"]
     [table header]
     [ Position | Timing | Description ]
-    [ Center | Perfect | Exactly on beat ]
-    [ Above center | Early | Hitting before beat ]
-    [ Below center | Late | Hitting after beat ]
+    [ Center | Perfect | Exactly on beat (0ms) ]
+    [ Above center | Early | Hitting before beat (negative values) ]
+    [ Below center | Late | Hitting after beat (positive values) ]
     [ Flat line | Consistent | Steady timing ]
     [ Jagged line | Inconsistent | Variable timing ]
     [/table]
+    
+    [heading: "Note on data source"]
+    <p>The AccuracyVisualizer reads timing data from <code>player.timingStory</code>, which stores the timing delta in seconds for each note judgment. Positive values indicate late hits, negative values indicate early hits.</p>
+    
+    [heading: "Example Usage (Modding)"]
+    [codeblock javascript]
+    // AccuracyVisualizer is automatically created based on settings
+    // To enable: Account.settings.visualizer = "ACCURACY";
+    
+    // Access the visualizer from Play state
+    const visualizer = game.state.states.Play.visualizer;
+    if (visualizer instanceof AccuracyVisualizer) {
+      console.log("Accuracy visualizer active");
+    }
+    [/codeblock]
     
     [footer: "&copy; Retora 2026"]
 </body>
